@@ -64,6 +64,7 @@ const Test = () => {
     };
 
     const handleDivisionChange = (e) => {
+        setSelectedPostcode('');
         const selectedDivisionId = e.target.value;
         setValue('district', ''); // Reset district when division changes
         setValue('upazilla', ''); // Reset upazilla when division changes
@@ -73,7 +74,7 @@ const Test = () => {
     };
 
     const handleDistrictChange = (e) => {
-
+        setSelectedPostcode('');
         const selectedDistrictId = e.target.value;
         setValue('upazilla', ''); // Reset upazilla when district changes
         setValue('postOffice', ''); // Reset postoffice when division changes
@@ -85,7 +86,7 @@ const Test = () => {
 
 
     const handleUpazillaChange = (e) => {
-
+        setSelectedPostcode('');
         const selectedUpazillaID = e.target.value;
 
         setValue('postOffice', ''); // Reset postoffice when division changes
