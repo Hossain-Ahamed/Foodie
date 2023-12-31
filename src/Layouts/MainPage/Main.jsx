@@ -23,7 +23,7 @@ const Main = () => {
             {/* todo */}
             {/* {noHeadFoot || <Header />} */}
             <main className='relative  max-w-[1500px] mx-auto' >
-                lorem3000
+                
                 <Outlet />
             </main>
             {/* todo */}
