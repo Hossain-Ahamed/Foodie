@@ -6,6 +6,7 @@ import Home from "../../pages/Home/Home";
 import Login from "../../pages/LoginPages/Login/Login";
 import PreventLogIn from "../PreventLogin/PreventLogIn";
 import Test from "../../pages/Shared/VideoPlayer/Test";
+import ErrorPage from "../../pages/Shared/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
             {
                 path: '/test',
                 element: <Test/>
+            },
+            {
+                path: '/error',
+                element: <ErrorPage/>
             },
 
         ]
