@@ -7,6 +7,7 @@ import Login from "../../pages/LoginPages/Login/Login";
 import PreventLogIn from "../PreventLogin/PreventLogIn";
 import Test from "../../pages/Shared/VideoPlayer/Test";
 import ErrorPage from "../../pages/Shared/ErrorPage/ErrorPage";
+import PrivacyPolicy from "../../pages/Others/PrivacyPolicy/PrivacyPolicy";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: '/error',
                 element: <ErrorPage/>
+            },
+            {
+                path: '/privacy-policy',
+                element: <PrivacyPolicy/>
             },
 
         ]
