@@ -19,11 +19,10 @@ const Main = () => {
     return (
 
 
-        <section className='  text-black  min-h-screen'>
+        <section className='text-black min-h-screen'>
             {/* todo */}
             {/* {noHeadFoot || <Header />} */}
-            <main className='relative  max-w-[2000px] mx-auto' >
-                
+            <main className='relative max-w-[2000px] mx-auto'>  
                 <Outlet />
             </main>
             {/* todo */}

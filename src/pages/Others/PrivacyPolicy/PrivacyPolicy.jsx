@@ -93,7 +93,7 @@ const PrivacyPolicy = () => {
 
 
                                 <section className="py-8">
-                                    <div className="container mx-auto">
+                                    <div className="mx-auto">
                                         <div className="">
                                             <h5 className="text-lg font-bold mb-4">3. Embedded Content</h5>
                                             <p className="mb-4">
@@ -131,7 +131,7 @@ const PrivacyPolicy = () => {
 
                                 {/* 4 */}
                                 <section className=" py-4">
-                                    <div className="container mx-auto">
+                                    <div className="mx-auto">
                                         <div className="w-full">
                                             <div className="mb-4">
                                                 <h5 className="text-lg font-bold mb-2">4. Cookies</h5>
@@ -178,7 +178,7 @@ const PrivacyPolicy = () => {
 
                                 {/* 5 */}
                                 <section className=" py-4">
-                                    <div className="container mx-auto">
+                                    <div className="mx-auto">
                                         <div className="w-full">
                                             <div className="mb-4">
                                                 <h5 className="text-lg font-bold mb-2">5. Who Has Access To Your Data</h5>
@@ -217,7 +217,7 @@ const PrivacyPolicy = () => {
 
                                 {/* 7  */}
                                 <section className=" py-4">
-                                    <div className="container mx-auto">
+                                    <div className="mx-auto">
                                         <div className="w-full">
                                             <div className="">
                                                 <h5 className="text-lg font-bold mb-2">7. How Long We Retain Your Data For</h5>
@@ -290,7 +290,7 @@ const PrivacyPolicy = () => {
 
                                 {/* 11 */}
                                 <section className="py-4 ">
-                                    <div className="container mx-auto">
+                                    <div className="mx-auto">
                                         <div className="flex justify-center">
                                             <div className="w-full">
                                                 <div >
