@@ -1,7 +1,5 @@
 import React from 'react';
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
-import { FaCheckCircle } from "react-icons/fa";
-import { IoMdCloseCircle } from "react-icons/io";
 import SectionTitle from '../SectionTitle/SectionTitle';
 // import { TbCurrencyTaka } from "react-icons/tb";
 const Pricing = () => {
@@ -26,7 +24,7 @@ const Pricing = () => {
                             </p>
 
                             <a
-                                className="mt-4 block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 sm:mt-6"
+                                className="mt-4 block rounded border border-[#F6866A] bg-[#F6866A] px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-[#F6866A] focus:outline-none focus:ring active:text-[#F6866A] sm:mt-6"
                                 href="#"
                             >
                                 Get Started
@@ -146,7 +144,7 @@ const Pricing = () => {
                             </p>
 
                             <a
-                                className="mt-4 block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 sm:mt-6"
+                                className="mt-4 block rounded border border-[#F6866A] bg-[#F6866A] px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-[#F6866A] focus:outline-none focus:ring active:text-[#F6866A] sm:mt-6"
                                 href="#"
                             >
                                 Get Started
@@ -266,7 +264,7 @@ const Pricing = () => {
                             </p>
 
                             <a
-                                className="mt-4 block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 sm:mt-6"
+                                className="mt-4 block rounded border border-[#F6866A] bg-[#F6866A] px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-[#F6866A] focus:outline-none focus:ring active:text-[#F6866A] sm:mt-6"
                                 href="#"
                             >
                                 Get Started

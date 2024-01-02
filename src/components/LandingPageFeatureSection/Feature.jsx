@@ -4,7 +4,7 @@ import SectionTitle from '../SectionTitle/SectionTitle';
 import { FaAngleRight } from "react-icons/fa";
 const Feature = ({ img, flexDirection, background, responsiveDirection, heading }) => {
     return (
-        <div className={`p-3 my-8 flex flex-col items-center gap-5 ${flexDirection ? 'md:flex-row-reverse' : 'md:flex-row'} ${background ? 'bg-gray-100' : ''}`}>
+        <div className={`max-w-screen-xl p-3 my-8 flex mx-auto flex-col items-center gap-5 ${flexDirection ? 'md:flex-row-reverse' : 'md:flex-row'} ${background ? 'bg-gray-100' : ''}`}>
             {/* this is for text  */}
             <div>
                 <div>
@@ -14,23 +14,23 @@ const Feature = ({ img, flexDirection, background, responsiveDirection, heading 
                         padding={'py-1'}
                     />
                     <SectionTitle
-                        p='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                        p='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.'
                         bg={false}
                         padding={'py-2'}
                     />
                 </div>
-                <div className='flex gap-4 items-center'>
+                <div className='flex items-center'>
                     <FaAngleRight size={22} />
                     <SectionTitle
-                        p='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                        p='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.'
                         bg={false}
                         padding={'py-1'}
                     />
                 </div>
-                <div className='flex gap-4 items-center'>
+                <div className='flex items-center'>
                     <FaAngleRight size={22} />
                     <SectionTitle
-                        p='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                        p='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.'
                         bg={false}
                         padding={'py-1'}
                     />
