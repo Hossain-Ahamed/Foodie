@@ -59,6 +59,9 @@ input[type=number] {
   background-color: transparent;
 }
 
+.error-img{
+  background-image: url('./assets/images/Error/error-img.jpg');
+}
 
 
 

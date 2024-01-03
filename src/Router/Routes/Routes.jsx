@@ -8,8 +8,12 @@ import PreventLogIn from "../PreventLogin/PreventLogIn";
 import Test from "../../pages/Shared/VideoPlayer/Test";
 import ErrorPage from "../../pages/Shared/ErrorPage/ErrorPage";
 import PrivacyPolicy from "../../pages/Others/PrivacyPolicy/PrivacyPolicy";
+
+import PricingPage from "../../pages/PricingPage/PricingPage";
+
 import AddEmployee from "../../pages/Admin/AddEmployee/AddEmployee";
 import AddRestaurant from "../../pages/MainSite/AddRestaurant/AddRestaurant";
+
 
 export const router = createBrowserRouter([
     {
@@ -46,6 +50,11 @@ export const router = createBrowserRouter([
             {
                 path: '/add-Restaurant',
                 element: <AddRestaurant />
+            }
+
+            {
+                path: '/pricing',
+                element: <PricingPage />
             }
 
         ]
