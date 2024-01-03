@@ -3,6 +3,12 @@ import Districts from '../../assets/bangladesh-geojson/bd-districts.json';
 import Upazillas from '../../assets/bangladesh-geojson/bd-upazilas.json';
 import PostCodes from '../../assets/bangladesh-geojson/bd-postcodes.json';
 
+import countries from '../../assets/bangladesh-geojson/countries_data.json';
+
+
+const getCountries = ()=>{
+    return countries;
+}
 
 const isValidAddress = (divisionId, districtId, upazillaId, postID, PostCode) => {
 
@@ -165,6 +171,7 @@ export {
     validPassword,
     getPcInfo,
 
+    getCountries,
     isValidAddress,
     getDivisions,
     getDistricts,

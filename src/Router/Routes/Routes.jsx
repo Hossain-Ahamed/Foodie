@@ -8,35 +8,49 @@ import PreventLogIn from "../PreventLogin/PreventLogIn";
 import Test from "../../pages/Shared/VideoPlayer/Test";
 import ErrorPage from "../../pages/Shared/ErrorPage/ErrorPage";
 import PrivacyPolicy from "../../pages/Others/PrivacyPolicy/PrivacyPolicy";
+
 import PricingPage from "../../pages/PricingPage/PricingPage";
+
+import AddEmployee from "../../pages/Admin/AddEmployee/AddEmployee";
+import AddRestaurant from "../../pages/MainSite/AddRestaurant/AddRestaurant";
+
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main/>,
-        errorElement : <>error occured</>,
-        children :[
+        element: <Main />,
+        errorElement: <>error occured</>,
+        children: [
 
             {
                 path: '/',
-                element: <Home/>
+                element: <Home />
             },
             {
                 path: '/login',
-                element: <PreventLogIn><Login/></PreventLogIn>
+                element: <PreventLogIn><Login /></PreventLogIn>
             },
             {
                 path: '/test',
-                element: <Test/>
+                element: <Test />
             },
             {
                 path: '/error',
-                element: <ErrorPage/>
+                element: <ErrorPage />
             },
             {
                 path: '/privacy-policy',
-                element: <PrivacyPolicy/>
+                element: <PrivacyPolicy />
             },
+            {
+                path: '/add-employee',
+                element: <AddEmployee />
+            }
+            ,
+            {
+                path: '/add-Restaurant',
+                element: <AddRestaurant />
+            }
 
             {
                 path: '/pricing',
@@ -46,5 +60,5 @@ export const router = createBrowserRouter([
         ]
 
     },
-   
+
 ])
