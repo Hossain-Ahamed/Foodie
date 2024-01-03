@@ -9,6 +9,7 @@ import Test from "../../pages/Shared/VideoPlayer/Test";
 import ErrorPage from "../../pages/Shared/ErrorPage/ErrorPage";
 import PrivacyPolicy from "../../pages/Others/PrivacyPolicy/PrivacyPolicy";
 import AddEmployee from "../../pages/Admin/AddEmployee/AddEmployee";
+import AddRestaurant from "../../pages/MainSite/AddRestaurant/AddRestaurant";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
             {
                 path: '/add-employee',
                 element: <AddEmployee />
+            }
+            ,
+            {
+                path: '/add-Restaurant',
+                element: <AddRestaurant />
             }
 
         ]
