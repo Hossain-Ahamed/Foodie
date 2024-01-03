@@ -6,7 +6,7 @@ const Header = () => {
     const navItems = <>
         <li><Link>Admin</Link></li>
         <li><Link>Home</Link></li>
-        <li><Link>Pricing</Link></li>
+        <li><Link to='/pricing'>Pricing</Link></li>
         <li><Link>Form & Privacy</Link></li>
     </>
     return (

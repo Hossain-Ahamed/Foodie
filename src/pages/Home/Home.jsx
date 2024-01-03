@@ -5,13 +5,12 @@ import Banner from '../../components/LandingPageBanner/Banner.jsx';
 import Divider from '../../components/LandingPageDivider/Divider.jsx';
 import Feature from '../../components/LandingPageFeatureSection/Feature.jsx';
 import home2 from '../../assets/images/Home/home2.png';
-import Pricing from '../../components/LandingPagePricing/Pricing.jsx';
+import Pricing from '../../components/LandingPagePricing/PricingCard.jsx';
+import Footer from '../Shared/Footer/Footer.jsx';
 const Home = () => {
     return (
         <div>
             <ScrollToTop />
-            {/* this is navbar */}
-            <Header />
 
             {/* this is banner image under navbar */}
             <Banner />
@@ -34,12 +33,12 @@ const Home = () => {
                 heading='OUR SOFTWARE FEATURES'
             />
 
-            <Pricing />
-
-            <Feature
+            {/* <Feature
             img={home2}
             heading='Download Our Software'
-            />
+            /> */}
+
+            <Footer />
         </div>
     );
 };
