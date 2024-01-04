@@ -13,7 +13,7 @@ import PricingPage from "../../pages/PricingPage/PricingPage";
 
 import AddEmployee from "../../pages/Admin/AddEmployee/AddEmployee";
 import AddRestaurant from "../../pages/MainSite/AddRestaurant/AddRestaurant";
-import Table from "../../components/Table/Table";
+import EmployeeList from "../../pages/Admin/EmployeeList/EmployeeList";
 
 
 export const router = createBrowserRouter([
@@ -56,14 +56,15 @@ export const router = createBrowserRouter([
             {
                 path: '/pricing',
                 element: <PricingPage />
+            },
+            {
+                path: 'table',
+                element: <EmployeeList />
             }
 
         ]
 
     },
-    {
-        path: 'table',
-        element: <Table />
-    }
+    
 
 ])
