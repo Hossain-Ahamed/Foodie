@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 
 const AddRestaurant = () => {
     const countries = getCountries();
- 
+
     const { register, handleSubmit, formState: { errors }, setValue, control } = useForm();
 
     const { fields, append, remove } = useFieldArray({
@@ -34,7 +34,7 @@ const AddRestaurant = () => {
 
             return;
         }
-        if(data?.branches.length<=0){
+        if (data?.branches.length <= 0) {
             toast.error('Minimum 1 branch needed');
 
             return;
@@ -351,8 +351,8 @@ const AddRestaurant = () => {
                                             className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg appearance-none"
                                         >
                                             <option value="" disabled>Select Country</option>
-                                            {countries.map((country,i) => (
-                                                <option key={i+index} value={country?.en_short_name} className='text-black'>
+                                            {countries.map((country, i) => (
+                                                <option key={i + index} value={country?.en_short_name} className='text-black'>
                                                     {country?.en_short_name}
                                                 </option>
                                             ))}
@@ -392,11 +392,18 @@ const AddRestaurant = () => {
                         </div>
                     </div>
 
+                    <div className="flex items-start mb-5 mt-2 pl-2">
+                        <div className="flex items-center h-5">
+                            <input id="terms" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required/>
+                        </div>
+                        <label htmlFor="terms" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="/privacy-policy" className="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a></label>
+                    </div>
+
                     <div className='my-4 w-full flex flex-wrap justify-center items-center gap-2'>
-                    <button
-                        type='submit' className="flex flex-wrap justify-center  px-4 py-2 bg-green-500 hover:bg-green-600 font-medium text-sm text-white border border-green-500 rounded-md shadow-button">
-                        <p data-config-id="auto-txt-22-3">Submit</p>
-                    </button>
+                        <button
+                            type='submit' className="flex flex-wrap justify-center  px-4 py-2 bg-green-500 hover:bg-green-600 font-medium text-sm text-white border border-green-500 rounded-md shadow-button">
+                            <p data-config-id="auto-txt-22-3">Submit</p>
+                        </button>
                     </div>
                 </div>
 

@@ -25,7 +25,7 @@ const Main = () => {
       
             {noHeadFoot || <Header />}
 
-            <main className='relative max-w-[2000px] mx-auto'>  
+            <main className='relative max-w-[2000px] pt-10 mx-auto'>  
                 <Outlet />
             </main>
             
