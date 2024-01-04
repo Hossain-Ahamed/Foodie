@@ -22,16 +22,43 @@ import { SearchIcon } from "./SearchIcon";
 import { ChevronDownIcon } from "./ChevronDownIcon";
 import { columns, users, statusOptions } from "./data";
 import { capitalize } from "./utils";
+import { Link } from "react-router-dom";
 
 const statusColorMap = {
     active: "success",
-    paused: "danger",
-    vacation: "warning",
+
+
+    vacation: "secondary",
+    leave: 'secondary',
+    probation: 'secondary',
+    training: 'secondary',
+
+    trial: 'primary',
+    upgrading: 'primary',
+
+
+
+    suspension: 'danger',
+    terminated: 'danger',
+    renewalPending: 'danger',
+    paymentExpired: 'danger',
+
+
+
+
+    hold: "warning",
+    paused: "warning",
+    downgrading: 'warning',
+    paymentIssue: 'warning',
+    paymentPending: 'warning',
+    gracePeriod: 'warning',
+
+
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
+// const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions",'id'];
 
-export default function TableComponent() {
+export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, View }) {
     const [filterValue, setFilterValue] = React.useState("");
     const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
     const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));
@@ -87,30 +114,30 @@ export default function TableComponent() {
         });
     }, [sortDescriptor, items]);
 
-    const renderCell = React.useCallback((user, columnKey) => {
-        const cellValue = user[columnKey];
+    const renderCell = React.useCallback((_data, columnKey) => {
+        const cellValue = _data[columnKey];
 
         switch (columnKey) {
             case "name":
                 return (
                     <User
-                        avatarProps={{ radius: "lg", src: user.avatar }}
-                        description={user.email}
+                        avatarProps={{ radius: "lg", src: _data.avatar }}
+                        description={_data.email}
                         name={cellValue}
                     >
-                        {user.email}
+                        {_data.email}
                     </User>
                 );
             case "role":
                 return (
                     <div className="flex flex-col">
                         <p className="text-bold text-small capitalize">{cellValue}</p>
-                        <p className="text-bold text-tiny capitalize text-default-400">{user.team}</p>
+                        <p className="text-bold text-tiny capitalize text-default-400">{_data.team}</p>
                     </div>
                 );
             case "status":
                 return (
-                    <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
+                    <Chip className="capitalize" color={statusColorMap[_data.status]} size="sm" variant="flat">
                         {cellValue}
                     </Chip>
                 );
@@ -223,8 +250,10 @@ export default function TableComponent() {
                                 ))}
                             </DropdownMenu>
                         </Dropdown>
-                        <Button color="primary" endContent={<PlusIcon />}>
-                            Add New
+                        <Button color="primary" endContent={<PlusIcon />} >
+                            <Link to={AddNew} >
+                                Add New
+                            </Link>
                         </Button>
                     </div>
                 </div>
@@ -237,8 +266,10 @@ export default function TableComponent() {
                             onChange={onRowsPerPageChange}
                         >
                             <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="1000">1000</option>
                         </select>
                     </label>
                 </div>
@@ -290,7 +321,7 @@ export default function TableComponent() {
             bottomContent={bottomContent}
             bottomContentPlacement="outside"
             classNames={{
-                wrapper: "max-h-[382px]",
+                wrapper: "h-fit",
             }}
             selectedKeys={selectedKeys}
             selectionMode="multiple"
