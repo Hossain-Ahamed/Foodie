@@ -3,6 +3,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import 'sweetalert2/src/sweetalert2.scss'
 import Header from '../../pages/Shared/Header/Header';
+import Footer from '../../pages/Shared/Footer/Footer';
 
 const Main = () => {
 
@@ -21,16 +22,14 @@ const Main = () => {
 
 
         <section className='text-black min-h-screen'>
-            {/* todo */}
-            {/* {noHeadFoot || <Header />} */}
+      
+            {noHeadFoot || <Header />}
 
-            {/* this is navbar */}
-            <Header />
             <main className='relative max-w-[2000px] mx-auto'>  
                 <Outlet />
             </main>
-            {/* todo */}
-            {/* {noHeadFoot || <Footer />} */}
+            
+            {noHeadFoot || <Footer />}
 
             
         </section>
