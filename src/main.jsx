@@ -9,23 +9,24 @@ import AuthProvider from './Contexts/AuthProvider/AuthProvider.jsx'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './Router/Routes/Routes.jsx'
 import ToasterProvider from './components/Toastprovider/ToastProvider.jsx'
+import { NextUIProvider } from '@nextui-org/react'
 // Create a client
 const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <HelmetProvider>
-        <AuthProvider>
-        <ToasterProvider />
-        <RouterProvider router={router} />
+      <NextUIProvider>
+        <QueryClientProvider client={queryClient}>
+          <HelmetProvider>
+            <AuthProvider>
+              <ToasterProvider />
+              <RouterProvider router={router} />
 
-        </AuthProvider>
+            </AuthProvider>
 
-        </HelmetProvider>
-      </QueryClientProvider>
-
-
+          </HelmetProvider>
+        </QueryClientProvider>
+      </NextUIProvider>
     </ThemeProvider>
   </React.StrictMode>,
 )
