@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
                 element: <PricingPage />
             },
             {
-                path: 'table',
+                path: '/employee-list',
                 element: <EmployeeList />
             }
 

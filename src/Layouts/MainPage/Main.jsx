@@ -11,10 +11,11 @@ const Main = () => {
           in this path, header and footer wont be available 
     -------------------------------------------------------------------*/
     const location = useLocation();
-    const noHeaderFooterArray = ['/login', '/sign-up', '/forget-password'];
+    const noHeaderFooterArray = ['/login', '/sign-up', '/forget-password', '/list'];
 
     const noHeadFoot = noHeaderFooterArray.some((str) =>
-        str.toLowerCase() === location.pathname.toLowerCase()
+        // str.toLowerCase() === location.pathname.toLowerCase()
+         location.pathname.toLowerCase().includes(str.toLocaleLowerCase())
     );
     // _______________________________________________________________________________//
 
