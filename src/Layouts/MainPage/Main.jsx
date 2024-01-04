@@ -19,14 +19,14 @@ const Main = () => {
     );
     // _______________________________________________________________________________//
 
-    return (
+return (
 
 
         <section className='text-black min-h-screen'>
       
             {noHeadFoot || <Header />}
 
-            <main className='relative max-w-[2000px] pt-10 mx-auto'>  
+            <main className='relative max-w-[2000px] pt-20 mx-auto'>  
                 <Outlet />
             </main>
             
