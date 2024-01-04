@@ -38,7 +38,7 @@ const Home = () => {
             heading='Download Our Software'
             /> */}
 
-            <Footer />
+    
         </div>
     );
 };
