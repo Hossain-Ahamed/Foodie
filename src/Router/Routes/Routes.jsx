@@ -52,7 +52,6 @@ export const router = createBrowserRouter([
                 path: '/add-Restaurant',
                 element: <AddRestaurant />
             },
-
             {
                 path: '/pricing',
                 element: <PricingPage />
