@@ -6,56 +6,150 @@ import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import { getCountries, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
 import SetTitle from '../../Shared/SetTtitle/SetTitle';
 import { toast } from 'react-hot-toast';
+import { useQuery } from 'react-query';
+// import { useParams,useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import ScrollToTop from '../../../components/ScrollToTop/ScrollToTop';
+import LoadingPage from '../../Shared/LoadingPages/LoadingPage/LoadingPage';
+import ErrorPage from '../../Shared/ErrorPage/ErrorPage';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const AddEmployee = () => {
+const EditEmployee = () => {
     const countries = getCountries();
+    const { employeeID } = useParams();
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    const axiosSecure = useAxiosSecure();
+
 
     // handle image
     const [selectedImage0, setSelectedImage0] = useState(null);
+    const navigate = useNavigate();
+    const { refetch: dataRefetch, data: data = {}, isLoading: dataLoading, error: dataError } = useQuery({
+        queryKey: ['employeeData', employeeID],
+        enabled: true,
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/get-employee-data/${employeeID}`);
+
+            //   to do uncomment 
+            // setSelectedImage0(res.data?.profilePhoto);
+            // return res?.data;
+
+            const prev = {
+                f_name: 'helo',
+                l_name: 'dsaj',
+                email: 'a@gmail.com',
+                gender: 'Female',
+                DOB: '0007-01-01',
+                nid: '45273485',
+                role: 'Accounts',
+                mobile: '01868726172',
+                commentNotes: "tui moros na k",
+                profilePhoto: 'https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no',
+                streetAddress: "J A M T O L A",
+                city: 'Narayanganj',
+                stateProvince: 'hello',
+                postalCode: '435',
+                country: "Bangladesh",
+
+
+                emergencyAddress: "J A M T O L A",
+                emergencyEmail: "hossainahamed6872@gmail.com",
+                emergencyName: "Md. Hossain Ahamed",
+                emergencyPhoneNumber: "01868726172",
+                emergencyRelation: "3241"
+            }
+
+            setSelectedImage0(prev.profilePhoto);
+            return prev;
+        },
+    });
+
+
 
     const handleImageUpload0 = (event) => {
         const file = event.target.files[0];
         setSelectedImage0(URL.createObjectURL(file));
-    
         setValue("profilePhoto", file);
 
     };
 
+
     const onSubmit = (data) => {
+        // Handle the htmlForm submission logic here
+        // first image upload check  --main image
+
+        
         if (!selectedImage0) {
             toast.error('Profile Photo needed');
             return;
         }
-    
+
+
         const formData = new FormData();
-    
+
+        if (data.profilePhoto) {
+            formData.append('profilePhoto', data.profilePhoto);
+        }
+
         // Loop through object keys and append each field to formData
         for (const key in data) {
             if (Object.prototype.hasOwnProperty.call(data, key)) {
                 formData.append(key, data[key]);
             }
         }
-    
-        console.log(data);
-        // Now `formData` contains all the fields with the same names as in the `data` object
-        // Continue with the rest of your submission logic
+
+
+
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            confirmButtonColor: '#059669',
+            cancelButtonColor: '#F43F5E',
+            showCancelButton: true,
+            confirmButtonText: "Save",
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                axiosSecure.patch(`/edit-employee/${employeeID}`, formData)
+                    .then(data => {
+                        toast.success('successfully updated');
+                        navigate(`/employee/${employeeID}`)
+                    })
+                    .catch(e => {
+                        Swal.fire({
+                            icon: 'error',
+                            text: e?.code + " " + e?.message,
+                            title: e?.response?.data?.message
+
+                        })
+                    })
+            }
+        });
+
+
     };
-    
+
+    if (dataLoading) {
+        return <LoadingPage />
+    }
+
+    if (dataError) {
+        return <ErrorPage />
+    }
 
     return (
         <>
             <ScrollToTop />
-            <SetTitle title="Add Employee" />
+            <SetTitle title="Edit Employee" />
             <form onSubmit={handleSubmit(onSubmit)} className='max-w-7xl mx-auto flex flex-col items-center py-12 select-none '>
-                <SectionTitle h1="Employee Form" />
+                <SectionTitle h1="Employee Edit Form" />
                 <div className="w-full md:w-3/4 p-3 mt-8">
                     <div className="p-6 h-full border border-coolGray-100 overflow-hidden bg-white rounded-md shadow-dashboard">
                         <div className="flex flex-wrap pb-3 -m-3">
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-3-3">First name</p>
                                 <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="text" placeholder="John"
+                                    defaultValue={data?.f_name}
                                     {...register("f_name", {
                                         required: "*Last Name is Required",
                                     })} />
@@ -66,6 +160,7 @@ const AddEmployee = () => {
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-4-3">Last name</p>
                                 <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="text" placeholder="Doe"
+                                    defaultValue={data?.l_name}
                                     {...register("l_name", {
                                         required: "*First Name is Required",
 
@@ -78,6 +173,7 @@ const AddEmployee = () => {
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-5-3">Email</p>
                                 <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="email" placeholder="alex@example.com"
+                                    defaultValue={data?.email}
                                     {...register("email", {
                                         required: "*E-mail is Required",
 
@@ -94,6 +190,7 @@ const AddEmployee = () => {
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-6-3">Phone number</p>
                                 <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="tel" placeholder="01x xxx xxxx "
+                                    defaultValue={data?.mobile}
                                     {...register("mobile", {
                                         required: "*Contact number is Required",
                                         validate: {
@@ -121,6 +218,7 @@ const AddEmployee = () => {
                                                     value={gender}
                                                     {...register('gender')}
                                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+                                                    checked={data?.gender === gender}
                                                 />
                                                 <label
                                                     htmlFor={`${gender.toLowerCase()}-gender`}
@@ -142,6 +240,7 @@ const AddEmployee = () => {
                                     id="dob"
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="date"
+                                    defaultValue={data?.DOB}
                                     {...register('DOB', {
                                         required: '*Date of Birth is required',
 
@@ -163,6 +262,7 @@ const AddEmployee = () => {
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="text"
                                     placeholder="xxx xxxx xxxx xxx"
+                                    defaultValue={data?.nid}
                                     {...register('nid', {
                                         required: '*NID is required',
                                     })}
@@ -187,7 +287,7 @@ const AddEmployee = () => {
                                     <select
                                         id="role"
                                         className="appearance-none w-full py-2.5 px-4 text-coolGray-900 text-base font-normal bg-white border outline-none border-coolGray-200 hover:border-green-500 rounded-lg shadow-input"
-                                        defaultValue=""
+                                        defaultValue={data?.role}
                                         {...register('role', { required: '*Select Role is required' })}
                                     >
                                         <option value="" disabled>Select Role</option>
@@ -213,9 +313,10 @@ const AddEmployee = () => {
                                             Comment/Notes
                                         </p>
                                         <textarea
+                                            defaultValue={data?.commentNotes}
                                             {...register('commentNotes')}
                                             className="block w-full h-64 p-4 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input resize-none"
-                                            defaultValue="N/A" // Set default value here
+
                                         ></textarea>
                                     </div>
                                 </div>
@@ -242,7 +343,7 @@ const AddEmployee = () => {
                     </div> */}
 
                         {/* pp */}
-                        <p className="mt-3 mb-1.5 font-medium text-coolGray-800 text-base" data-config-id="auto-txt-10-3">
+                        <p className="mt-3 mb-1.5 font-medium text-coolGray-800 text-base " data-config-id="auto-txt-10-3">
                             Profile Photo
                         </p>
                         <div className=''>
@@ -255,7 +356,7 @@ const AddEmployee = () => {
 
                                 {!selectedImage0 &&
                                     <>
-                                        <div className="w-full">
+                                        <div className="w-full h-60">
                                             <div className="flex flex-wrap -m-3">
                                                 <div className="w-full p-3">
 
@@ -279,7 +380,7 @@ const AddEmployee = () => {
                                     </>
                                 }
                                 {selectedImage0 && (
-                                    <img src={selectedImage0} alt="Uploaded" className=" rounded-2xl object-contain" />
+                                    <img src={selectedImage0} alt="Uploaded" className="h-60 rounded-2xl object-contain" />
                                 )}
                                 <input
 
@@ -308,6 +409,7 @@ const AddEmployee = () => {
                                     id="streetAddress"
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="text"
+                                    defaultValue={data?.streetAddress}
                                     placeholder="Enter your street address"
                                     {...register('streetAddress', {
                                         required: '*Street Address is required',
@@ -325,6 +427,7 @@ const AddEmployee = () => {
                                     City/Town
                                 </label>
                                 <input
+                                    defaultValue={data?.city}
                                     {...register('city', { required: 'City/Town is required' })}
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="text"
@@ -343,6 +446,7 @@ const AddEmployee = () => {
                                     State / Province
                                 </label>
                                 <input
+                                    defaultValue={data?.stateProvince}
                                     {...register('stateProvince', { required: 'State / Province is required' })}
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="text"
@@ -361,6 +465,7 @@ const AddEmployee = () => {
                                     ZIP / Postal code
                                 </label>
                                 <input
+                                    defaultValue={data?.postalCode}
                                     {...register('postalCode', { required: 'ZIP / Postal code is required' })}
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="text"
@@ -383,7 +488,7 @@ const AddEmployee = () => {
                                         <path d="M11.3333 6.1133C11.2084 5.98913 11.0395 5.91943 10.8633 5.91943C10.6872 5.91943 10.5182 5.98913 10.3933 6.1133L8.00001 8.47329L5.64001 6.1133C5.5151 5.98913 5.34613 5.91943 5.17001 5.91943C4.99388 5.91943 4.82491 5.98913 4.70001 6.1133C4.63752 6.17527 4.58792 6.249 4.55408 6.33024C4.52023 6.41148 4.50281 6.49862 4.50281 6.58663C4.50281 6.67464 4.52023 6.76177 4.55408 6.84301C4.58792 6.92425 4.63752 6.99799 4.70001 7.05996L7.52667 9.88663C7.58865 9.94911 7.66238 9.99871 7.74362 10.0326C7.82486 10.0664 7.912 10.0838 8.00001 10.0838C8.08801 10.0838 8.17515 10.0664 8.25639 10.0326C8.33763 9.99871 8.41136 9.94911 8.47334 9.88663L11.3333 7.05996C11.3958 6.99799 11.4454 6.92425 11.4793 6.84301C11.5131 6.76177 11.5305 6.67464 11.5305 6.58663C11.5305 6.49862 11.5131 6.41148 11.4793 6.33024C11.4454 6.249 11.3958 6.17527 11.3333 6.1133Z" fill="#8896AB"></path>
                                     </svg>
                                     <select
-                                        defaultValue=""
+                                        defaultValue={data?.country}
                                         {...register('country', { required: 'Country is required' })}
                                         className="appearance-none w-full py-2.5 px-4 text-coolGray-900 text-base font-normal bg-white border outline-none border-coolGray-200 hover:border-green-500 rounded-lg shadow-input"
                                     >
@@ -421,6 +526,7 @@ const AddEmployee = () => {
                                     Name
                                 </label>
                                 <input
+                                    defaultValue={data?.emergencyName}
                                     {...register('emergencyName', { required: 'Name is required' })}
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="text"
@@ -439,6 +545,7 @@ const AddEmployee = () => {
                                     Relation
                                 </label>
                                 <input
+                                    defaultValue={data?.emergencyRelation}
                                     {...register('emergencyRelation', { required: 'Relation is required' })}
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="text"
@@ -457,6 +564,7 @@ const AddEmployee = () => {
                                     Phone number
                                 </label>
                                 <input
+                                    defaultValue={data?.emergencyPhoneNumber}
                                     {...register('emergencyPhoneNumber', { required: 'Phone number is required' })}
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="tel"
@@ -475,6 +583,7 @@ const AddEmployee = () => {
                                     Email
                                 </label>
                                 <input
+                                    defaultValue={data?.emergencyEmail}
                                     {...register('emergencyEmail', { required: 'Email is required' })}
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="email"
@@ -493,6 +602,7 @@ const AddEmployee = () => {
                                     Address
                                 </label>
                                 <input
+                                    defaultValue={data?.emergencyAddress}
                                     {...register('emergencyAddress', { required: 'Address is required' })}
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="text"
@@ -506,7 +616,7 @@ const AddEmployee = () => {
                             </div>
                         </div>
                         <button type='submit' className="flex flex-wrap justify-center w-full md:w-auto md:ml-auto px-4 py-2 bg-green-500 hover:bg-green-600 font-medium text-sm text-white border border-green-500 rounded-md shadow-button">
-                            <p data-config-id="auto-txt-22-3">Save</p>
+                            <p data-config-id="auto-txt-22-3">Update</p>
                         </button>
                     </div>
 
@@ -517,4 +627,4 @@ const AddEmployee = () => {
     );
 };
 
-export default AddEmployee;
+export default EditEmployee;

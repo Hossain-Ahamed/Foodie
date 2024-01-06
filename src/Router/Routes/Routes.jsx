@@ -14,6 +14,8 @@ import PricingPage from "../../pages/PricingPage/PricingPage";
 import AddEmployee from "../../pages/Admin/AddEmployee/AddEmployee";
 import AddRestaurant from "../../pages/MainSite/AddRestaurant/AddRestaurant";
 import EmployeeList from "../../pages/Admin/EmployeeList/EmployeeList";
+import EditEmployee from "../../pages/Admin/EditEmployee/EditEmployee";
+import FormPolicy from "../../pages/MainSite/FormPolicy/FormPolicy";
 
 
 export const router = createBrowserRouter([
@@ -46,11 +48,6 @@ export const router = createBrowserRouter([
             {
                 path: '/add-employee',
                 element: <AddEmployee />
-            }
-            ,
-            {
-                path: '/add-Restaurant',
-                element: <AddRestaurant />
             },
             {
                 path: '/pricing',
@@ -59,6 +56,14 @@ export const router = createBrowserRouter([
             {
                 path: '/employee-list',
                 element: <EmployeeList />
+            },
+            {
+                path : '/edit-employee/:employeeID',
+                element : <EditEmployee/>
+            },
+            {
+                path : '/registration-form',
+                element : <AddRestaurant/>
             }
 
         ]
