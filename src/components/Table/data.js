@@ -14,6 +14,8 @@ const statusOptions = [
     { name: "Active", uid: "active" },
     { name: "Paused", uid: "paused" },
     { name: "Vacation", uid: "vacation" },
+    { name: "Trial", uid: "trial" },
+
 ];
 
 const users = [
@@ -75,7 +77,7 @@ const users = [
         age: "29",
         avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
         email: "brian.kim@example.com",
-        status: "Active",
+        status: "active",
     },
     {
         id: 7,
