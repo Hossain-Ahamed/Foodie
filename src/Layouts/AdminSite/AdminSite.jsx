@@ -9,7 +9,7 @@ import useAuthProvider from '../../Hooks/useAuthProvider';
 
 const AdminSite = () => {
     const [isChecked, setChecked] = useState(false);
-    const {user} = useAuthProvider();
+    const {user,loading} = useAuthProvider();
     const { profile, profileLoading, role, profileError } = useProfile();
 
     /**
@@ -20,16 +20,16 @@ const AdminSite = () => {
      *                                                             ==> go to the destination page
      *                                                             ==> otherwise  go to the error page
      */
-
+    if (profileLoading ||loading) {
+        return <LoadingPage />
+    }
 
     if(!user){
         return <Navigate to='/' replace></Navigate>
     }
 
 
-    if (profileLoading) {
-        return <LoadingPage />
-    }
+ 
     if (profileError || !profile || !['Admin', 'Accounts', 'Developer'].includes(role)) {
         return <ErrorPage />
     }

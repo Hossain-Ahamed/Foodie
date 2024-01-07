@@ -83,7 +83,7 @@ export const router = createBrowserRouter([
             },
             {
 
-                path: 'view-employee/:employeeID',
+                path: 'employee-list/view/:employeeID',
                 element: <ViewAsAdmin />
             },
             {
@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
                 element: <ViewAsMyProfile />
             },
             {
-                path : 'edit-employee/:employeeID',
+                path : 'employee-list/edit/:employeeID',
                 element : <EditEmployee/>
             },
         ]
