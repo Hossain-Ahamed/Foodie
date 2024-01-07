@@ -1,4 +1,5 @@
 import React from "react";
+import logo from '../../../assets/images/brand-icon.png'
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, DropdownMenu, DropdownItem, Dropdown, DropdownTrigger, Avatar } from "@nextui-org/react";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
@@ -32,8 +33,9 @@ export default function TopNavUser() {
 
             <NavbarBrand>
                 {/* <AcmeLogo /> */}
-
-                <Link className="font-bold text-inherit text-red-500 cursor-pointer" href="/">Foodie</Link>
+                <Avatar  radius="sm" color="default" src={logo} />
+  
+                <Link className="font-bold text-inherit text-red-500 cursor-pointer pl-2" href="/">Foodie</Link>
             </NavbarBrand>
 
 
@@ -78,7 +80,7 @@ export default function TopNavUser() {
                             isBordered
                             as="button"
                             className="transition-transform"
-                            color="secondary"
+                            color="danger"
                             name="Jason Hughes"
                             size="sm"
                             src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
