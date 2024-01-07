@@ -14,6 +14,7 @@ import PricingPage from "../../pages/PricingPage/PricingPage";
 import AddEmployee from "../../pages/Admin/AddEmployee/AddEmployee";
 import AddRestaurant from "../../pages/MainSite/AddRestaurant/AddRestaurant";
 import EmployeeList from "../../pages/Admin/EmployeeList/EmployeeList";
+import ViewEmployee from "../../pages/Admin/ViewEmployee/ViewEmployee";
 
 
 export const router = createBrowserRouter([
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
             {
                 path: '/employee-list',
                 element: <EmployeeList />
+            },
+            {
+                path: '/view-employee',
+                element: <ViewEmployee />
             }
 
         ]

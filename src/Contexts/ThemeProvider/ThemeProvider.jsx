@@ -19,8 +19,8 @@ const ThemeProvider = ({ children }) => {
 
     useEffect(() => {
         if (theme === "dark") {
-            localStorage.setItem("c_art_THEME", "dark")
-            document.documentElement.classList.add("dark")
+            // localStorage.setItem("c_art_THEME", "dark")
+            // document.documentElement.classList.add("dark")
         } else if (theme === "light") {
             localStorage.setItem("c_art_THEME", "light")
             document.documentElement.classList.remove("dark")

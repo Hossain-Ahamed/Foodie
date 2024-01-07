@@ -7,9 +7,11 @@ import Feature from '../../components/LandingPageFeatureSection/Feature.jsx';
 import home2 from '../../assets/images/Home/home2.png';
 import Pricing from '../../components/LandingPagePricing/PricingCard.jsx';
 import Footer from '../Shared/Footer/Footer.jsx';
+import SetTitle from '../Shared/SetTtitle/SetTitle.jsx';
 const Home = () => {
     return (
         <div>
+            <SetTitle title="Home"/>
             <ScrollToTop />
 
             {/* this is banner image under navbar */}
