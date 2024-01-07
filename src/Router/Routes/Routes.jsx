@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
             },
             {
 
-                path: '/view-employee',
+                path: '/view-employee/:employeeID',
                 element: <ViewAsAdmin />
             },
             {
