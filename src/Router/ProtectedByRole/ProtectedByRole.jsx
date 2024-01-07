@@ -1,7 +1,8 @@
 import React from 'react';
-import useProfile from '../../Hooks/useProfile';
-import LoadingPage from '../../Pages/LoadingPage/LoadingPage/LoadingPage';
+
 import { Navigate } from 'react-router-dom';
+import useProfile from '../../Hooks/useProfile';
+import LoadingPage from '../../pages/Shared/LoadingPages/LoadingPage/LoadingPage';
 
 const ProtectedByRole = ({ allowedRoles, children }) => {
     const { role, profileLoading } = useProfile();
