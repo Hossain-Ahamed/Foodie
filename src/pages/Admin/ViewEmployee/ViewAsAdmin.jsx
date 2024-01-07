@@ -23,19 +23,19 @@ const ViewAsAdmin = () => {
             // return res?.data;
 
             const prev = {
-                f_name: 'helo',
-                l_name: 'dsaj',
+                f_name: 'Farhan Hasan',
+                l_name: 'Nilok',
                 email: 'a@gmail.com',
-                gender: 'Female',
+                gender: 'Male',
                 DOB: '2001-01-19',
                 nid: '45273485',
                 role: 'Accounts',
                 mobile: '01868726172',
                 commentNotes: "tui moros na k",
                 profilePhoto: 'https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no',
-                streetAddress: "J A M T O L A",
+                streetAddress: "14/9 New Chasara",
                 city: 'Narayanganj',
-                stateProvince: 'hello',
+                stateProvince: 'Dhaka',
                 postalCode: '435',
                 country: "Bangladesh",
 

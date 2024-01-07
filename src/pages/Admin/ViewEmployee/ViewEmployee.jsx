@@ -10,6 +10,7 @@ import ScrollToTop from '../../../components/ScrollToTop/ScrollToTop';
 const ViewEmployee = ({ title, data, editable }) => {
 
     // admin , developer , mine 
+    console.log(data)
     return (
         <>
             <ScrollToTop />
@@ -20,7 +21,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                 <div className="w-full md:w-3/4 p-3 mt-8">
                     <div className='p-6 h-full border border-coolGray-100 overflow-hidden bg-white rounded-md shadow-dashboard'>
                         <div className='flex flex-col md:flex-row justify-between items-center'>
-                            <img className='w-12 h-12 rounded-full object-cover ring ring-indigo-600 mb-4 mx-auto md:mx-0' src={user} alt="" />
+                            <img className='w-12 h-12 rounded-full object-cover ring ring-red-500 mb-4 mx-auto md:mx-0' src={data?.profilePhoto} alt="" />
                             {
                                 editable && <span className="inline-flex items-center rounded-md bg-blue-50 px-4 cursor-pointer py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Edit</span>
 
@@ -33,7 +34,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 <div><MdOutlineDriveFileRenameOutline size={20} /></div>
                                 <div className='flex flex-col'>
                                     <p className='text-gray-500'>Full Name</p>
-                                    <p>Farhan Hasan Nilok</p>
+                                    <p>{data?.f_name} {data?.l_name}</p>
                                 </div>
                             </div>
                             <div className='flex gap-3 items-center mb-4'>
@@ -41,7 +42,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 <div><FaBriefcase size={20} /></div>
                                 <div className='flex flex-col'>
                                     <p className='text-gray-500'>Role</p>
-                                    <span className="inline-flex items-center rounded-large bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Admin</span>
+                                    <span className="inline-flex items-center rounded-large bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{data.role}</span>
                                 </div>
                             </div>
                             <div className='flex gap-3 items-center mb-4'>
@@ -49,7 +50,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 <div><MdEmail size={20} /></div>
                                 <div className='flex flex-col'>
                                     <p className='text-gray-500'>Email</p>
-                                    <p>farhan@gmail.com</p>
+                                    <p>{data?.email}</p>
                                 </div>
                             </div>
                             <div className='flex gap-3 items-center mb-4'>
@@ -57,7 +58,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 <div><MdPhone size={20} /></div>
                                 <div className='flex flex-col'>
                                     <p className='text-gray-500'>Phone Number</p>
-                                    <p>01234939933</p>
+                                    <p>{data?.mobile}</p>
                                 </div>
                             </div>
                             <div className='flex gap-3 items-center mb-4'>
@@ -65,7 +66,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 <div><MdCalendarMonth size={20} /></div>
                                 <div className='flex flex-col'>
                                     <p className='text-gray-500'>Date of Birth</p>
-                                    <p>24/11/2001</p>
+                                    <p>{data?.DOB}</p>
                                 </div>
                             </div>
                             <div className='flex gap-3 items-center mb-4'>
@@ -73,7 +74,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 <div><FaAddressCard size={20} /></div>
                                 <div className='flex flex-col'>
                                     <p className='text-gray-500'>NID</p>
-                                    <p>2474830293048</p>
+                                    <p>{data?.nid}</p>
                                 </div>
                             </div>
 
@@ -82,7 +83,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 <div><IoIosTransgender size={20} /></div>
                                 <div className='flex flex-col'>
                                     <p className='text-gray-500'>Gender</p>
-                                    <p>Male</p>
+                                    <p>{data?.gender}</p>
                                 </div>
                             </div>
                         </div>
@@ -101,11 +102,10 @@ const ViewEmployee = ({ title, data, editable }) => {
                             <div><FaLocationArrow size={20} /></div>
                             <div className='flex flex-col'>
                                 <p className='text-gray-500'>Street Address</p>
-                                <p>14/9 New Chasara
-                                </p>
-                                <p>Narayanaganj,Dhaka</p>
+                                <p>{data?.streetAddress}</p>
+                                <p>{data?.city},{data?.stateProvince}</p>
                                 <p>
-                                    Bangladesh, 1400
+                                    {data?.country}, {data?.postalCode}
                                 </p>
                             </div>
                         </div>
@@ -114,10 +114,10 @@ const ViewEmployee = ({ title, data, editable }) => {
                             <div><MdPermContactCalendar size={22} /></div>
                             <div className='flex flex-col'>
                                 <p className='text-gray-500'>Emergency Contact</p>
-                                <p>Name: Farhan Hasan Nilok</p>
-                                <p>Phone: 01234939933</p>
-                                <p>Email: farhan@gmail.com</p>
-                                <p>Address: Dhaka, Bangladesh</p>
+                                <p>Name: {data?.emergencyName}</p>
+                                <p>Phone: {data?.emergencyPhoneNumber}</p>
+                                <p>Email: {data?.emergencyEmail}</p>
+                                <p>Address: {data?.emergencyAddress}</p>
                             </div>
                         </div>
 
