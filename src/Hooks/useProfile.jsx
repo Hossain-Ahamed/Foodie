@@ -23,7 +23,7 @@ const useProfile = () => {
                 gender: 'Female',
                 DOB: '2001-01-19',
                 nid: '45273485',
-                role: 'Developer',
+                role: 'Admin',
                 mobile: '01868726172',
                 commentNotes: "tui moros na k",
                 profilePhoto: 'https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no',

@@ -47,37 +47,13 @@ export const router = createBrowserRouter([
                 element: <Test />
             },
             {
-                path: '/error',
-                element: <ErrorPage />
-            },
-            {
                 path: '/privacy-policy',
                 element: <PrivacyPolicy />
             },
-            {
-                path: '/add-employee',
-                element: <AddEmployee />
-            },
+            
             {
                 path: '/pricing',
                 element: <PricingPage />
-            },
-            {
-                path: '/employee-list',
-                element: <EmployeeList />
-            },
-            {
-
-                path: '/view-employee/:employeeID',
-                element: <ViewAsAdmin />
-            },
-            {
-                path: '/my-profile',
-                element: <ViewAsMyProfile />
-            },
-            {
-                path : '/edit-employee/:employeeID',
-                element : <EditEmployee/>
             },
             {
                 path : '/registration-form',
@@ -96,7 +72,28 @@ export const router = createBrowserRouter([
                 path : '/admin',
                 element : <RoleWiseNavigateToDashboardHome/>
 
-            }
+            },
+            {
+                path: 'add-employee',
+                element: <AddEmployee />
+            },
+            {
+                path: 'employee-list',
+                element: <EmployeeList />
+            },
+            {
+
+                path: 'view-employee/:employeeID',
+                element: <ViewAsAdmin />
+            },
+            {
+                path: 'my-profile',
+                element: <ViewAsMyProfile />
+            },
+            {
+                path : 'edit-employee/:employeeID',
+                element : <EditEmployee/>
+            },
         ]
     }
     
