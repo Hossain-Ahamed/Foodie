@@ -40,7 +40,7 @@ const EditEmployee = () => {
                 l_name: 'dsaj',
                 email: 'a@gmail.com',
                 gender: 'Female',
-                DOB: '0007-01-01',
+                DOB: '2001-01-19',
                 nid: '45273485',
                 role: 'Accounts',
                 mobile: '01868726172',
@@ -79,7 +79,7 @@ const EditEmployee = () => {
         // Handle the htmlForm submission logic here
         // first image upload check  --main image
 
-        
+        console.log(data)
         if (!selectedImage0) {
             toast.error('Profile Photo needed');
             return;
@@ -217,8 +217,9 @@ const EditEmployee = () => {
                                                     type="radio"
                                                     value={gender}
                                                     {...register('gender')}
+                                                    defaultChecked={data?.gender === gender}
                                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                                                    checked={data?.gender === gender}
+                                               
                                                 />
                                                 <label
                                                     htmlFor={`${gender.toLowerCase()}-gender`}
@@ -241,6 +242,9 @@ const EditEmployee = () => {
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="date"
                                     defaultValue={data?.DOB}
+                                    min="1800-01-01"
+                                    max={new Date().toISOString().split('T')[0]}
+                                    
                                     {...register('DOB', {
                                         required: '*Date of Birth is required',
 
