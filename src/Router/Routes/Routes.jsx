@@ -22,6 +22,8 @@ import FormPolicy from "../../pages/MainSite/FormPolicy/FormPolicy";
 import AdminSite from "../../Layouts/AdminSite/AdminSite";
 import ViewAsAdmin from "../../pages/Admin/ViewEmployee/ViewAsAdmin";
 import ViewAsMyProfile from "../../pages/Admin/ViewEmployee/ViewAsMyProfile";
+import RoleWiseNavigateToDashboardHome from "../RoleWiseNavigate/RoleWiseNavigate";
+import ProtectedByRole from "../ProtectedByRole/ProtectedByRole";
 
 
 
@@ -88,9 +90,13 @@ export const router = createBrowserRouter([
     },
     {
         path: '/admin',
-        element : <AdminSite/>,
+        element :<AdminSite/>,
         children : [
+            {
+                path : '/admin',
+                element : <RoleWiseNavigateToDashboardHome/>
 
+            }
         ]
     }
     
