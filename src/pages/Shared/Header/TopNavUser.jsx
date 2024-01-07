@@ -1,6 +1,8 @@
 import React from "react";
 import logo from '../../../assets/images/brand-icon.png'
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, DropdownMenu, DropdownItem, Dropdown, DropdownTrigger, Avatar } from "@nextui-org/react";
+import useProfile from "../../../Hooks/useProfile";
+import useAuthProvider from "../../../Hooks/useAuthProvider";
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function TopNavUser() {
@@ -16,7 +18,8 @@ export default function TopNavUser() {
         "Help & Feedback",
         "Log Out",
     ];
-
+ const {profile,role} = useProfile();
+ const {provideSignOut} = useAuthProvider()
 
     const menuItem = [
         { name: 'Home', to: '/' },
@@ -25,7 +28,7 @@ export default function TopNavUser() {
         { name: 'Policy', to: '/privacy-policy' },
     ]
     return (
-        <Navbar isBordered animation className="max-w-full" maxWidth="full">
+        <Navbar isBordered  className="max-w-full" maxWidth="full">
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle />
             </NavbarContent>
@@ -72,8 +75,10 @@ export default function TopNavUser() {
                     </NavbarMenuItem>
                 ))}
             </NavbarMenu>
-
-            <NavbarContent as="div" justify="end">
+{
+    profile && ['Admin','Accounts','Developer'].includes(role) && <>
+    
+    <NavbarContent as="div" justify="end">
                 <Dropdown placement="bottom-end">
                     <DropdownTrigger>
                         <Avatar
@@ -81,28 +86,28 @@ export default function TopNavUser() {
                             as="button"
                             className="transition-transform"
                             color="danger"
-                            name="Jason Hughes"
+                            name={(profile?.f_name + " "+profile?.l_name).toLowerCase().replace(/(?:^|\s)\w/g, match => match.toUpperCase())}
                             size="sm"
-                            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                            src={profile?.profilePhoto}
+                            title={(profile?.f_name + " "+profile?.l_name).toLowerCase().replace(/(?:^|\s)\w/g, match => match.toUpperCase())}
                         />
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Profile Actions" variant="flat">
                         <DropdownItem key="profile" className="h-14 gap-2">
                             <p className="font-semibold">Signed in as</p>
-                            <p className="font-semibold">zoey@example.com</p>
+                            <p className="font-semibold">{profile?.email}</p>
                         </DropdownItem>
-                        <DropdownItem key="settings">My Settings</DropdownItem>
-                        <DropdownItem key="team_settings">Team Settings</DropdownItem>
-                        <DropdownItem key="analytics">Analytics</DropdownItem>
-                        <DropdownItem key="system">System</DropdownItem>
-                        <DropdownItem key="configurations">Configurations</DropdownItem>
-                        <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-                        <DropdownItem key="logout" color="danger">
+                        <DropdownItem key="dahboard" href="/admin">Dashboard</DropdownItem>
+                        <DropdownItem key="settings">Settings</DropdownItem>
+                        
+                        <DropdownItem key="logout" color="danger"onClick={()=>provideSignOut()}>
                             Log Out
                         </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
             </NavbarContent>
+    </>
+}
         </Navbar>
     );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import errorImg from '../../../assets/images/Error/404.png'
 import { useRouteError } from 'react-router';
+import { Link } from 'react-router-dom';
 const ErrorPage = () => {
     const error = useRouteError();
     return (
@@ -14,12 +15,11 @@ const ErrorPage = () => {
 
                         <p className="mt-4 text-gray-500">We can&apos;t find that page.</p>
 
-                        <a
-                            href="#"
+                        <Link to='/'
                             className="mt-6 inline-block rounded bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring"
                         >
                             Go Back Home
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
