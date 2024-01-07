@@ -142,6 +142,8 @@ const AddEmployee = () => {
                                     id="dob"
                                     className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
                                     type="date"
+                                    min="1800-01-01"
+                                    max={new Date().toISOString().split('T')[0]}
                                     {...register('DOB', {
                                         required: '*Date of Birth is required',
 

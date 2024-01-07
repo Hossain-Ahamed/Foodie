@@ -22,7 +22,7 @@ import { SearchIcon } from "./SearchIcon";
 import { ChevronDownIcon } from "./ChevronDownIcon";
 import { columns, users, statusOptions } from "./data";
 import { capitalize } from "./utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const statusColorMap = {
     active: "success",
@@ -81,6 +81,8 @@ export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, Vie
     const [page, setPage] = React.useState(1);
 
     const hasSearchFilter = Boolean(filterValue);
+
+    const navigate = useNavigate()
 
 
 
@@ -182,9 +184,9 @@ export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, Vie
                                 </Button>
                             </DropdownTrigger>
                             <DropdownMenu>
-                                <DropdownItem>View</DropdownItem>
-                                <DropdownItem>Edit</DropdownItem>
-                                <DropdownItem>Delete</DropdownItem>
+                                <DropdownItem onClick={()=>navigate(`view/${_data?.id}`)}>View</DropdownItem>
+                                <DropdownItem onClick={()=>navigate(`edit/${_data?.id}`)}>Edit</DropdownItem>
+                                <DropdownItem onClick={()=>navigate(`delete/${_data?.id}`)}>Delete</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                     </div>
