@@ -20,6 +20,8 @@ import ViewEmployee from "../../pages/Admin/ViewEmployee/ViewEmployee";
 import EditEmployee from "../../pages/Admin/EditEmployee/EditEmployee";
 import FormPolicy from "../../pages/MainSite/FormPolicy/FormPolicy";
 import AdminSite from "../../Layouts/AdminSite/AdminSite";
+import ViewAsAdmin from "../../pages/Admin/ViewEmployee/ViewAsAdmin";
+import ViewAsMyProfile from "../../pages/Admin/ViewEmployee/ViewAsMyProfile";
 
 
 
@@ -65,7 +67,11 @@ export const router = createBrowserRouter([
             {
 
                 path: '/view-employee',
-                element: <ViewEmployee />
+                element: <ViewAsAdmin />
+            },
+            {
+                path: '/my-profile',
+                element: <ViewAsMyProfile />
             },
             {
                 path : '/edit-employee/:employeeID',
