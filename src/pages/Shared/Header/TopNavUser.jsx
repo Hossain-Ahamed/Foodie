@@ -31,7 +31,7 @@ export default function TopNavUser() {
             </NavbarContent>
 
 
-            <NavbarBrand>
+            <NavbarBrand >
                 {/* <AcmeLogo /> */}
                 <Avatar  radius="sm" color="default" src={logo} />
   
