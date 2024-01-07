@@ -7,7 +7,7 @@ const Header = () => {
         <li><Link>Admin</Link></li>
         <li><Link>Home</Link></li>
         <li><Link to='/pricing'>Pricing</Link></li>
-        <li><Link>Form & Privacy</Link></li>
+        <li><Link to='/registration-form'>Register Forms</Link></li>
     </>
     return (
         <div>

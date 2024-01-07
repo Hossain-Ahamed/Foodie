@@ -4,6 +4,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import 'sweetalert2/src/sweetalert2.scss'
 import Header from '../../pages/Shared/Header/Header';
 import Footer from '../../pages/Shared/Footer/Footer';
+import TopNavUser from '../../pages/Shared/Header/TopNavUser';
 
 const Main = () => {
 
@@ -24,9 +25,9 @@ return (
 
         <section className='text-black min-h-screen'>
       
-            {noHeadFoot || <Header />}
+            {noHeadFoot || <TopNavUser />}
 
-            <main className='relative max-w-[2000px] pt-20 mx-auto'>  
+            <main className='relative max-w-[2000px]  mx-auto'>  
                 <Outlet />
             </main>
             

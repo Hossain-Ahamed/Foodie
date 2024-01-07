@@ -3,7 +3,7 @@ import SectionTitle from '../SectionTitle/SectionTitle';
 
 const Faq = () => {
     return (
-        <div className="space-y-4 max-w-screen-xl mx-auto mb-6">
+        <div className="space-y-4 max-w-screen-xl mx-auto mb-6 select-none">
             <SectionTitle h1='Frequently Asked Questions' padding='mt-7 pb-10' />
             <div>
                 <details

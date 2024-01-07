@@ -22,7 +22,7 @@ import { SearchIcon } from "./SearchIcon";
 import { ChevronDownIcon } from "./ChevronDownIcon";
 import { columns, users, statusOptions } from "./data";
 import { capitalize } from "./utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const statusColorMap = {
     active: "success",
@@ -60,24 +60,46 @@ const statusColorMap = {
 
 export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, View }) {
     const [filterValue, setFilterValue] = React.useState("");
+
+
     const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
+
+    // visible columns 
     const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));
     const [statusFilter, setStatusFilter] = React.useState("all");
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+
+    const [rowsPerPage, setRowsPerPage] = React.useState(20);
+
+
     const [sortDescriptor, setSortDescriptor] = React.useState({
         column: "age",
         direction: "ascending",
     });
+
+
     const [page, setPage] = React.useState(1);
 
     const hasSearchFilter = Boolean(filterValue);
 
+    const navigate = useNavigate()
+
+
+
+    /*
+                            header column initilaly visible 
+    */
     const headerColumns = React.useMemo(() => {
         if (visibleColumns === "all") return columns;
 
         return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
     }, [visibleColumns]);
+    // --------------------------------------------------------------------------------------------
 
+
+    /* 
+                        filter using status  active inactive trial vacation
+    */
     const filteredItems = React.useMemo(() => {
         let filteredUsers = [...users];
 
@@ -94,7 +116,14 @@ export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, Vie
 
         return filteredUsers;
     }, [users, filterValue, statusFilter]);
+    // --------------------------------------------------------------------------------------------------------------------
 
+
+
+    /* 
+                    data accroding to page
+
+    */
     const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
     const items = React.useMemo(() => {
@@ -104,6 +133,10 @@ export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, Vie
         return filteredItems.slice(start, end);
     }, [page, filteredItems, rowsPerPage]);
 
+
+    /*
+               sorting data
+    */
     const sortedItems = React.useMemo(() => {
         return [...items].sort((a, b) => {
             const first = a[sortDescriptor.column];
@@ -151,9 +184,9 @@ export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, Vie
                                 </Button>
                             </DropdownTrigger>
                             <DropdownMenu>
-                                <DropdownItem>View</DropdownItem>
-                                <DropdownItem>Edit</DropdownItem>
-                                <DropdownItem>Delete</DropdownItem>
+                                <DropdownItem onClick={()=>navigate(`view/${_data?.id}`)}>View</DropdownItem>
+                                <DropdownItem onClick={()=>navigate(`edit/${_data?.id}`)}>Edit</DropdownItem>
+                                <DropdownItem onClick={()=>navigate(`delete/${_data?.id}`)}>Delete</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                     </div>

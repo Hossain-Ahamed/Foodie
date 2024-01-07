@@ -4,6 +4,8 @@ import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import { getCountries, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
 import SetTitle from '../../Shared/SetTtitle/SetTitle';
 import { toast } from 'react-hot-toast';
+import Cookies from 'js-cookie';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const AddRestaurant = () => {
     const countries = getCountries();
@@ -25,29 +27,48 @@ const AddRestaurant = () => {
 
     };
 
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
+
+
+
+        Cookies.remove('form_identity_number');
         // Handle the htmlForm submission logic here
         // first image upload check  --main image
         if (!selectedImage0) {
             toast.error('Cover Photo needed');
-
             return;
         }
+
+
         if (data?.branches.length <= 0) {
             toast.error('Minimum 1 branch needed');
-
             return;
         }
 
 
         const formData = new FormData();
+        // Loop through object keys and append each field to formData
+        for (const key in data) {
+            if (Object.prototype.hasOwnProperty.call(data, key)) {
+                formData.append(key, data[key]);
+            }
+        }
 
-        console.log(data);
+        
+
+
+        // after response 
+        Cookies.set('form_identity_number', (data?.email), {
+            secure: true, // Cookie will only be sent over HTTPS
+            sameSite: 'strict'
+        });
+
+        navigate('/payment?id=43875734', { replace: true })
+
     };
-    const branchAddHTMLComponent = <>
 
-    </>
 
     return (
         <>
@@ -154,6 +175,7 @@ const AddRestaurant = () => {
                                 {errors.res_mobile?.type === "notPhone" && (<p className='m-0 p-0 pl-1  text-base text-red-500 text-[9px]' role="alert">*Not a phone number</p>)}
 
                             </div>
+
 
 
 
@@ -394,7 +416,7 @@ const AddRestaurant = () => {
 
                     <div className="flex items-start mb-5 mt-2 pl-2">
                         <div className="flex items-center h-5">
-                            <input id="terms" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required/>
+                            <input id="terms" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
                         </div>
                         <label htmlFor="terms" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="/privacy-policy" className="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a></label>
                     </div>
