@@ -10,7 +10,7 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  
+
     const googleAuthprovider = new GoogleAuthProvider();
 
     const [user, setUser] = useState(null);
@@ -37,11 +37,11 @@ const AuthProvider = ({ children }) => {
     }
 
 
-   
+
 
     // logout 
     const provideSignOut = () => {
-        // setLoading(true);
+        setUser(null)
         return signOut(auth);
     }
 
@@ -51,7 +51,7 @@ const AuthProvider = ({ children }) => {
         })
     }
 
-    const providerPasswordReset = (email)=>{
+    const providerPasswordReset = (email) => {
         return sendPasswordResetEmail(auth, email);
     }
 
@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             // todo 
-            setUser({email: 'hossainahamed6872@gmail.com'});
+            setUser({ email: 'hossainahamed6872@gmail.com' });
             // setUser(currentUser);
             console.log('current user cred : ', currentUser);
 
@@ -71,15 +71,15 @@ const AuthProvider = ({ children }) => {
                     photoURL: currentUser?.photoURL,
                     phone: currentUser?.phoneNumber,
                     firebase_UID: currentUser?.uid,
-        
-        
+
+
                 }
-        
+
                 // const user
-                axios.post(`${import.meta.env.VITE_serverAddress}/jwt`,userData, { withCredentials: true })
+                axios.post(`${import.meta.env.VITE_serverAddress}/jwt`, userData, { withCredentials: true })
                     .then(data => {
                         console.log("Token :  ", data.data.token);
-                        
+
                         Cookies.set('access-token', data.data.token, { expires: 7 });
                         setLoading(false);
                     })
@@ -109,7 +109,7 @@ const AuthProvider = ({ children }) => {
         provideCreateUserWithEmailAndPassword,
         provideSignInWithEmailAndPassword,
         provideSignInWithGoogle,
- 
+
         providerUpdateuserProfile,
         providerPasswordReset,
         provideSignOut,
@@ -117,7 +117,7 @@ const AuthProvider = ({ children }) => {
     }
 
     if (loading) {
-        return <LoadingPage/>
+        return <LoadingPage />
     }
     return (
         <AuthContext.Provider value={authInfo}>

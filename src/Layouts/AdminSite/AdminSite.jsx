@@ -1,14 +1,32 @@
 import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
 import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Navigate, Outlet } from 'react-router-dom';
 import useProfile from '../../Hooks/useProfile';
 import LoadingPage from '../../pages/Shared/LoadingPages/LoadingPage/LoadingPage';
 import ErrorPage from '../../pages/Shared/ErrorPage/ErrorPage';
 import AdminSiteSideNav from './AdminSiteSideNav';
+import useAuthProvider from '../../Hooks/useAuthProvider';
 
 const AdminSite = () => {
     const [isChecked, setChecked] = useState(false);
+    const {user} = useAuthProvider();
     const { profile, profileLoading, role, profileError } = useProfile();
+
+    /**
+     * 
+     * if user is not present ==> then navigate to home
+     *                present ==> then try to find profile
+     *                             ==> if profile found and there role is correct
+     *                                                             ==> go to the destination page
+     *                                                             ==> otherwise  go to the error page
+     */
+
+
+    if(!user){
+        return <Navigate to='/' replace></Navigate>
+    }
+
+
     if (profileLoading) {
         return <LoadingPage />
     }
@@ -21,7 +39,7 @@ const AdminSite = () => {
 
 
             {/* Button that acts as a checkbox */}
-            <Navbar isBordered className=" md:hidden max-w-full" maxWidth="full">
+            <Navbar isBordered className=" sm:hidden max-w-full" maxWidth="full">
                 <NavbarContent className="sm:hidden" justify="start">
                     <label htmlFor="sidebarToggle">
                         <svg
