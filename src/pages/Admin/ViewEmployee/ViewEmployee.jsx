@@ -7,6 +7,7 @@ import { FaLocationArrow } from "react-icons/fa6";
 import { IoIosTransgender } from "react-icons/io";
 import user from '../../../assets/images/Home/user.png';
 import ScrollToTop from '../../../components/ScrollToTop/ScrollToTop';
+import { Link } from 'react-router-dom';
 const ViewEmployee = ({ title, data, editable }) => {
 
     // admin , developer , mine 
@@ -23,7 +24,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                         <div className='flex flex-col md:flex-row justify-between items-center'>
                             <img className='w-12 h-12 rounded-full object-cover ring ring-red-500 mb-4 mx-auto md:mx-0' src={data?.profilePhoto} alt="" />
                             {
-                                editable && <span className="inline-flex items-center rounded-md bg-blue-50 px-4 cursor-pointer py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Edit</span>
+                                editable && <Link to={`edit-employee/${data?.id}`} className="inline-flex items-center rounded-md bg-blue-50 px-4 cursor-pointer py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Edit</Link>
 
                             }
                         </div>
