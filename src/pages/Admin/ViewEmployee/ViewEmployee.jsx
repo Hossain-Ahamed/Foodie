@@ -25,7 +25,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                         <div className='flex flex-col md:flex-row justify-between items-center'>
                             <img className='w-12 h-12 rounded-full object-cover ring ring-red-500 mb-4 mx-auto md:mx-0' src={data?.profilePhoto} alt="" />
                             {
-                                editable && <Link to={`edit-employee/${data?.id}`} className="inline-flex items-center rounded-md bg-blue-50 px-4 cursor-pointer py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Edit</Link>
+                                editable && <Link to={`/admin/employee-list/edit/${data?.id}`} className="inline-flex items-center rounded-md bg-blue-50 px-4 cursor-pointer py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Edit</Link>
 
                             }
                         </div>
@@ -98,7 +98,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                 {/* address */}
                 <div className="w-full md:w-3/4 p-3 mt-8 relative">
                     {
-                        editable && <span className="inline-flex absolute right-10 top-8 items-center rounded-md bg-blue-50 px-4 cursor-pointer py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Edit</span>
+                        editable && <Link to={`/admin/employee-list/edit/${data?.id}`} className="inline-flex absolute right-10 top-8 items-center rounded-md bg-blue-50 px-4 cursor-pointer py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Edit</Link>
 
                     }
                     <div className='w-full p-6 h-full flex flex-wrap border border-coolGray-100 overflow-hidden bg-white rounded-md shadow-dashboard'>
