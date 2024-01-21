@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAuthProvider from "./useAuthProvider";
 
 const axiosSecure = axios.create({
-    baseURL: `${import.meta.env.VITE_serverAddress}`,
+    baseURL: `${import.meta.env.VITE_serverAddress}/foodie`,
 })
 const useAxiosSecure = () => {
     const { provideSignOut } = useAuthProvider();
