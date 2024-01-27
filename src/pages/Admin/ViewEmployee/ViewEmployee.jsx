@@ -8,10 +8,11 @@ import { IoIosTransgender } from "react-icons/io";
 import user from '../../../assets/images/Home/user.png';
 import ScrollToTop from '../../../components/ScrollToTop/ScrollToTop';
 import { Link } from 'react-router-dom';
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import ChangePasswordModal from '../../../components/Modal/ChangePasswordModal';
 const ViewEmployee = ({ title, data, editable }) => {
 
     // admin , developer , mine 
-    console.log(data)
     return (
         <>
             <ScrollToTop />
@@ -43,7 +44,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 <div><FaBriefcase size={20} /></div>
                                 <div className='flex flex-col'>
                                     <p className='text-gray-500'>Role</p>
-                                    <span className="inline-flex items-center rounded-large bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{data.role}</span>
+                                    <span className="inline-flex items-center rounded-large bg-green-50 px-2 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{data.role} <IoIosCheckmarkCircle className='ml-1'/> </span>
                                 </div>
                             </div>
                             <div className='flex gap-3 items-center mb-4'>
@@ -86,6 +87,9 @@ const ViewEmployee = ({ title, data, editable }) => {
                                     <p className='text-gray-500'>Gender</p>
                                     <p>{data?.gender}</p>
                                 </div>
+                            </div>
+                            <div>
+                                <ChangePasswordModal userEmail={data?.email}/>
                             </div>
                         </div>
                     </div>
