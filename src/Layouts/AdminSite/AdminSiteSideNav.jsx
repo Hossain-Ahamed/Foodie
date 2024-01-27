@@ -8,11 +8,11 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
         <>
             <aside
                 id="default-sidebar"
-                className={` select-none cursor-pointer fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${isChecked ? '' : '-translate-x-full sm:translate-x-0'
+                className={`shadow select-none cursor-pointer fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${isChecked ? '' : '-translate-x-full sm:translate-x-0'
                     }`}
                 aria-label="Sidebar"
             >
-                <div className="h-full px-3 py-4 overflow-y-auto bg-gray-100 relative">
+                <div className="h-full px-3 py-4 overflow-y-auto  relative">
                     <button className='absolute md:hidden top-2 right-1 z-[5000] bg-slate-500 p-1 rounded' onClick={() => setChecked(false)}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.00098 5L19 18.9991" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -158,17 +158,7 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
                                         >
                                            My Profile
                                         </Link>
-                                    </li>
-
-                                    <li>
-                                        <a
-                                            href=""
-                                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-300 hover:text-gray-700"
-                                        >
-                                            Change password
-                                        </a>
-                                    </li>
-
+                                    </li>                       
                                     <li>
                                        
                                             <button

@@ -6,7 +6,7 @@ const EmployeeList = () => {
         <div className='max-w-[1600px] mx-auto'>
             <TableComponent  INITIAL_VISIBLE_COLUMNS={["name", "role", "status", "actions",'id']} 
 
-            AddNew={'/add-employee'}
+            AddNew={'/admin/add-employee'}
             />
         </div>
     );

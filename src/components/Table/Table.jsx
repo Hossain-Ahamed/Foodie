@@ -297,7 +297,9 @@ export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, Vie
                         <select
                             className="bg-transparent outline-none text-default-400 text-small"
                             onChange={onRowsPerPageChange}
+                            value={rowsPerPage}
                         >
+                         
                             <option value="5">5</option>
                             <option value="20">20</option>
                             <option value="50">50</option>
@@ -308,7 +310,7 @@ export default function App({ INITIAL_VISIBLE_COLUMNS, AddNew, Edit, Delete, Vie
                 </div>
             </div>
         );
-    }, [
+    }, [ rowsPerPage,
         filterValue,
         statusFilter,
         visibleColumns,
