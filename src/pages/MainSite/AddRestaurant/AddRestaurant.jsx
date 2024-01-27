@@ -116,7 +116,7 @@ const AddRestaurant = () => {
 
                         {/* pp */}
                         <p className="mt-3 mb-1.5 font-medium text-coolGray-800 text-base" data-config-id="auto-txt-10-3">
-                            Cover Photo
+                            Logo
                         </p>
                         <div className=''>
 
