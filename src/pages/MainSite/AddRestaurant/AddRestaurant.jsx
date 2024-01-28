@@ -79,8 +79,8 @@ const AddRestaurant = () => {
     };
 
     const generateBranchID = (branch) => {
-        console.log(branch)
-        const { streetAddress, city, stateProvince, country, postalCode } = branch;
+    
+        const { streetAddress, city, stateProvince, country, postalCode,branch_name } = branch;
         if (!streetAddress || !city || !stateProvince || !country || !postalCode) {
             let message = "";
             let fieldName = ""
@@ -99,6 +99,9 @@ const AddRestaurant = () => {
             } else if (!postalCode) {
                 message = "Postal Code Missing"
                 fieldName = "Postal Code"
+            }else if (!branch_name) {
+                message = "Branch name Missing"
+                fieldName = "Branch Name"
             } else {
                 message = "Necessary Data missing"
                 fieldName = "Necessary Data"
@@ -111,10 +114,12 @@ const AddRestaurant = () => {
             });
             return;
         }
-        const combinedInfo = `${streetAddress}-${city}-${postalCode}`.replace(/\s/g, '-');
-        // Add logic to ensure uniqueness if needed
-        // For simplicity, appending a timestamp to make it unique
-        const uniqueBranchID = `${combinedInfo}-${Date.now()}`;
+
+        // Combine values with hyphens
+        const combinedInfo = `${branch_name}-${city}-${postalCode}`.replace(/\s/g, '-');
+
+        // Append Date.now() to make it unique
+        const uniqueBranchID = `${combinedInfo}-${Date.now().toString().slice(0,6)}`;
         return uniqueBranchID;
     };
 
