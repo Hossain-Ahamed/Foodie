@@ -119,7 +119,7 @@ const AddRestaurant = () => {
         const combinedInfo = `${branch_name}-${city}-${postalCode}`.replace(/\s/g, '-');
 
         // Append Date.now() to make it unique
-        const uniqueBranchID = `${combinedInfo}-${Date.now().toString().slice(0,6)}`;
+        const uniqueBranchID = `${combinedInfo}-${Date.now().toString().slice(-6)}`;
         return uniqueBranchID;
     };
 
