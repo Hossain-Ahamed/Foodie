@@ -87,19 +87,19 @@ const AddRestaurant = () => {
             if (!streetAddress) {
                 message = "Street Address Missing"
                 fieldName = "Street Address"
-            }else if(!city){
+            } else if (!city) {
                 message = "City Name Missing"
                 fieldName = "Street Address"
-            }else if(!stateProvince){
+            } else if (!stateProvince) {
                 message = "State / Province Name Missing"
                 fieldName = "State / Province Address"
-            }else if(!country){
+            } else if (!country) {
                 message = "Country Name Missing"
                 fieldName = "Country Address"
-            }else if(!postalCode){
+            } else if (!postalCode) {
                 message = "Postal Code Missing"
                 fieldName = "Postal Code"
-            }else{
+            } else {
                 message = "Necessary Data missing"
                 fieldName = "Necessary Data"
             }
@@ -111,7 +111,7 @@ const AddRestaurant = () => {
             });
             return;
         }
-        const combinedInfo = `${streetAddress}-${city}-${stateProvince}-${country}-${postalCode}`.replace(/\s/g, '-');
+        const combinedInfo = `${streetAddress}-${city}-${postalCode}`.replace(/\s/g, '-');
         // Add logic to ensure uniqueness if needed
         // For simplicity, appending a timestamp to make it unique
         const uniqueBranchID = `${combinedInfo}-${Date.now()}`;
@@ -311,6 +311,7 @@ const AddRestaurant = () => {
                                     {...register('res_Owner_streetAddress', {
                                         required: '*Street Address is required',
                                     })}
+
                                 />
                                 {errors.res_Owner_streetAddress && (
                                     <p className='m-0 p-0 pl-1 text-base text-red-500 text-[9px]' role="alert">
@@ -327,7 +328,7 @@ const AddRestaurant = () => {
 
                                     {...register('res_Owner_city', { required: 'City/Town is required' })}
                                     defaultValue=""
-                                    onChange={(e) => { setValue(`res_Owner_stateProvince`, getProvinceOfSelectedCity(e.target.value)) }}
+                                    onChange={(e) => { setValue(`res_Owner_city`, e.target.value); setValue(`res_Owner_stateProvince`, getProvinceOfSelectedCity(e.target.value)) }}
 
                                 >
                                     <option value="" disabled>
@@ -355,7 +356,6 @@ const AddRestaurant = () => {
                                     className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-2.5"
                                     defaultValue=""
                                     {...register('res_Owner_stateProvince', { required: 'State / Province is required' })}
-                                    onChange={(e) => { setValue(`res_Owner_stateProvince`, getProvinceOfSelectedCity(e.target.value)) }}
 
                                 >
                                     <option value="" disabled>
@@ -476,7 +476,7 @@ const AddRestaurant = () => {
 
                                         defaultValue=""
                                         {...register(`branches[${index}].city`, { required: 'City/Town is required' })}
-                                        onChange={(e) => { setValue(`branches[${index}].stateProvince`, getProvinceOfSelectedCity(e.target.value)) }}
+                                        onChange={(e) => { setValue(`branches[${index}].city`, e.target.value); setValue(`branches[${index}].stateProvince`, getProvinceOfSelectedCity(e.target.value)) }}
                                     >
                                         <option value="" disabled>
                                             Select City
