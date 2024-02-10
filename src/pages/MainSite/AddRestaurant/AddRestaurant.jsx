@@ -7,11 +7,16 @@ import { toast } from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+// import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const AddRestaurant = () => {
     const countries = getCountries();
+
+    // const axiosSecure = useAxiosSecure();
+
     const AllDistricts = getAllDistricts();
     const AllDivisions = getDivisions();
+
     const { register, handleSubmit, formState: { errors }, setValue, control, getValues } = useForm();
 
     const { fields, append, remove } = useFieldArray({
@@ -74,7 +79,6 @@ const AddRestaurant = () => {
         });
 
         console.log(data)
-        // navigate('/payment?id=43875734', { replace: true })
 
     };
 
@@ -585,7 +589,7 @@ const AddRestaurant = () => {
                                             ))}
                                         </select>
                                     </div>
-                                    {errors.branches && errors.branches[0]?.country && (
+
                                         <p className='m-0 p-0 pl-1 text-base text-red-500 text-[9px]' role="alert">
                                             {errors.branches[0].country.message}
                                         </p>
