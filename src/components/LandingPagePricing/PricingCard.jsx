@@ -12,34 +12,34 @@ const PricingCard = () => {
     const { handleSubmit, register, setValue } = useForm();
     const { refetch: dataRefetch, data: data = [], isLoading: dataLoading, error: dataError, } = useQuery({
         queryKey: ['paymenttype',],
-        enabled: true,
         queryFn: async () => {
-            let res = await axiosSecure.get(`/subscription-packages`);
+            const res = await axiosSecure.get(`/subscription-packages`);
+            console.log(1,res.data)
 
-            res = {
-                data: [
-                    {
-                        "packageType": "Starter",
-                        "shortDescription": "3 month subscription - Get started with our Starter package!",
-                        "finalPrice": "1500",
-                        "cutPrice": "0"
+            // res = {
+            //     data: [
+            //         {
+            //             "packageType": "Starter",
+            //             "shortDescription": "3 month subscription - Get started with our Starter package!",
+            //             "finalPrice": "1500",
+            //             "cutPrice": "0"
 
-                    },
-                    {
-                        "packageType": "Pro",
-                        "shortDescription": "6 month subscription - Upgrade to our Pro package for long time non-stop support!",
-                        "finalPrice": "2800",
-                        "cutPrice": "0"
-                    },
-                    {
-                        "packageType": "Enterprise",
-                        "shortDescription": "12 month subscription - Unlock premium prizes   with our Enterprise package!",
-                        "finalPrice": "5000",
-                        "cutPrice": "0"
+            //         },
+            //         {
+            //             "packageType": "Pro",
+            //             "shortDescription": "6 month subscription - Upgrade to our Pro package for long time non-stop support!",
+            //             "finalPrice": "2800",
+            //             "cutPrice": "0"
+            //         },
+            //         {
+            //             "packageType": "Enterprise",
+            //             "shortDescription": "12 month subscription - Unlock premium prizes   with our Enterprise package!",
+            //             "finalPrice": "5000",
+            //             "cutPrice": "0"
 
-                    }
-                ]
-            }
+            //         }
+            //     ]
+            // }
 
             return res?.data;
         },
@@ -50,6 +50,7 @@ const PricingCard = () => {
         return <LoadingPage />
     }
     if (dataError) {
+        console.log(dataError)
         return <ErrorPage />
     }
     return (

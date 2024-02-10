@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 // import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const AddRestaurant = () => {
@@ -35,13 +36,12 @@ const AddRestaurant = () => {
     };
 
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
 
     const onSubmit = (data) => {
 
         console.log(data)
-        navigate('/select-package/jkds',{replace : true})
 
-        Cookies.remove('form_identity_number');
 
 
         // first image upload check  --main image
@@ -68,24 +68,63 @@ const AddRestaurant = () => {
 
             return;
         }
+        const formData = new FormData();
+
+        // Loop through each key-value pair in the data object
+        for (const key in data) {
+            if (Object.prototype.hasOwnProperty.call(data, key)) {
+                const value = data[key];
+
+                // If the value is an array, handle it separately
+                if (Array.isArray(value)) {
+                    value.forEach((item, index) => {
+                        // Append array items with indexes
+                        for (const subKey in item) {
+                            if (Object.prototype.hasOwnProperty.call(item, subKey)) {
+                                formData.append(`${key}[${index}][${subKey}]`, item[subKey]);
+                            }
+                        }
+                    });
+                } else {
+                    // Append single values
+                    formData.append(key, value);
+                }
+            }
+        }
 
 
+        if (data && data.img instanceof File) {
+            formData.append('img', data.img);
+        }
+
+        // for (const entry of formData.entries()) {
+        //     // Each entry is an array [key, value]
+        //     const [key, value] = entry;
+
+        //     // Log the key-value pair to the console
+        //     console.log(`${key}: ${value}`);
+        // }
 
 
+        axiosSecure.post('/create-restaurant', formData)
+            .then(res => {
 
-        // after response 
-        Cookies.set('form_identity_number', (data), {
-            secure: true, // Cookie will only be sent over HTTPS
-            sameSite: 'strict'
-        });
+                console.log(res.data);
+                navigate(`/select-package/${res?.data?.branchID}`, { replace: true })
+            }).catch(e => {
+                console.error(e)
+                Swal.fire({
+                    icon: "error",
+                    text: e?.code + " " + e?.message,
+                    title: e?.response?.data?.message
 
-        console.log(data)
-
+                });
+            })
     };
 
     const generateBranchID = (branch) => {
-    
-        const { streetAddress, city, stateProvince, country, postalCode,branch_name } = branch;
+
+        const { streetAddress, city, stateProvince, country, postalCode, branch_name } = branch;
         if (!streetAddress || !city || !stateProvince || !country || !postalCode) {
             let message = "";
             let fieldName = ""
@@ -104,7 +143,7 @@ const AddRestaurant = () => {
             } else if (!postalCode) {
                 message = "Postal Code Missing"
                 fieldName = "Postal Code"
-            }else if (!branch_name) {
+            } else if (!branch_name) {
                 message = "Branch name Missing"
                 fieldName = "Branch Name"
             } else {
@@ -489,7 +528,7 @@ const AddRestaurant = () => {
                                     )}
                                 </div>
 
-                                
+
                                 <div className="w-full md:w-1/2 p-3">
                                     <label htmlFor={`branches[${0}].city`} className="mb-1.5 font-medium text-base text-coolGray-800">
                                         City/Town
@@ -520,7 +559,7 @@ const AddRestaurant = () => {
                                     )}
                                 </div>
 
-                              
+
                                 <div className="w-full md:w-1/2 p-3">
                                     <label htmlFor={`branches[${0}].city`} className="mb-1.5 font-medium text-base text-coolGray-800">
                                         State / Province
@@ -568,7 +607,7 @@ const AddRestaurant = () => {
                                     )}
                                 </div>
 
-                              
+
                                 <div className="w-full md:w-1/2 p-3">
                                     <label htmlFor={`branches[${0}].country`} className="mb-1.5 font-medium text-base text-coolGray-800">
                                         Country
@@ -595,15 +634,15 @@ const AddRestaurant = () => {
                                             {errors.branches[0].country.message}
                                         </p>
                                     )}
-                                      
-                                   
-                                </div>
-                              
-                                
 
-                        
-                             
-                        
+
+                                </div>
+
+
+
+
+
+
                                 {/* <div className='w-full flex flex-wrap justify-end items-center gap-2'>
                                     <button
                                         type="button"
@@ -618,7 +657,7 @@ const AddRestaurant = () => {
                             </div>
                         }
 
-                
+
                         {/* <div className='w-full flex flex-wrap justify-start items-center gap-2'>
                             <button
                                 type="button"

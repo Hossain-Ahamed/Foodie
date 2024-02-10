@@ -57,7 +57,7 @@ const Faq = () => {
                         </span>
                     </summary>
 
-                    <p className="mt-4 leading-relaxed text-gray-700">
+                    <span className="mt-4 leading-relaxed text-gray-700">
                         <div>
                             {/* Step 1: Fill out the registration form */}
                             <p>Fill out the registration form located at <Link to='/registration-form' className='text-blue-400 cursor-pointer'><code>Registration Form</code></Link>.</p>
@@ -72,7 +72,7 @@ const Faq = () => {
                             <p>Once payment is confirmed, you can start using the services or benefits associated with the selected package.</p>
                         </div>
 
-                    </p>
+                    </span>
                 </details>
                 <details
                     className="group bg-gray-100 p-6 [&_summary::-webkit-details-marker]:hidden rounded-md"
@@ -96,14 +96,14 @@ const Faq = () => {
                         </span>
                     </summary>
 
-                    <p className="mt-4 leading-relaxed text-gray-700">
+                    <span className="mt-4 leading-relaxed text-gray-700">
                         <div>
                             <p>Foodie is our restaurant management system (RMS) designed to provide a user-friendly experience. It includes a QR-based ordering system for both on-site and off-site orders.</p>
                             <p>With Foodie, users can easily navigate through the restaurant&#39;s site, place orders seamlessly, and enjoy an intuitive user interface.</p>
                             <p>Foodie aims to streamline restaurant operations, making it convenient for both restaurant owners and customers to manage orders and enjoy a smooth dining experience.</p>
                         </div>
 
-                    </p>
+                    </span>
                 </details>
             </div>
         </div>
