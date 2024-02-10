@@ -30,6 +30,7 @@ import BranchBillingHistory from "../../pages/Admin/BrnachBillingHistory/BranchB
 
 import Dashboard from "../../pages/Admin/Dashboard/Dashboard";
 import PackageSelection from "../../pages/PackageSelection/PackageSelection";
+import PrivateRoute from './../PrivateRoute/PrivateRoute';
 
 
 
@@ -77,7 +78,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/admin',
-        element: <AdminSite />,
+        element: <PrivateRoute><AdminSite /></PrivateRoute>,
         children: [
             {
                 path: '/admin',

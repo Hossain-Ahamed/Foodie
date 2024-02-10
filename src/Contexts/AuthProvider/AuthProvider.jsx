@@ -59,8 +59,8 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
            
-            // setUser(currentUser);
-            console.log('current user cred : ', currentUser);
+             setUser(currentUser);
+          console.log('current user cred : ', currentUser?.displayName, " || " , currentUser?.email);
 
             if (currentUser) {
 
@@ -68,12 +68,14 @@ const AuthProvider = ({ children }) => {
                     name: currentUser?.displayName,
                     email: currentUser.email,
                     photoURL: currentUser?.photoURL,
-                    phone: currentUser?.phoneNumber,
+                    mobile: currentUser?.phoneNumber,
                     firebase_UID: currentUser?.uid,
+                    allData : currentUser,
 
 
                 }
 
+                console.log(userData)
                 // const user
                 axios.post(`${import.meta.env.VITE_serverAddress}/jwt`, userData, { withCredentials: true })
                     .then(data => {

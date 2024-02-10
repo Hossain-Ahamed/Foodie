@@ -1,7 +1,9 @@
 import React from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 import useAuthProvider from '../../Hooks/useAuthProvider';
-import LoadingPage from '../../Pages/LoadingPage/LoadingPage/LoadingPage';
+import { useNavigate } from 'react-router-dom';
+import LoadingPage from '../../pages/Shared/LoadingPages/LoadingPage/LoadingPage';
+
 
 const PrivateRoute = ({children}) => {
     const location = useLocation();
