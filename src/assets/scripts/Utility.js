@@ -42,10 +42,10 @@ const isValidAddress = (
   }
 };
 const getDivisions = () => {
-  return Divisions.divisions;
+  return Divisions.divisions.sort((a, b) => a.name.localeCompare(b.name));
 };
 const getAllDistricts = ()=>{
-  return Districts.districts;
+  return Districts.districts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 const getProvinceOfSelectedCity = (name)=>{
@@ -55,15 +55,15 @@ const getProvinceOfSelectedCity = (name)=>{
   return Divisions.divisions.find(i=>i.id===districtID.division_id).name
 }
 const getDistricts = (division_id) => {
-  return Districts.districts.filter((i) => i.division_id === division_id);
+  return Districts.districts.filter((i) => i.division_id === division_id).sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const getUpazillas = (district_id) => {
-  return Upazillas.upazilas.filter((i) => i.district_id === district_id);
+  return Upazillas.upazilas.filter((i) => i.district_id === district_id).sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const getPostOffices = (disctrict_id) => {
-  return PostCodes.postcodes.filter((i) => i.district_id === disctrict_id);
+  return PostCodes.postcodes.filter((i) => i.district_id === disctrict_id).sort((a, b) => a.name.localeCompare(b.name));
 };
 
 export const getPostcode = (id) => {
