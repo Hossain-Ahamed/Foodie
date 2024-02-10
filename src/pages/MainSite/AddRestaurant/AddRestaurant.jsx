@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
-import { getCountries, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
+import { getAllDistricts, getCountries, getDivisions, getProvinceOfSelectedCity, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
 import SetTitle from '../../Shared/SetTtitle/SetTitle';
 import { toast } from 'react-hot-toast';
 import Cookies from 'js-cookie';
@@ -11,7 +11,12 @@ import Swal from 'sweetalert2';
 
 const AddRestaurant = () => {
     const countries = getCountries();
+
     // const axiosSecure = useAxiosSecure();
+
+    const AllDistricts = getAllDistricts();
+    const AllDivisions = getDivisions();
+
     const { register, handleSubmit, formState: { errors }, setValue, control, getValues } = useForm();
 
     const { fields, append, remove } = useFieldArray({
@@ -33,7 +38,7 @@ const AddRestaurant = () => {
 
     const onSubmit = (data) => {
 
-
+        console.log(data)
 
         Cookies.remove('form_identity_number');
 
@@ -43,11 +48,11 @@ const AddRestaurant = () => {
             Swal.fire({
                 icon: "error",
                 title: "No Photo is selected",
-                text : "Upload a photo"
-              
+                text: "Upload a photo"
+
 
             });
-            
+
             return;
         }
 
@@ -59,7 +64,7 @@ const AddRestaurant = () => {
                 text: "Create a branch",
 
             });
-         
+
             return;
         }
 
@@ -78,20 +83,47 @@ const AddRestaurant = () => {
     };
 
     const generateBranchID = (branch) => {
-        const { streetAddress, city, stateProvince, country, postalCode } = branch;
+    
+        const { streetAddress, city, stateProvince, country, postalCode,branch_name } = branch;
         if (!streetAddress || !city || !stateProvince || !country || !postalCode) {
+            let message = "";
+            let fieldName = ""
+            if (!streetAddress) {
+                message = "Street Address Missing"
+                fieldName = "Street Address"
+            } else if (!city) {
+                message = "City Name Missing"
+                fieldName = "Street Address"
+            } else if (!stateProvince) {
+                message = "State / Province Name Missing"
+                fieldName = "State / Province Address"
+            } else if (!country) {
+                message = "Country Name Missing"
+                fieldName = "Country Address"
+            } else if (!postalCode) {
+                message = "Postal Code Missing"
+                fieldName = "Postal Code"
+            }else if (!branch_name) {
+                message = "Branch name Missing"
+                fieldName = "Branch Name"
+            } else {
+                message = "Necessary Data missing"
+                fieldName = "Necessary Data"
+            }
             Swal.fire({
                 icon: "error",
-                title: "Necessary Data missing",
-                text: "Insert all the Informtion",
+                title: message,
+                text: "Insert " + fieldName,
 
             });
             return;
         }
-        const combinedInfo = `${streetAddress}-${city}-${stateProvince}-${country}-${postalCode}`.replace(/\s/g, '-');
-        // Add logic to ensure uniqueness if needed
-        // For simplicity, appending a timestamp to make it unique
-        const uniqueBranchID = `${combinedInfo}-${Date.now()}`;
+
+        // Combine values with hyphens
+        const combinedInfo = `${branch_name}-${city}-${postalCode}`.replace(/\s/g, '-');
+
+        // Append Date.now() to make it unique
+        const uniqueBranchID = `${combinedInfo}-${Date.now().toString().slice(-6)}`;
         return uniqueBranchID;
     };
 
@@ -106,7 +138,7 @@ const AddRestaurant = () => {
     return (
         <>
             <SetTitle title="Add Restaurant" />
-            <form onSubmit={handleSubmit(onSubmit)} className='max-w-7xl mx-auto flex flex-col items-center py-12 select-none '>
+            <form onSubmit={handleSubmit(onSubmit)} className='max-w-7xl mx-auto flex flex-col items-center py-12 select-none ' autoComplete='off'>
                 <SectionTitle h1={`Restaurant Form`} />
 
                 {/* restaurant info  */}
@@ -116,7 +148,7 @@ const AddRestaurant = () => {
 
                         {/* pp */}
                         <p className="mt-3 mb-1.5 font-medium text-coolGray-800 text-base" data-config-id="auto-txt-10-3">
-                            Cover Photo
+                            Logo
                         </p>
                         <div className=''>
 
@@ -288,6 +320,7 @@ const AddRestaurant = () => {
                                     {...register('res_Owner_streetAddress', {
                                         required: '*Street Address is required',
                                     })}
+
                                 />
                                 {errors.res_Owner_streetAddress && (
                                     <p className='m-0 p-0 pl-1 text-base text-red-500 text-[9px]' role="alert">
@@ -297,15 +330,27 @@ const AddRestaurant = () => {
                             </div>
                             {/* City/Town */}
                             <div className="w-full md:w-1/2 p-3">
-                                <label htmlFor="res_Owner_city" className="mb-1.5 font-medium text-base text-gray-800">
-                                    City/Town
-                                </label>
-                                <input
+
+                                <select
+
+                                    className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-2.5"
+
                                     {...register('res_Owner_city', { required: 'City/Town is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-gray-900 font-normal outline-none focus:border-green-500 border border-gray-400/40 rounded-lg shadow-input"
-                                    type="text"
-                                    placeholder="Enter your city/town"
-                                />
+                                    defaultValue=""
+                                    onChange={(e) => { setValue(`res_Owner_city`, e.target.value); setValue(`res_Owner_stateProvince`, getProvinceOfSelectedCity(e.target.value)) }}
+
+                                >
+                                    <option value="" disabled>
+                                        Select City / Town
+                                    </option>
+
+                                    {AllDistricts.map((item, _idx) => (
+                                        <option key={item?.name} value={item?.name}>
+                                            {item?.name}
+                                        </option>
+                                    ))}
+                                </select>
+
                                 {errors.res_Owner_city && (
                                     <p className='m-0 p-0 pl-1 text-base text-red-500 text-[9px]' role="alert">
                                         {errors.res_Owner_city.message}
@@ -315,15 +360,24 @@ const AddRestaurant = () => {
 
                             {/* State / Province */}
                             <div className="w-full md:w-1/2 p-3">
-                                <label htmlFor="res_Owner_stateProvince" className="mb-1.5 font-medium text-base text-gray-800">
-                                    State / Province
-                                </label>
-                                <input
+                                <select
+
+                                    className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-2.5"
+                                    defaultValue=""
                                     {...register('res_Owner_stateProvince', { required: 'State / Province is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-gray-900 font-normal outline-none focus:border-green-500 border border-gray-400/40 rounded-lg shadow-input"
-                                    type="text"
-                                    placeholder="Enter your state/province"
-                                />
+
+                                >
+                                    <option value="" disabled>
+                                        Select State / Province
+                                    </option>
+
+                                    {AllDivisions.map((item, _idx) => (
+                                        <option key={item?.name} value={item?.name}>
+                                            {item?.name}
+                                        </option>
+                                    ))}
+                                </select>
+
                                 {errors.res_Owner_stateProvince && (
                                     <p className='m-0 p-0 pl-1 text-base text-red-500 text-[9px]' role="alert">
                                         {errors.res_Owner_stateProvince.message}
@@ -359,7 +413,7 @@ const AddRestaurant = () => {
                                         <path d="M11.3333 6.1133C11.2084 5.98913 11.0395 5.91943 10.8633 5.91943C10.6872 5.91943 10.5182 5.98913 10.3933 6.1133L8.00001 8.47329L5.64001 6.1133C5.5151 5.98913 5.34613 5.91943 5.17001 5.91943C4.99388 5.91943 4.82491 5.98913 4.70001 6.1133C4.63752 6.17527 4.58792 6.249 4.55408 6.33024C4.52023 6.41148 4.50281 6.49862 4.50281 6.58663C4.50281 6.67464 4.52023 6.76177 4.55408 6.84301C4.58792 6.92425 4.63752 6.99799 4.70001 7.05996L7.52667 9.88663C7.58865 9.94911 7.66238 9.99871 7.74362 10.0326C7.82486 10.0664 7.912 10.0838 8.00001 10.0838C8.08801 10.0838 8.17515 10.0664 8.25639 10.0326C8.33763 9.99871 8.41136 9.94911 8.47334 9.88663L11.3333 7.05996C11.3958 6.99799 11.4454 6.92425 11.4793 6.84301C11.5131 6.76177 11.5305 6.67464 11.5305 6.58663C11.5305 6.49862 11.5131 6.41148 11.4793 6.33024C11.4454 6.249 11.3958 6.17527 11.3333 6.1133Z" fill="#8896AB"></path>
                                     </svg>
                                     <select
-                                        defaultValue=""
+                                        defaultValue="Bangladesh"
                                         {...register('res_Owner_country', { required: 'Country is required' })}
                                         className="appearance-none w-full py-2.5 px-4 text-gray-900 text-base font-normal bg-white border outline-none border-gray-400/40 hover:border-green-500 rounded-lg shadow-input"
                                     >
@@ -425,12 +479,25 @@ const AddRestaurant = () => {
                                     <label htmlFor={`branches[${index}].city`} className="mb-1.5 font-medium text-base text-coolGray-800">
                                         City/Town
                                     </label>
-                                    <input
+                                    <select
+
+                                        className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-2.5"
+
+                                        defaultValue=""
                                         {...register(`branches[${index}].city`, { required: 'City/Town is required' })}
-                                        className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                        type="text"
-                                        placeholder="Enter your city/town"
-                                    />
+                                        onChange={(e) => { setValue(`branches[${index}].city`, e.target.value); setValue(`branches[${index}].stateProvince`, getProvinceOfSelectedCity(e.target.value)) }}
+                                    >
+                                        <option value="" disabled>
+                                            Select City
+                                        </option>
+
+                                        {AllDistricts.map((item, _idx) => (
+                                            <option key={item?.name} value={item?.name}>
+                                                {item?.name}
+                                            </option>
+                                        ))}
+                                    </select>
+
                                     {errors.branches && errors.branches[index]?.city && (
                                         <p className='m-0 p-0 pl-1 text-base text-red-500 text-[9px]' role="alert">
                                             {errors.branches[index].city.message}
@@ -440,15 +507,28 @@ const AddRestaurant = () => {
 
                                 {/* State / Province */}
                                 <div className="w-full md:w-1/2 p-3">
-                                    <label htmlFor={`branches[${index}].stateProvince`} className="mb-1.5 font-medium text-base text-coolGray-800">
+                                    <label htmlFor={`branches[${index}].city`} className="mb-1.5 font-medium text-base text-coolGray-800">
                                         State / Province
                                     </label>
-                                    <input
+                                    <select
+                                        label="Select Dish Category"
+                                        className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block p-2.5"
+
+                                        defaultValue=""
                                         {...register(`branches[${index}].stateProvince`, { required: 'State / Province is required' })}
-                                        className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                        type="text"
-                                        placeholder="Enter your state/province"
-                                    />
+                                    >
+                                        <option value="" disabled>
+                                            Select Province / State
+                                        </option>
+
+                                        {AllDivisions.map((item, _idx) => (
+                                            <option key={item?.name} value={item?.name}>
+                                                {item?.name}
+                                            </option>
+                                        ))}
+                                    </select>
+
+
                                     {errors.branches && errors.branches[index]?.stateProvince && (
                                         <p className='m-0 p-0 pl-1 text-base text-red-500 text-[9px]' role="alert">
                                             {errors.branches[index].stateProvince.message}
@@ -485,7 +565,7 @@ const AddRestaurant = () => {
                                         </svg>
                                         <select
                                             {...register(`branches[${index}].country`, { required: 'Country is required' })}
-                                            defaultValue=""
+                                            defaultValue="Bangladesh"
                                             className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg appearance-none"
                                         >
                                             <option value="" disabled>Select Country</option>

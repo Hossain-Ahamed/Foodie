@@ -44,6 +44,16 @@ const isValidAddress = (
 const getDivisions = () => {
   return Divisions.divisions;
 };
+const getAllDistricts = ()=>{
+  return Districts.districts;
+}
+
+const getProvinceOfSelectedCity = (name)=>{
+
+  const districtID = Districts.districts.find(item=>item?.name===name)
+
+  return Divisions.divisions.find(i=>i.id===districtID.division_id).name
+}
 const getDistricts = (division_id) => {
   return Districts.districts.filter((i) => i.division_id === division_id);
 };
@@ -108,15 +118,16 @@ const validateImage = (file) => {
     const { type, size } = file[0];
 
     if (!supportedFormats.includes(type)) {
-      return "Only JPEG, PNG, and GIF images are allowed.";
+      return false;
+      // return "Only JPEG, PNG, and GIF images are allowed.";
     }
 
     if (size > 3 * 1024 * 1024) {
-      return "Image size should not exceed 3MB.";
+      return false;
+      // return "Image size should not exceed 3MB.";
     }
+    return true;
   }
-
-  return true;
 };
 
 const getPcInfo = async () => {
@@ -158,10 +169,23 @@ const getPcInfo = async () => {
 };
 
 
-  
+const validateSalesTax = (value) => {
+  if (isNaN(value)) {
+    return "*is not a number";
+  }
+
+  const floatValue = parseFloat(value);
+
+  if (floatValue < 0 || floatValue > 100) {
+    return "Sales Tax must be between 0 and 100";
+  }
+
+  return true;
+};
 
 export {
   validateMobileNumber,
+  validateSalesTax,
   validateEmail,
   fetchJson,
   validateImage,
@@ -173,4 +197,6 @@ export {
   getDistricts,
   getUpazillas,
   getPostOffices,
+  getAllDistricts,
+  getProvinceOfSelectedCity
 };
