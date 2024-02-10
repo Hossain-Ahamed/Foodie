@@ -58,9 +58,9 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
-           
-             setUser(currentUser);
-          console.log('current user cred : ', currentUser?.displayName, " || " , currentUser?.email);
+
+            setUser(currentUser);
+            console.log('current user cred : ', currentUser?.displayName, " || ", currentUser?.email);
 
             if (currentUser) {
 
@@ -70,7 +70,7 @@ const AuthProvider = ({ children }) => {
                     photoURL: currentUser?.photoURL,
                     mobile: currentUser?.phoneNumber,
                     firebase_UID: currentUser?.uid,
-                    allData : currentUser,
+                    allData: currentUser,
 
 
                 }
