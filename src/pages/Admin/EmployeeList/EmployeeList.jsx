@@ -1,13 +1,10 @@
 import React from 'react';
-import TableComponent from '../../../components/Table/Table';
+import Table from '../../../components/Table/RestaurentTable';
 
 const EmployeeList = () => {
     return (
         <div className='max-w-[1600px] mx-auto'>
-            <TableComponent  INITIAL_VISIBLE_COLUMNS={["name", "role", "status", "actions",'id']} 
-
-            AddNew={'/admin/add-employee'}
-            />
+            <Table />
         </div>
     );
 };
