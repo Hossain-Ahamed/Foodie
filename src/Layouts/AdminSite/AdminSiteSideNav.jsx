@@ -22,7 +22,7 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
                     </button>
                     <ul className="space-y-1 pt-8">
                         <li>
-                            <Link to='/admin' className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-gray-500 hover:bg-gray-300 hover:text-gray-700">
+                            <Link to='/admin' className="flex items-center gap-2 rounded-lg  px-4 py-2 text-gray-500 hover:bg-gray-300 hover:text-gray-700">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-5 w-5 opacity-75"
@@ -43,7 +43,7 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
                             </Link>
                         </li>
                         <li>
-                            <Link to='employee-list' className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-gray-500 hover:bg-gray-300 hover:text-gray-700">
+                            <Link to='employee-list' className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-300 hover:text-gray-700">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-5 w-5 opacity-75"

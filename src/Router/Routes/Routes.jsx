@@ -24,6 +24,7 @@ import ViewAsAdmin from "../../pages/Admin/ViewEmployee/ViewAsAdmin";
 import ViewAsMyProfile from "../../pages/Admin/ViewEmployee/ViewAsMyProfile";
 import RoleWiseNavigateToDashboardHome from "../RoleWiseNavigate/RoleWiseNavigate";
 import ProtectedByRole from "../ProtectedByRole/ProtectedByRole";
+import Dashboard from "../../pages/Admin/Dashboard/Dashboard";
 
 
 
@@ -70,7 +71,8 @@ export const router = createBrowserRouter([
         children : [
             {
                 path : '/admin',
-                element : <RoleWiseNavigateToDashboardHome/>
+                // element : <RoleWiseNavigateToDashboardHome/>
+                element: <Dashboard />
 
             },
             {
