@@ -12,7 +12,7 @@ const Main = () => {
           in this path, header and footer wont be available 
     -------------------------------------------------------------------*/
     const location = useLocation();
-    const noHeaderFooterArray = ['/login', '/sign-up', '/forget-password', '/list'];
+    const noHeaderFooterArray = ['/login', '/sign-up', '/forget-password', '/list',];
 
     const noHeadFoot = noHeaderFooterArray.some((str) =>
         // str.toLowerCase() === location.pathname.toLowerCase()
@@ -27,7 +27,7 @@ return (
       
             {noHeadFoot || <TopNavUser />}
 
-            <main className='relative max-w-[2000px]  mx-auto'>  
+            <main className='relative max-w-[2000px]  mx-auto '>  
                 <Outlet />
             </main>
             
