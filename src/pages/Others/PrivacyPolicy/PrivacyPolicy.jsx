@@ -27,9 +27,9 @@ const PrivacyPolicy = () => {
                                         <div className="">
                                             <h5 className="text-lg font-bold mb-2">1. Introduction</h5>
                                             <p>
-                                                AncoraThemes (website url address:{' '}
-                                                <a href="http://ancorathemes.com/" target="_blank" rel="noopener noreferrer">
-                                                    <span className="text-blue-500">http://ancorathemes.com/</span>
+                                                Policy lawyers (website url address:{' '}
+                                                <a href="/" target="_blank" rel="noopener noreferrer">
+                                                    <span className="text-blue-500">http://policies.foodie.com/</span>
                                                 </a>) appreciates your business and trust. We are a Cyprus based company, creating products to enhance your website building experience. Please read this Privacy Policy, providing consent to both documents in order to have permission to use our services.
                                             </p>
                                         </div>
