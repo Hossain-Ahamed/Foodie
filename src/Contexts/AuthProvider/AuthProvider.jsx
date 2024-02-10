@@ -58,8 +58,7 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            // todo 
-            setUser({ email: 'hossainahamed6872@gmail.com' });
+           
             // setUser(currentUser);
             console.log('current user cred : ', currentUser);
 
