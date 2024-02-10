@@ -24,7 +24,13 @@ import ViewAsAdmin from "../../pages/Admin/ViewEmployee/ViewAsAdmin";
 import ViewAsMyProfile from "../../pages/Admin/ViewEmployee/ViewAsMyProfile";
 import RoleWiseNavigateToDashboardHome from "../RoleWiseNavigate/RoleWiseNavigate";
 import ProtectedByRole from "../ProtectedByRole/ProtectedByRole";
+
+import RestaurantDetailForDev from "../../pages/Admin/RestaurantDetailForDev/RestaurantDetailForDev";
+import BranchBillingHistory from "../../pages/Admin/BrnachBillingHistory/BranchBillingHistory";
+
 import Dashboard from "../../pages/Admin/Dashboard/Dashboard";
+import PackageSelection from "../../pages/PackageSelection/PackageSelection";
+
 
 
 
@@ -51,15 +57,19 @@ export const router = createBrowserRouter([
                 path: '/privacy-policy',
                 element: <PrivacyPolicy />
             },
-            
+
             {
                 path: '/pricing',
                 element: <PricingPage />
             },
             {
-                path : '/registration-form',
-                element : <AddRestaurant/>
+                path: '/registration-form',
+                element: <AddRestaurant />
 
+            },
+            {
+                path: '/select-package/:branchID',
+                element: <PackageSelection />
             }
 
         ]
@@ -67,10 +77,10 @@ export const router = createBrowserRouter([
     },
     {
         path: '/admin',
-        element :<AdminSite/>,
-        children : [
+        element: <AdminSite />,
+        children: [
             {
-                path : '/admin',
+                path: '/admin',
                 // element : <RoleWiseNavigateToDashboardHome/>
                 element: <Dashboard />
 
@@ -93,11 +103,19 @@ export const router = createBrowserRouter([
                 element: <ViewAsMyProfile />
             },
             {
-                path : 'employee-list/edit/:employeeID',
-                element : <EditEmployee/>
+                path: 'employee-list/edit/:employeeID',
+                element: <EditEmployee />
+            },
+            {
+                path: 'restaurant-list/edit/:res_id',
+                element: <RestaurantDetailForDev />
+            },
+            {
+                path: 'restaurant-list/billing-hsitory/branches/:branchID',
+                element: <BranchBillingHistory />
             },
         ]
     }
-    
+
 
 ])
