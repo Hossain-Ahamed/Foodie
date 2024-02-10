@@ -17,7 +17,6 @@ const PackageSelection = () => {
     const { refetch: dataRefetch, data: data = [], isLoading: dataLoading, error: dataError, } = useQuery({
         queryKey: ['paymenttype', branchID],
         enabled: true,
-        cacheTime: 0,
         queryFn: async () => {
             let res = await axiosSecure.get(`/subscription-packages`);
 
