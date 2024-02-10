@@ -39,6 +39,7 @@ const AddRestaurant = () => {
     const onSubmit = (data) => {
 
         console.log(data)
+        navigate('/select-package/jkds',{replace : true})
 
         Cookies.remove('form_identity_number');
 
@@ -589,11 +590,13 @@ const AddRestaurant = () => {
                                             ))}
                                         </select>
                                     </div>
-
+                                    {errors.branches && errors.branches[0]?.country && (
                                         <p className='m-0 p-0 pl-1 text-base text-red-500 text-[9px]' role="alert">
                                             {errors.branches[0].country.message}
                                         </p>
                                     )}
+                                      
+                                   
                                 </div>
                               
                                 
