@@ -174,7 +174,7 @@ const CheckOutForm = ({ price, priceDetails }) => {
     };
 
     if (paymentMethod && transactionID) {
-        return <SuccessfullPage transactionID={transactionID} id={paymentMethod.id} reset={reset} />
+        return <SuccessfullPage transactionID={transactionID} id={paymentMethod.id} reset={reset} paymentDetails={priceDetails} price={price} />
     }
 
     return <>

@@ -32,6 +32,7 @@ import Dashboard from "../../pages/Admin/Dashboard/Dashboard";
 import PackageSelection from "../../pages/PackageSelection/PackageSelection";
 import PrivateRoute from './../PrivateRoute/PrivateRoute';
 import Payment from "../../pages/MainSite/Payment/Payment";
+import SuccessfullPage from "../../pages/MainSite/Payment/SuccessfullPage";
 
 
 
@@ -40,7 +41,7 @@ export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main />,
-        errorElement: <>error occured</>,
+        errorElement: <ErrorPage/>,
         children: [
 
             {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
             {
                 path: '/subscription-payment/:branchID',
                 element: <Payment />
+            },
+            {
+                path: '/pp',
+                element: <SuccessfullPage />
             },
 
         ]
@@ -121,7 +126,7 @@ export const router = createBrowserRouter([
                 element: <BranchBillingHistory />
             },
         ]
-    }
+    },
 
 
 ])
