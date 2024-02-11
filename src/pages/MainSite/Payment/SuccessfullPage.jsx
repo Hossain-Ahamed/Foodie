@@ -24,7 +24,7 @@ const SuccessfullPage = ({ id, reset, transactionID, price }) => {
   };
 
   return (
-    <section className='w-screen  max-w-[500px] mx-auto '>
+    <section className='w-screen  max-w-[500px] mx-auto min-h-[900px]'>
       <div className="w-full flex flex-col items-start justify-center my-8  select-none">
         <div className="w-full pb-3 border-b-2 font-extrabold text-3xl flex" role="alert">
           <div className='w-3/4'>
@@ -57,7 +57,7 @@ const SuccessfullPage = ({ id, reset, transactionID, price }) => {
 
           <p className='text-slate-500 py-0 mt-6 text-xs'>For security, payment to new payees may be held for 24 hours.</p>
 
-          <p className='text-slate-700 mt-1'>E-mail and password is sent to you E-mail. <Link to={"http://localhost:5174/"} target='_blank' className='hover:underline text-blue-300 '>Click to RMS Login</Link></p>
+          <p className='text-slate-700 mt-1'>E-mail and password is sent to you E-mail. <Link to={import.meta.env.VITE_RMS_ADDRESS} target='_blank' className='hover:underline text-blue-300 '>Click to RMS Login</Link></p>
         </div>
 
 
