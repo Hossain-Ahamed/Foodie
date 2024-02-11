@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAxiosSecure from './../../Hooks/useAxiosSecure';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
@@ -12,43 +12,45 @@ import { toast } from 'react-hot-toast';
 
 const PackageSelection = () => {
     const { branchID } = useParams();
+    const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const { handleSubmit, register, setValue } = useForm();
     const { refetch: dataRefetch, data: data = [], isLoading: dataLoading, error: dataError, } = useQuery({
         queryKey: ['paymenttype', branchID],
         enabled: true,
         queryFn: async () => {
-            let res = await axiosSecure.get(`/subscription-packages`);
+            const res = await axiosSecure.get(`/subscription-packages`);
 
-            res = {
-                data: [
-                    {
-                        "packageType": "Starter",
-                        "shortDescription": "3 month subscription - Get started with our Starter package!",
-                        "finalPrice": "1500",
-                        "cutPrice": "0"
+            // res = {
+            //     data: [
+            //         {
+            //             "packageType": "Starter",
+            //             "shortDescription": "3 month subscription - Get started with our Starter package!",
+            //             "finalPrice": "1500",
+            //             "cutPrice": "0"
 
-                    },
-                    {
-                        "packageType": "Pro",
-                        "shortDescription": "6 month subscription - Upgrade to our Pro package for long time non-stop support!",
-                        "finalPrice": "2800",
-                        "cutPrice": "0"
-                    },
-                    {
-                        "packageType": "Enterprise",
-                        "shortDescription": "12 month subscription - Unlock premium prizes   with our Enterprise package!",
-                        "finalPrice": "5000",
-                        "cutPrice": "0"
+            //         },
+            //         {
+            //             "packageType": "Pro",
+            //             "shortDescription": "6 month subscription - Upgrade to our Pro package for long time non-stop support!",
+            //             "finalPrice": "2800",
+            //             "cutPrice": "0"
+            //         },
+            //         {
+            //             "packageType": "Enterprise",
+            //             "shortDescription": "12 month subscription - Unlock premium prizes   with our Enterprise package!",
+            //             "finalPrice": "5000",
+            //             "cutPrice": "0"
 
-                    }
-                ]
-            }
+            //         }
+            //     ]
+            // }
 
             return res?.data;
         },
     });
 
+    // console.log(branchID);
     const handleChange = (Changedata) => {
 
         setValue('packageType', Changedata);
@@ -69,7 +71,8 @@ const PackageSelection = () => {
             if (result.isConfirmed) {
                 axiosSecure.patch(`/payment-package/branch/${branchID}`, reqData)
                     .then(data => {
-                        toast.success("Successfully Changed");
+                        toast.success("Successfully Selected");
+                        navigate(`/subscription-payment/${branchID}`, {replace: true})
                     })
                     .catch((error) => {
                         console.error(error)

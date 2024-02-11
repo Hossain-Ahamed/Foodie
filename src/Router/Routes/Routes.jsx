@@ -31,6 +31,7 @@ import BranchBillingHistory from "../../pages/Admin/BrnachBillingHistory/BranchB
 import Dashboard from "../../pages/Admin/Dashboard/Dashboard";
 import PackageSelection from "../../pages/PackageSelection/PackageSelection";
 import PrivateRoute from './../PrivateRoute/PrivateRoute';
+import Payment from "../../pages/MainSite/Payment/Payment";
 
 
 
@@ -71,7 +72,11 @@ export const router = createBrowserRouter([
             {
                 path: '/select-package/:branchID',
                 element: <PackageSelection />
-            }
+            },
+            {
+                path: '/subscription-payment/:branchID',
+                element: <Payment />
+            },
 
         ]
 

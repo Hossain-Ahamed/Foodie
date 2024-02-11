@@ -1,16 +1,16 @@
 import React from 'react';
-import SectionTitle from '../../../../components/SectionTitle/SectionTitle';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import CheckOutForm from './CheckOutForm';
-import useCart from '../../../../Hooks/useCart';
+// import useCart from '../../../../Hooks/useCart';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
-import useProfile from '../../../../Hooks/useProfile';
-import LoadingPage from '../../../LoadingPage/LoadingPage/LoadingPage';
 import Swal from 'sweetalert2';
-import SetTitle from '../../../Shared/SetTtitle/SetTitle';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import LoadingPage from '../../Shared/LoadingPages/LoadingPage/LoadingPage';
+import SetTitle from '../../Shared/SetTtitle/SetTitle';
+import SectionTitle from '../../../components/SectionTitle/SectionTitle';
+import CheckOutForm from './CheckOutForm';
+import ErrorPage from '../../Shared/ErrorPage/ErrorPage';
 
 
 const ELEMENTS_OPTIONS = {
@@ -30,14 +30,14 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_GateWay_PK);
 
 const Payment = () => {
     
-    const { cartID } = useParams();
+    const { branchID } = useParams();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const { data: { Details, price } = {}, error: detailError, isLoading: detailLoading, refetch: detailrefetch } = useQuery({
-        queryKey: ['detailCartData', cartID],
+        queryKey: ['detailCartData', branchID],
        
         queryFn: async () => {
-            const res = await axiosSecure.get(`/get-paymnet-data/${cartID}`);
+            const res = await axiosSecure.get(`/subscription-payment/${branchID}`);
             // console.log(res.data)
             return res.data;
         },
@@ -51,11 +51,11 @@ const Payment = () => {
             position: 'center',
             icon: 'error',
             title: `${detailError?.response?.data?.message}`,
-            showConfirmButton: false,
-            timer: 1500
+            text: 'Payment Error please check your email for more info',
+            showConfirmButton: true,
         })
 
-        return navigate('/dashboard/carts');
+        return <ErrorPage />;
     }
 
     if (detailLoading) {
