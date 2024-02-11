@@ -29,39 +29,38 @@ const EditEmployee = () => {
         queryKey: ['employeeData', employeeID],
         enabled: true,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/get-employee-data/${employeeID}`);
+            const res = await axiosSecure.get(`/dev/${employeeID}`);
+            // console.log(res.data)
+            setSelectedImage0(res.data?.profilePhoto);
+            return res?.data;
 
-            //   to do uncomment 
-            // setSelectedImage0(res.data?.profilePhoto);
-            // return res?.data;
-
-            const prev = {
-                f_name: 'helo',
-                l_name: 'dsaj',
-                email: 'a@gmail.com',
-                gender: 'Female',
-                DOB: '2001-01-19',
-                nid: '45273485',
-                role: 'Accounts',
-                mobile: '01868726172',
-                commentNotes: "tui moros na k",
-                profilePhoto: 'https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no',
-                streetAddress: "J A M T O L A",
-                city: 'Narayanganj',
-                stateProvince: 'hello',
-                postalCode: '435',
-                country: "Bangladesh",
+            // const prev = {
+            //     f_name: 'helo',
+            //     l_name: 'dsaj',
+            //     email: 'a@gmail.com',
+            //     gender: 'Female',
+            //     DOB: '2001-01-19',
+            //     nid: '45273485',
+            //     role: 'Accounts',
+            //     mobile: '01868726172',
+            //     commentNotes: "tui moros na k",
+            //     profilePhoto: 'https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no',
+            //     streetAddress: "J A M T O L A",
+            //     city: 'Narayanganj',
+            //     stateProvince: 'hello',
+            //     postalCode: '435',
+            //     country: "Bangladesh",
 
 
-                emergencyAddress: "J A M T O L A",
-                emergencyEmail: "hossainahamed6872@gmail.com",
-                emergencyName: "Md. Hossain Ahamed",
-                emergencyPhoneNumber: "01868726172",
-                emergencyRelation: "3241"
-            }
+            //     emergencyAddress: "J A M T O L A",
+            //     emergencyEmail: "hossainahamed6872@gmail.com",
+            //     emergencyName: "Md. Hossain Ahamed",
+            //     emergencyPhoneNumber: "01868726172",
+            //     emergencyRelation: "3241"
+            // }
 
-            setSelectedImage0(prev.profilePhoto);
-            return prev;
+            // setSelectedImage0(prev.profilePhoto);
+            // return prev;
         },
     });
 
@@ -140,15 +139,15 @@ const EditEmployee = () => {
     return (
         <>
             <ScrollToTop />
-            <SetTitle title="Edit Employee" />
+            <SetTitle title="Employee Data" />
             <form onSubmit={handleSubmit(onSubmit)} className='max-w-7xl mx-auto flex flex-col items-center py-12 select-none '>
-                <SectionTitle h1="Employee Edit Form" />
+                <SectionTitle h1="Employee Profile" />
                 <div className="w-full md:w-3/4 p-3 mt-8">
                     <div className="p-6 h-full border border-coolGray-100 overflow-hidden bg-white rounded-md shadow-dashboard">
                         <div className="flex flex-wrap pb-3 -m-3">
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-3-3">First name</p>
-                                <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="text" placeholder="John"
+                                <input disabled className="disabled:cursor-not-allowed w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled" type="textdisabled:cursor-not-allowed " placeholder="John"
                                     defaultValue={data?.f_name}
                                     {...register("f_name", {
                                         required: "*Last Name is Required",
@@ -159,7 +158,7 @@ const EditEmployee = () => {
                             {/* last name  */}
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-4-3">Last name</p>
-                                <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="text" placeholder="Doe"
+                                <input disabled className="disabled:cursor-not-allowed w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled" type="textdisabled:cursor-not-allowed " placeholder="Doe"
                                     defaultValue={data?.l_name}
                                     {...register("l_name", {
                                         required: "*First Name is Required",
@@ -172,7 +171,7 @@ const EditEmployee = () => {
                             {/* email  */}
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-5-3">Email</p>
-                                <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="email" placeholder="alex@example.com"
+                                <input disabled className="disabled:cursor-not-allowed w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled" type="emaidisabled:cursor-not-allowed l" placeholder="alex@example.com"
                                     defaultValue={data?.email}
                                     {...register("email", {
                                         required: "*E-mail is Required",
@@ -189,7 +188,7 @@ const EditEmployee = () => {
                             {/* phone  */}
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-6-3">Phone number</p>
-                                <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="tel" placeholder="01x xxx xxxx "
+                                <input disabled className="disabled:cursor-not-allowed w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled" type="tel"  placeholder="01x xxx xxxx "
                                     defaultValue={data?.mobile}
                                     {...register("mobile", {
                                         required: "*Contact number is Required",
@@ -212,13 +211,13 @@ const EditEmployee = () => {
                                     {['Male', 'Female', 'Others'].map((gender) => (
                                         <li key={gender} className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
                                             <div className="flex items-center ps-3">
-                                                <input
-                                                    id={`${gender.toLowerCase()}-gender`}
+                                                <input disabled
+                                            id={`${gender.toLowerCase()}-gender`}
                                                     type="radio"
                                                     value={gender}
                                                     {...register('gender')}
                                                     defaultChecked={data?.gender === gender}
-                                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+                                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 cursor-not-allowed"
                                                
                                                 />
                                                 <label
@@ -237,10 +236,10 @@ const EditEmployee = () => {
                                 <label htmlFor="dob" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     Date of Birth
                                 </label>
-                                <input
-                                    id="dob"
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="date"
+                                <input disabled
+                             id="dob"
+                                    className=" cursor-not-allowed w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                                type="date"
                                     defaultValue={data?.DOB}
                                     min="1800-01-01"
                                     max={new Date().toISOString().split('T')[0]}
@@ -261,10 +260,10 @@ const EditEmployee = () => {
                                 <label htmlFor="nid" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     NID
                                 </label>
-                                <input
-                                    id="nid"
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="text"
+                                <input disabled
+                               id="nid"
+                                    className="   disabled:cursor-not-allowed    w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                               type="text"
                                     placeholder="xxx xxxx xxxx xxx"
                                     defaultValue={data?.nid}
                                     {...register('nid', {
@@ -290,8 +289,9 @@ const EditEmployee = () => {
                                     </svg>
                                     <select
                                         id="role"
-                                        className="appearance-none w-full py-2.5 px-4 text-coolGray-900 text-base font-normal bg-white border outline-none border-coolGray-200 hover:border-green-500 rounded-lg shadow-input"
-                                        defaultValue={data?.role}
+                                        
+                                        className="appearance-none w-full py-2.5 px-4 text-coolGray-900 text-base font-normal bg-white border outline-none border-coolGray-200 hover:border-green-500 rounded-lg shadow-input disabled"
+                                         defaultValue={data?.role}
                                         {...register('role', { required: '*Select Role is required' })}
                                     >
                                         <option value="" disabled>Select Role</option>
@@ -318,8 +318,9 @@ const EditEmployee = () => {
                                         </p>
                                         <textarea
                                             defaultValue={data?.commentNotes}
+                                            disabled
                                             {...register('commentNotes')}
-                                            className="block w-full h-64 p-4 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input resize-none"
+                                            className="cursor-not-allowed block w-full h-64 p-4 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled resize-nonedisabled:cursor-not-allowed "
 
                                         ></textarea>
                                     </div>
@@ -386,9 +387,9 @@ const EditEmployee = () => {
                                 {selectedImage0 && (
                                     <img src={selectedImage0} alt="Uploaded" className="h-60 rounded-2xl object-contain" />
                                 )}
-                                <input
+                                <input disabled
 
-                                    type="file"
+                                  type="file"
                                     accept="image/*"
                                     className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer"
                                     onChange={handleImageUpload0}
@@ -409,10 +410,10 @@ const EditEmployee = () => {
                                 <label htmlFor="streetAddress" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     Street Address
                                 </label>
-                                <input
-                                    id="streetAddress"
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="text"
+                                <input disabled
+                                id="streetAddress"
+                                    className="   disabled:cursor-not-allowed   w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                           type="text"
                                     defaultValue={data?.streetAddress}
                                     placeholder="Enter your street address"
                                     {...register('streetAddress', {
@@ -430,11 +431,11 @@ const EditEmployee = () => {
                                 <label htmlFor="city" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     City/Town
                                 </label>
-                                <input
-                                    defaultValue={data?.city}
+                                <input disabled
+                                  defaultValue={data?.city}
                                     {...register('city', { required: 'City/Town is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="text"
+                                    className=" disabled:cursor-not-allowed   w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                        type="text"
                                     placeholder="Enter your city/town"
                                 />
                                 {errors.city && (
@@ -449,11 +450,11 @@ const EditEmployee = () => {
                                 <label htmlFor="stateProvince" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     State / Province
                                 </label>
-                                <input
-                                    defaultValue={data?.stateProvince}
+                                <input disabled
+                           defaultValue={data?.stateProvince}
                                     {...register('stateProvince', { required: 'State / Province is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="text"
+                                    className="  disabled:cursor-not-allowed  w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                              type="text"
                                     placeholder="Enter your state/province"
                                 />
                                 {errors.stateProvince && (
@@ -468,11 +469,11 @@ const EditEmployee = () => {
                                 <label htmlFor="postalCode" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     ZIP / Postal code
                                 </label>
-                                <input
-                                    defaultValue={data?.postalCode}
+                                <input disabled
+                               defaultValue={data?.postalCode}
                                     {...register('postalCode', { required: 'ZIP / Postal code is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="text"
+                                    className="disabled:cursor-not-allowed    w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                                  type="text"
                                     placeholder="ZIP / Postal code"
                                 />
                                 {errors.postalCode && (
@@ -492,10 +493,11 @@ const EditEmployee = () => {
                                         <path d="M11.3333 6.1133C11.2084 5.98913 11.0395 5.91943 10.8633 5.91943C10.6872 5.91943 10.5182 5.98913 10.3933 6.1133L8.00001 8.47329L5.64001 6.1133C5.5151 5.98913 5.34613 5.91943 5.17001 5.91943C4.99388 5.91943 4.82491 5.98913 4.70001 6.1133C4.63752 6.17527 4.58792 6.249 4.55408 6.33024C4.52023 6.41148 4.50281 6.49862 4.50281 6.58663C4.50281 6.67464 4.52023 6.76177 4.55408 6.84301C4.58792 6.92425 4.63752 6.99799 4.70001 7.05996L7.52667 9.88663C7.58865 9.94911 7.66238 9.99871 7.74362 10.0326C7.82486 10.0664 7.912 10.0838 8.00001 10.0838C8.08801 10.0838 8.17515 10.0664 8.25639 10.0326C8.33763 9.99871 8.41136 9.94911 8.47334 9.88663L11.3333 7.05996C11.3958 6.99799 11.4454 6.92425 11.4793 6.84301C11.5131 6.76177 11.5305 6.67464 11.5305 6.58663C11.5305 6.49862 11.5131 6.41148 11.4793 6.33024C11.4454 6.249 11.3958 6.17527 11.3333 6.1133Z" fill="#8896AB"></path>
                                     </svg>
                                     <select
+                                   
                                         defaultValue={data?.country}
                                         {...register('country', { required: 'Country is required' })}
-                                        className="appearance-none w-full py-2.5 px-4 text-coolGray-900 text-base font-normal bg-white border outline-none border-coolGray-200 hover:border-green-500 rounded-lg shadow-input"
-                                    >
+                                        className="appearance-none w-full py-2.5 px-4 text-coolGray-900 text-base font-normal bg-white border outline-none border-coolGray-200 hover:border-green-500 rounded-lg shadow-input disabled"
+                               >
                                         <option value="" disabled>Select Country</option>
                                         {
                                             countries.map(i => <option key={i?.alpha_3_code} value={i?.en_short_name}>{i.en_short_name}</option>)
@@ -529,11 +531,11 @@ const EditEmployee = () => {
                                 <label htmlFor="emergencyName" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     Name
                                 </label>
-                                <input
-                                    defaultValue={data?.emergencyName}
+                                <input disabled
+                               defaultValue={data?.emergencyName}
                                     {...register('emergencyName', { required: 'Name is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="text"
+                                    className=" disabled:cursor-not-allowed   w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                            type="text"
                                     placeholder="Emergency contact name"
                                 />
                                 {errors.emergencyName && (
@@ -548,11 +550,11 @@ const EditEmployee = () => {
                                 <label htmlFor="emergencyRelation" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     Relation
                                 </label>
-                                <input
-                                    defaultValue={data?.emergencyRelation}
+                                <input disabled
+                        defaultValue={data?.emergencyRelation}
                                     {...register('emergencyRelation', { required: 'Relation is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="text"
+                                    className="disabled:cursor-not-allowed    w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                            type="text"
                                     placeholder="Relation to the person"
                                 />
                                 {errors.emergencyRelation && (
@@ -567,11 +569,11 @@ const EditEmployee = () => {
                                 <label htmlFor="emergencyPhoneNumber" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     Phone number
                                 </label>
-                                <input
-                                    defaultValue={data?.emergencyPhoneNumber}
+                                <input disabled
+                             defaultValue={data?.emergencyPhoneNumber}
                                     {...register('emergencyPhoneNumber', { required: 'Phone number is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="tel"
+                                    className="disabled:cursor-not-allowed    w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                                 type="tel"
                                     placeholder="01x xxx xxxx"
                                 />
                                 {errors.emergencyPhoneNumber && (
@@ -586,11 +588,11 @@ const EditEmployee = () => {
                                 <label htmlFor="emergencyEmail" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     Email
                                 </label>
-                                <input
-                                    defaultValue={data?.emergencyEmail}
+                                <input disabled
+                       defaultValue={data?.emergencyEmail}
                                     {...register('emergencyEmail', { required: 'Email is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="email"
+                                    className="disabled:cursor-not-allowed    w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                         type="email"
                                     placeholder="Emergency contact email"
                                 />
                                 {errors.emergencyEmail && (
@@ -605,11 +607,11 @@ const EditEmployee = () => {
                                 <label htmlFor="emergencyAddress" className="mb-1.5 font-medium text-base text-coolGray-800">
                                     Address
                                 </label>
-                                <input
-                                    defaultValue={data?.emergencyAddress}
+                                <input disabled
+                                 defaultValue={data?.emergencyAddress}
                                     {...register('emergencyAddress', { required: 'Address is required' })}
-                                    className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                                    type="text"
+                                    className="disabled:cursor-not-allowed    w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled"
+                            type="text"
                                     placeholder="ie : black St. VIC Australia 3001"
                                 />
                                 {errors.emergencyAddress && (
@@ -619,9 +621,9 @@ const EditEmployee = () => {
                                 )}
                             </div>
                         </div>
-                        <button type='submit' className="flex flex-wrap justify-center w-full md:w-auto md:ml-auto px-4 py-2 bg-green-500 hover:bg-green-600 font-medium text-sm text-white border border-green-500 rounded-md shadow-button">
+                        {/* <button type='submit' className="flex flex-wrap justify-center w-full md:w-auto md:ml-auto px-4 py-2 bg-green-500 hover:bg-green-600 font-medium text-sm text-white border border-green-500 rounded-md shadow-button">
                             <p data-config-id="auto-txt-22-3">Update</p>
-                        </button>
+                        </button> */}
                     </div>
 
                 </div>

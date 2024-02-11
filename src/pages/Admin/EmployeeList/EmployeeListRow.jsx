@@ -1,16 +1,16 @@
 import React from 'react';
 // import useRestauarantAndBranch from '../../../../Hooks/useRestauarantAndBranch';
 import { Link } from 'react-router-dom';
-import { BiEditAlt } from 'react-icons/bi';
+import { AiOutlineEye } from "react-icons/ai";
 import Swal from 'sweetalert2';
-import { MdClear, MdOutlineCheckCircle } from 'react-icons/md';
-import { LuEye } from 'react-icons/lu';
 import { FaTrashAlt } from 'react-icons/fa';
+import useAxiosSecure from './../../../Hooks/useAxiosSecure';
+import { SwalErrorShow } from '../../../assets/scripts/Utility';
 
-const EmployeeListRow = ({ employee }) => {
-    // const { branchName, restaurantName, res_id, branchID } = useRestauarantAndBranch();
-    const handleDeletecategory = id => {
-        console.log(id)
+const EmployeeListRow = ({ employee,refetch }) => {
+  const axiosSecure = useAxiosSecure();
+    const handleDeletecategory = uid => {
+        // console.log(uid)
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -21,11 +21,20 @@ const EmployeeListRow = ({ employee }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
+
+                axiosSecure.delete(`/delete-a-dev-profile/${uid}`)
+                .then(res=>{
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Employee has been deleted.",
+                        icon: "success"
+                    });
+                    refetch();
+                })
+                .catch(e=>{
+                    SwalErrorShow(e);
+                })
+             
             }
         });
     }
@@ -101,8 +110,8 @@ const EmployeeListRow = ({ employee }) => {
                 <span
                     className='text-gray-900 whitespace-no-wrap flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center'
                 >
-                    <Link title="Edit category" to={`/update-employee-profile/${employee?._id}`} className="inline-flex ml-3 cursor-pointer text-gray-500"><BiEditAlt size={25} /></Link>
-                    <span title="Delete category" onClick={() => handleDeletecategory(employee._id)} className="inline-flex ml-3 cursor-pointer text-red-500"><FaTrashAlt size={25} /></span>
+                    <Link title="Edit category" to={`/admin/employee-list/edit/${employee?.uid}`} className="inline-flex ml-3 cursor-pointer text-gray-500"><AiOutlineEye size={25} /></Link>
+                    <span title="Delete category" onClick={() => handleDeletecategory(employee.uid)} className="inline-flex ml-3 cursor-pointer text-red-500"><FaTrashAlt size={25} /></span>
                 </span>
             </td>
         </tr>

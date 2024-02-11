@@ -2,6 +2,7 @@ import Divisions from "../../assets/bangladesh-geojson/bd-divisions.json";
 import Districts from "../../assets/bangladesh-geojson/bd-districts.json";
 import Upazillas from "../../assets/bangladesh-geojson/bd-upazilas.json";
 import PostCodes from "../../assets/bangladesh-geojson/bd-postcodes.json";
+import Swal from "sweetalert2";
 
 import countries from "../../assets/bangladesh-geojson/countries_data.json";
 
@@ -44,26 +45,31 @@ const isValidAddress = (
 const getDivisions = () => {
   return Divisions.divisions.sort((a, b) => a.name.localeCompare(b.name));
 };
-const getAllDistricts = ()=>{
+const getAllDistricts = () => {
   return Districts.districts.sort((a, b) => a.name.localeCompare(b.name));
-}
+};
 
-const getProvinceOfSelectedCity = (name)=>{
+const getProvinceOfSelectedCity = (name) => {
+  const districtID = Districts.districts.find((item) => item?.name === name);
 
-  const districtID = Districts.districts.find(item=>item?.name===name)
-
-  return Divisions.divisions.find(i=>i.id===districtID.division_id).name
-}
+  return Divisions.divisions.find((i) => i.id === districtID.division_id).name;
+};
 const getDistricts = (division_id) => {
-  return Districts.districts.filter((i) => i.division_id === division_id).sort((a, b) => a.name.localeCompare(b.name));
+  return Districts.districts
+    .filter((i) => i.division_id === division_id)
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const getUpazillas = (district_id) => {
-  return Upazillas.upazilas.filter((i) => i.district_id === district_id).sort((a, b) => a.name.localeCompare(b.name));
+  return Upazillas.upazilas
+    .filter((i) => i.district_id === district_id)
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const getPostOffices = (disctrict_id) => {
-  return PostCodes.postcodes.filter((i) => i.district_id === disctrict_id).sort((a, b) => a.name.localeCompare(b.name));
+  return PostCodes.postcodes
+    .filter((i) => i.district_id === disctrict_id)
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 export const getPostcode = (id) => {
@@ -168,7 +174,6 @@ const getPcInfo = async () => {
   }
 };
 
-
 const validateSalesTax = (value) => {
   if (isNaN(value)) {
     return "*is not a number";
@@ -184,20 +189,28 @@ const validateSalesTax = (value) => {
 };
 
 // ImgBB image upload function
-const imageUpload = async image => {
+const imageUpload = async (image) => {
   const formData = new FormData();
-  formData.append('image', image);
-  const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_ImgBBAPI}`;
+  formData.append("image", image);
+  const url = `https://api.imgbb.com/1/upload?key=${
+    import.meta.env.VITE_ImgBBAPI
+  }`;
   const response = await fetch(url, {
-    method: 'POST',
-    body: formData
-  })
+    method: "POST",
+    body: formData,
+  });
 
   const data = await response.json();
   return data;
-}
+};
 
-
+const SwalErrorShow = (e) => {
+  Swal.fire({
+    icon: "error",
+    text: e?.code + " " + e?.message,
+    title: e?.response?.data?.message,
+  });
+};
 
 export {
   validateMobileNumber,
@@ -215,5 +228,6 @@ export {
   getPostOffices,
   getAllDistricts,
   getProvinceOfSelectedCity,
-  imageUpload
+  imageUpload,
+  SwalErrorShow
 };

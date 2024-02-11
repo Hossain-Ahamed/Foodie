@@ -3,22 +3,27 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
-import { getCountries, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
+import { SwalErrorShow, getCountries, imageUpload, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
 import SetTitle from '../../Shared/SetTtitle/SetTitle';
 import { toast } from 'react-hot-toast';
 import ScrollToTop from '../../../components/ScrollToTop/ScrollToTop';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { useNavigate } from 'react-router-dom';
+import LoadingPage from '../../Shared/LoadingPages/LoadingPage/LoadingPage';
 
 const AddEmployee = () => {
     const countries = getCountries();
+    const axiosSecure = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-
+    const navigate = useNavigate();
     // handle image
     const [selectedImage0, setSelectedImage0] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleImageUpload0 = (event) => {
         const file = event.target.files[0];
         setSelectedImage0(URL.createObjectURL(file));
-    
+
         setValue("profilePhoto", file);
 
     };
@@ -28,21 +33,37 @@ const AddEmployee = () => {
             toast.error('Profile Photo needed');
             return;
         }
-    
-        const formData = new FormData();
-    
-        // Loop through object keys and append each field to formData
-        for (const key in data) {
-            if (Object.prototype.hasOwnProperty.call(data, key)) {
-                formData.append(key, data[key]);
-            }
-        }
-    
-        console.log(data);
-        // Now `formData` contains all the fields with the same names as in the `data` object
-        // Continue with the rest of your submission logic
+        setLoading(true);
+        imageUpload(data.profilePhoto)
+            .then(image => {
+
+                data.profilePhoto = image?.data?.display_url
+                axiosSecure.post("/dev/create", data)
+                    .then(res => {
+                        
+                        toast.success('Successfully Employee added');
+                        navigate('/admin/employee-list', { replace: true })
+                    }).catch(e => {
+                        SwalErrorShow(e);
+                    }).finally(()=>{
+                        setLoading(false)
+                    })
+
+
+                
+              
+
+            })
+            .catch(err => {
+                console.log(err);
+                setLoading(false)
+            })
+
     };
-    
+
+    if (loading) {
+        return <LoadingPage />
+    }
 
     return (
         <>
