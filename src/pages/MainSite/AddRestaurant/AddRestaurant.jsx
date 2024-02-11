@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
-import { getAllDistricts, getCountries, getDivisions, getProvinceOfSelectedCity, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
+import { getAllDistricts, getCountries, getDivisions, getProvinceOfSelectedCity, imageUpload, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
 import SetTitle from '../../Shared/SetTtitle/SetTitle';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -10,7 +10,7 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const AddRestaurant = () => {
     const countries = getCountries();
-
+    const [loading, setLoading] = useState(true);
     // const axiosSecure = useAxiosSecure();
 
     const AllDistricts = getAllDistricts();
@@ -37,7 +37,7 @@ const AddRestaurant = () => {
     const axiosSecure = useAxiosSecure();
 
     const onSubmit = (data) => {
-
+        setLoading(true)
         console.log(data)
 
 
@@ -95,7 +95,7 @@ const AddRestaurant = () => {
         //     resData.append('img', data.img);
         // }
 
-        console.log([...resData])
+        // console.log([...resData])
 
         // Add fields to the FormData object
         // resData.append('res_name', data.res_name);
@@ -133,25 +133,34 @@ const AddRestaurant = () => {
         //     console.log(`${key}: ${value}`);
         // }
 
+        // image upload
+        imageUpload(data.img)
+        .then(image => {
+        
+            data.img = image?.data?.display_url
+            axiosSecure.post(`/create-restaurant`, data,)
+                .then(res => {
+                    console.log(res.data);
+                    setLoading(false)
+                    navigate(`/select-package/${res?.data?.branchID}`, { replace: true })
+                }).catch(e => {
+                    setLoading(false)
+                    console.error(e)
+                    Swal.fire({
+                        icon: "error",
+                        text: e?.code + " " + e?.message,
+                        title: e?.response?.data?.message
 
-        axiosSecure.post(`/create-restaurant`, resData,{
-            headers:  {
-                'Content-Type': 'multipart/form-data'
-              }
-        } )
-            .then(res => {
+                    });
+                })
+            console.log(data)
 
-                console.log(res.data);
-                // navigate(`/select-package/${res?.data?.branchID}`, { replace: true })
-            }).catch(e => {
-                console.error(e)
-                Swal.fire({
-                    icon: "error",
-                    text: e?.code + " " + e?.message,
-                    title: e?.response?.data?.message
-
-                });
-            })
+        })
+        .catch(err =>{ 
+            console.log(err);
+            setLoading(false)
+        })
+        
     };
 
     const generateBranchID = (branch) => {

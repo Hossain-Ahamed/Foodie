@@ -5,9 +5,9 @@ import Field from './Field';
 import CardField from './CardField';
 import SuccessfullPage from './SuccessfullPage';
 import PaymentError from './PaymentError';
-import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 
 
@@ -117,10 +117,10 @@ const CheckOutForm = ({ price, priceDetails }) => {
                   
 
                    
-                
-                    res_id: priceDetails?._id,
-                    res_name : priceDetails?.res_name,
-
+                    subscriptionID: priceDetails?._id,
+                    res_id: priceDetails?.res_id,
+                    branchID: priceDetails?.branchID,
+                    packageType: priceDetails?.packageType,
 
                     transaction_method_email: payload.paymentMethod?.billing_details?.email,
                     transaction_method_name: payload.paymentMethod?.billing_details?.name,
@@ -130,22 +130,20 @@ const CheckOutForm = ({ price, priceDetails }) => {
                     methodID: payload.paymentMethod?.id,
                     price: parseFloat((paymentIntent?.amount / 100.00).toFixed(2)),
 
-                    Joindate: new Date().toISOString(),
-
                 }
 
-                axiosSecure.post('/enroll-in-class', data)
+                axiosSecure.post('/enlisted-payment', data)
                     .then(res => {
 
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'Your are Enrolled',
+                            title: 'Your are Enlisted Check your email for user name and password',
                             showConfirmButton: false,
                             timer: 1500
                         })
 
-                        navigate('/dashboard/classes');
+                        window.open('https://facebook.com', '_blank')
                     })
                     .catch(e => {
                         console.error(e);
@@ -157,7 +155,7 @@ const CheckOutForm = ({ price, priceDetails }) => {
                             timer: 1500
                         })
 
-                        navigate('/dashboard/carts');
+                        // navigate('/dashboard/carts');
                     })
 
             }
