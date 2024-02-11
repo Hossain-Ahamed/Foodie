@@ -134,7 +134,7 @@ const AddRestaurant = () => {
         // }
 
 
-        axiosSecure.post(`${import.meta.env.VITE_serverAddress}/create-restaurant`, data,{
+        axiosSecure.post(`/create-restaurant`, resData,{
             headers:  {
                 'Content-Type': 'multipart/form-data'
               }
