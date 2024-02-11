@@ -1,6 +1,7 @@
 import React from 'react';
 import ResetButton from './ResetButton';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const SuccessfullPage = ({ id, reset, transactionID }) => {
 
@@ -32,6 +33,8 @@ const SuccessfullPage = ({ id, reset, transactionID }) => {
                 PaymentMethod:  <span onClick={()=>handleCopyClick(id)} className='cursor-pointer hover:underline' title='click to copy'>{id} </span><br />
                 transaction ID : <span onClick={()=>handleCopyClick(transactionID)} className='cursor-pointer hover:underline' title='click to copy'>{transactionID}</span>
             </div>
+            <p className='text-blue-400 mt-8'>E-mail and password is sent to you E-mail.</p>
+            <Link to={"http://localhost:5174/"} target='_blank'>Log In to RMS</Link>
             <ResetButton onClick={reset} />
         </div>
     );
