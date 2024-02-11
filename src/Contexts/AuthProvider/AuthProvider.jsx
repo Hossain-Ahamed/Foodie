@@ -64,32 +64,33 @@ const AuthProvider = ({ children }) => {
 
             if (currentUser) {
 
-                const userData = {
-                    name: currentUser?.displayName,
-                    email: currentUser.email,
-                    photoURL: currentUser?.photoURL,
-                    mobile: currentUser?.phoneNumber,
-                    firebase_UID: currentUser?.uid,
-                    allData: currentUser,
+                // const userData = {
+                //     name: currentUser?.displayName,
+                //     email: currentUser.email,
+                //     photoURL: currentUser?.photoURL,
+                //     mobile: currentUser?.phoneNumber,
+                //     firebase_UID: currentUser?.uid,
+                //     allData: currentUser,
 
 
-                }
+                // }
 
-                console.log(userData)
+                // console.log(userData);
+                setLoading(false);
                 // const user
-                axios.post(`${import.meta.env.VITE_serverAddress}/jwt`, userData, { withCredentials: true })
-                    .then(data => {
-                        console.log("Token :  ", data.data.token);
+                // axios.post(`${import.meta.env.VITE_serverAddress}/jwt`, userData, { withCredentials: true })
+                //     .then(data => {
+                //         console.log("Token :  ", data.data.token);
 
-                        Cookies.set('access-token', data.data.token, { expires: 7 });
-                        setLoading(false);
-                    })
-                    .catch(e => { console.error(e); setLoading(false) })
+                //         Cookies.set('access-token', data.data.token, { expires: 7 });
+                //         setLoading(false);
+                //     })
+                //     .catch(e => { console.error(e); setLoading(false) })
 
 
             } else {
-                localStorage.removeItem('access-token');
-                Cookies.remove('access-token');
+                // localStorage.removeItem('access-token');
+                // Cookies.remove('access-token');
                 setLoading(false)
             }
 
