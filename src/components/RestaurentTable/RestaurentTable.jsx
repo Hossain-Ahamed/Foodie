@@ -117,67 +117,69 @@ const RestaurentTable = () => {
     }
 
     return (
-        <div className='py-8'>
-            <SetTitle title="All Restaurents"/>
-            <SectionTitle h1="All Restaurents" />
-            <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto mt-4'>
-                <div className='inline-block min-w-full shadow rounded-lg overflow-h_idden'>
-                    <table className='min-w-full leading-normal'>
-                        <thead>
-                            <tr>
-                                <th
-                                    scope='col'
-                                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-center text-sm uppercase font-normal'
-                                >
-                                    Restaurent Name
-                                </th>
-                                <th
-                                    scope='col'
-                                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
-                                >
-                                    Branch Name
-                                </th>
-                                <th
-                                    scope='col'
-                                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
-                                >
-                                    Subscription Start
-                                </th>
-                                <th
-                                    scope='col'
-                                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
-                                >
-                                    Subscription End
-                                </th>
+        <div className='max-w-[1600px] mx-auto'>
+            <div className='py-8'>
+                <SetTitle title="All Restaurents" />
+                <SectionTitle h1="All Restaurents" />
+                <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto mt-4'>
+                    <div className='inline-block min-w-full shadow rounded-lg overflow-h_idden'>
+                        <table className='min-w-full leading-normal'>
+                            <thead>
+                                <tr>
+                                    <th
+                                        scope='col'
+                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-center text-sm uppercase font-normal'
+                                    >
+                                        Restaurent Name
+                                    </th>
+                                    <th
+                                        scope='col'
+                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
+                                    >
+                                        Branch Name
+                                    </th>
+                                    <th
+                                        scope='col'
+                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
+                                    >
+                                        Subscription Start
+                                    </th>
+                                    <th
+                                        scope='col'
+                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
+                                    >
+                                        Subscription End
+                                    </th>
 
-                                <th
-                                    scope='col'
-                                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
-                                >
-                                    Payment Time
-                                </th>
-                                <th
-                                    scope='col'
-                                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
-                                >
-                                    Transaction ID
-                                </th>
-                                <th
-                                    scope='col'
-                                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
-                                >
-                                    Status
-                                </th>
-                                <th
-                                    scope='col'
-                                    className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
-                                >
-                                    Action
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>{data && Array.isArray(data) && data.map((item, _idx) => <RestaurentTableRow key={_idx} restaurent={item} getColor={getColor}/>)}</tbody>
-                    </table>
+                                    <th
+                                        scope='col'
+                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
+                                    >
+                                        Payment Time
+                                    </th>
+                                    <th
+                                        scope='col'
+                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
+                                    >
+                                        Transaction ID
+                                    </th>
+                                    <th
+                                        scope='col'
+                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
+                                    >
+                                        Status
+                                    </th>
+                                    <th
+                                        scope='col'
+                                        className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-sm uppercase font-normal text-center'
+                                    >
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>{data && Array.isArray(data) && data.map((item, _idx) => <RestaurentTableRow key={_idx} restaurent={item} getColor={getColor} />)}</tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
