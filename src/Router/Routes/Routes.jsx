@@ -83,14 +83,6 @@ export const router = createBrowserRouter([
                 path: '/pp',
                 element: <SuccessfullPage />
             },
-            {
-                path: 'restaurent-list',
-                element: <RestaurentTable />
-            },
-            {
-                path: 'employee-list',
-                element: <EmployeeList />
-            },
 
         ]
 
@@ -109,10 +101,15 @@ export const router = createBrowserRouter([
                 path: 'add-employee',
                 element: <AddEmployee />
             },
-            // {
-            //     path: 'employee-list',
-            //     element: <EmployeeList />
-            // },
+
+            {
+                path: 'restaurent-list',
+                element: <RestaurentTable />
+            },
+            {
+                path: 'employee-list',
+                element: <EmployeeList />
+            },
             {
 
                 path: 'employee-list/view/:employeeID',
