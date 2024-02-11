@@ -54,7 +54,7 @@ const EmployeeListRow = ({ employee }) => {
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                 <span
-                    className='text-gray-900 whitespace-no-wrap block text-center'
+                    className='text-gray-900 whitespace-no-wrap block text-left'
                 >
 
                     {employee?.gender}
