@@ -6,125 +6,137 @@ import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import { Link } from 'react-router-dom';
 import { IoAddOutline } from 'react-icons/io5';
 import EmployeeListRow from './EmployeeListRow';
+import LoadingPage from '../../Shared/LoadingPages/LoadingPage/LoadingPage';
+import ErrorPage from '../../Shared/ErrorPage/ErrorPage';
 
 const EmployeeList = () => {
     const axiosSecure = useAxiosSecure();
     const { refetch, data: data = [], isLoading, error } = useQuery({
         queryKey: ['employee-list'],
         queryFn: async () => {
-            // const res = await axiosSecure.get(`/restaurant/${res_id}/branch/${branchID}/employee-list`);
-            return [
-                {
-                    _id: "1",
-                    f_name: "Farhan Hasan",
-                    l_name: "Nilok",
-                    email: "nilok@gmail.com",
-                    mobile: "018399473783",
-                    gender: "Male",
-                    nid: "8349490384893",
-                    uid: "4385884935",
-                    role: "Admin",
-                    DOB: "27-01-2001",
-                    profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
-                    streetAddress: "J A M T O L A",
-                    city: 'Narayanganj',
-                    stateProvince: 'Dhaka',
-                    postalCode: '435',
-                    country: "Bangladesh",
-                },
-                {
-                    _id: "2",
-                    f_name: "Fattan Prodan",
-                    l_name: "Pathul",
-                    email: "pathul@gmail.com",
-                    mobile: "018399473783",
-                    gender: "Female",
-                    nid: "8349490384893",
-                    uid: "4385884935",
-                    role: "Admin",
-                    DOB: "27-01-2001",
-                    profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
-                    streetAddress: "J A M T O L A",
-                    city: 'Narayanganj',
-                    stateProvince: 'Dhaka',
-                    postalCode: '435',
-                    country: "Bangladesh",
-                },
-                {
-                    _id: "3",
-                    f_name: "Hossain",
-                    l_name: "Ahamed",
-                    email: "hossain@gmail.com",
-                    mobile: "018399473783",
-                    gender: "Male",
-                    nid: "8349490384893",
-                    uid: "4385884935",
-                    role: "Admin",
-                    DOB: "27-01-2001",
-                    profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
-                    streetAddress: "J A M T O L A",
-                    city: 'Narayanganj',
-                    stateProvince: 'Dhaka',
-                    postalCode: '435',
-                    country: "Bangladesh",
-                },
-                {
-                    _id: "4",
-                    f_name: "Gazi Fuad",
-                    l_name: "Tahsin",
-                    email: "tahsin@gmail.com",
-                    mobile: "018399473783",
-                    gender: "Female",
-                    nid: "8349490384893",
-                    uid: "4385884935",
-                    role: "Admin",
-                    DOB: "27-01-2001",
-                    profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
-                    streetAddress: "J A M T O L A",
-                    city: 'Narayanganj',
-                    stateProvince: 'Dhaka',
-                    postalCode: '435',
-                    country: "Bangladesh",
-                },
-                {
-                    _id: "5",
-                    f_name: "Gazi Fuad",
-                    l_name: "Tahsin",
-                    email: "tahsin@gmail.com",
-                    mobile: "018399473783",
-                    gender: "Male",
-                    nid: "8349490384893",
-                    uid: "4385884935",
-                    role: "Admin",
-                    DOB: "27-01-2001",
-                    profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
-                    streetAddress: "J A M T O L A",
-                    city: 'Narayanganj',
-                    stateProvince: 'Dhaka',
-                    postalCode: '435',
-                    country: "Bangladesh",
-                },
-                {
-                    _id: "6",
-                    f_name: "Gazi Fuad",
-                    l_name: "Tahsin",
-                    email: "tahsin@gmail.com",
-                    mobile: "018399473783",
-                    gender: "Female",
-                    nid: "8349490384893",
-                    uid: "4385884935",
-                    role: "Admin",
-                    DOB: "27-01-2001",
-                    profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
-                    streetAddress: "J A M T O L A",
-                    city: 'Narayanganj',
-                    stateProvince: 'Dhaka',
-                    postalCode: '435',
-                    country: "Bangladesh",
-                },
-            ]
+         const res = await axiosSecure.get(`/all-dev-profile`);
+            // return [
+            //     {
+            //         _id: "1",
+            //         f_name: "Farhan Hasan",
+            //         l_name: "Nilok",
+            //         email: "nilok@gmail.com",
+            //         mobile: "018399473783",
+            //         gender: "Male",
+            //         nid: "8349490384893",
+            //         uid: "4385884935",
+            //         role: "Admin",
+            //         DOB: "27-01-2001",
+            //         profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
+            //         streetAddress: "J A M T O L A",
+            //         city: 'Narayanganj',
+            //         stateProvince: 'Dhaka',
+            //         postalCode: '435',
+            //         country: "Bangladesh",
+            //     },
+            //     {
+            //         _id: "2",
+            //         f_name: "Fattan Prodan",
+            //         l_name: "Pathul",
+            //         email: "pathul@gmail.com",
+            //         mobile: "018399473783",
+            //         gender: "Female",
+            //         nid: "8349490384893",
+            //         uid: "4385884935",
+            //         role: "Admin",
+            //         DOB: "27-01-2001",
+            //         profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
+            //         streetAddress: "J A M T O L A",
+            //         city: 'Narayanganj',
+            //         stateProvince: 'Dhaka',
+            //         postalCode: '435',
+            //         country: "Bangladesh",
+            //     },
+            //     {
+            //         _id: "3",
+            //         f_name: "Hossain",
+            //         l_name: "Ahamed",
+            //         email: "hossain@gmail.com",
+            //         mobile: "018399473783",
+            //         gender: "Male",
+            //         nid: "8349490384893",
+            //         uid: "4385884935",
+            //         role: "Admin",
+            //         DOB: "27-01-2001",
+            //         profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
+            //         streetAddress: "J A M T O L A",
+            //         city: 'Narayanganj',
+            //         stateProvince: 'Dhaka',
+            //         postalCode: '435',
+            //         country: "Bangladesh",
+            //     },
+            //     {
+            //         _id: "4",
+            //         f_name: "Gazi Fuad",
+            //         l_name: "Tahsin",
+            //         email: "tahsin@gmail.com",
+            //         mobile: "018399473783",
+            //         gender: "Female",
+            //         nid: "8349490384893",
+            //         uid: "4385884935",
+            //         role: "Admin",
+            //         DOB: "27-01-2001",
+            //         profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
+            //         streetAddress: "J A M T O L A",
+            //         city: 'Narayanganj',
+            //         stateProvince: 'Dhaka',
+            //         postalCode: '435',
+            //         country: "Bangladesh",
+            //     },
+            //     {
+            //         _id: "5",
+            //         f_name: "Gazi Fuad",
+            //         l_name: "Tahsin",
+            //         email: "tahsin@gmail.com",
+            //         mobile: "018399473783",
+            //         gender: "Male",
+            //         nid: "8349490384893",
+            //         uid: "4385884935",
+            //         role: "Admin",
+            //         DOB: "27-01-2001",
+            //         profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
+            //         streetAddress: "J A M T O L A",
+            //         city: 'Narayanganj',
+            //         stateProvince: 'Dhaka',
+            //         postalCode: '435',
+            //         country: "Bangladesh",
+            //     },
+            //     {
+            //         _id: "6",
+            //         f_name: "Gazi Fuad",
+            //         l_name: "Tahsin",
+            //         email: "tahsin@gmail.com",
+            //         mobile: "018399473783",
+            //         gender: "Female",
+            //         nid: "8349490384893",
+            //         uid: "4385884935",
+            //         role: "Admin",
+            //         DOB: "27-01-2001",
+            //         profilePhoto: "https://lh3.googleusercontent.com/a/ACg8ocKjKSD7xxcI8hEoNgPnsxZ632hSVJFspYJNcAAmPKc39g=s360-c-no",
+            //         streetAddress: "J A M T O L A",
+            //         city: 'Narayanganj',
+            //         stateProvince: 'Dhaka',
+            //         postalCode: '435',
+            //         country: "Bangladesh",
+            //     },
+            // ]
+
+            return res.data;
         }
     })
+
+    if(isLoading){
+        return <LoadingPage/>
+    }
+    if(error){
+        return <ErrorPage/>
+    }
+
     return (
         <div className='max-w-[1600px] mx-auto'>
             <section className='max-w-[1600px] mx-auto mt-5'>
@@ -135,7 +147,7 @@ const EmployeeList = () => {
                         <SectionTitle h1="Employee List" />
                     </div>
                     <div>
-                        <Link to={`/add-employee`} className='flex justify-center items-center gap-2 text-white font-medium  px-4 py-2 bg-green-400 rounded-md text-nowrap '>Add Employee<IoAddOutline className='text-white' /></Link>
+                        <Link to={`/admin/add-employee`} className='flex justify-center items-center gap-2 text-white font-medium  px-4 py-2 bg-green-400 rounded-md text-nowrap '>Add Employee<IoAddOutline className='text-white' /></Link>
 
                     </div>
 
@@ -192,7 +204,7 @@ const EmployeeList = () => {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>{data && Array.isArray(data) && data.map((employee, _idx) => <EmployeeListRow key={_idx} employee={employee} />)}</tbody>
+                                <tbody>{data && Array.isArray(data) && data.map((employee, _idx) => <EmployeeListRow key={_idx} employee={employee} refetch={refetch} />)}</tbody>
                             </table>
                         </div>
                     </div>
