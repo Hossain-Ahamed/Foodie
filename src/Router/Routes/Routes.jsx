@@ -33,6 +33,7 @@ import PackageSelection from "../../pages/PackageSelection/PackageSelection";
 import PrivateRoute from './../PrivateRoute/PrivateRoute';
 import Payment from "../../pages/MainSite/Payment/Payment";
 import SuccessfullPage from "../../pages/MainSite/Payment/SuccessfullPage";
+import RestaurentTable from "../../components/RestaurentTable/RestaurentTable";
 
 
 
@@ -82,6 +83,14 @@ export const router = createBrowserRouter([
                 path: '/pp',
                 element: <SuccessfullPage />
             },
+            {
+                path: 'restaurent-list',
+                element: <RestaurentTable />
+            },
+            {
+                path: 'employee-list',
+                element: <EmployeeList />
+            },
 
         ]
 
@@ -100,10 +109,10 @@ export const router = createBrowserRouter([
                 path: 'add-employee',
                 element: <AddEmployee />
             },
-            {
-                path: 'employee-list',
-                element: <EmployeeList />
-            },
+            // {
+            //     path: 'employee-list',
+            //     element: <EmployeeList />
+            // },
             {
 
                 path: 'employee-list/view/:employeeID',
