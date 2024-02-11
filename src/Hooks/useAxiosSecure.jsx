@@ -14,17 +14,6 @@ const useAxiosSecure = () => {
 
     useEffect(() => {
 
-        axiosSecure.interceptors.request.use((config) => {
-
-            const token = Cookies.get('access-token');
-
-            if (token) {
-
-                config.headers.Authorization = `Bearer ${token}`
-            }
-            config.withCredentials = true
-            return config;
-        })
         axiosSecure.interceptors.response.use((response) => response,
             async (error) => {
                 if (error.response && (error.response.status === 401 || error.response.status === 403)) {

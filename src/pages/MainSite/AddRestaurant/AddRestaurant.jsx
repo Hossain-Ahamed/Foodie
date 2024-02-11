@@ -3,8 +3,6 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import { getAllDistricts, getCountries, getDivisions, getProvinceOfSelectedCity, validateEmail, validateMobileNumber } from '../../../assets/scripts/Utility';
 import SetTitle from '../../Shared/SetTtitle/SetTitle';
-import { toast } from 'react-hot-toast';
-import Cookies from 'js-cookie';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
@@ -68,36 +66,66 @@ const AddRestaurant = () => {
 
             return;
         }
-        const formData = new FormData();
+        const resData = new FormData();
 
-        // Loop through each key-value pair in the data object
         for (const key in data) {
             if (Object.prototype.hasOwnProperty.call(data, key)) {
                 const value = data[key];
-
+    
                 // If the value is an array, handle it separately
                 if (Array.isArray(value)) {
                     value.forEach((item, index) => {
                         // Append array items with indexes
                         for (const subKey in item) {
                             if (Object.prototype.hasOwnProperty.call(item, subKey)) {
-                                formData.append(`${key}[${index}][${subKey}]`, item[subKey]);
+                                resData.append(`${key}[${index}][${subKey}]`, item[subKey]);
                             }
                         }
                     });
                 } else {
                     // Append single values
-                    formData.append(key, value);
+                    resData.append(key, value);
                 }
             }
         }
+    
+        // If there's an image, you can append it as well
+        // Assuming data.img is a File object
+        // if (data && data.img instanceof File) {
+        //     resData.append('img', data.img);
+        // }
+
+        console.log([...resData])
+
+        // Add fields to the FormData object
+        // resData.append('res_name', data.res_name);
+        // resData.append('res_email', data.res_email);
+        // resData.append('res_mobile', data.res_mobile);
+        // resData.append('res_Owner_Name', data.res_Owner_Name);
+        // resData.append('res_Owner_email', data.res_Owner_email);
+        // resData.append('res_Owner_mobile', data.res_Owner_mobile);
+        // resData.append('res_Owner_streetAddress', data.res_Owner_streetAddress);
+        // resData.append('res_Owner_city', data.res_Owner_city);
+        // resData.append('res_Owner_stateProvince', data.res_Owner_stateProvince);
+        // resData.append('res_Owner_postalCode', data.res_Owner_postalCode);
+        // resData.append('res_Owner_country', data.res_Owner_country);
+
+        // Add branch information
+        // data.branches.forEach((branch, index) => {
+        //     resData.append(`branches[${index}][name]`, branch.name);
+        //     resData.append(`branches[${index}][streetAddress]`, branch.streetAddress);
+        //     resData.append(`branches[${index}][city]`, branch.city);
+        //     resData.append(`branches[${index}][stateProvince]`, branch.stateProvince);
+        //     resData.append(`branches[${index}][postalCode]`, branch.postalCode);
+        //     resData.append(`branches[${index}][country]`, branch.country);
+        // });
 
 
-        if (data && data.img instanceof File) {
-            formData.append('img', data.img);
-        }
+        // resData.append('img', data.img);
 
-        // for (const entry of formData.entries()) {
+
+
+        // for (const entry of resData.entries()) {
         //     // Each entry is an array [key, value]
         //     const [key, value] = entry;
 
@@ -106,11 +134,15 @@ const AddRestaurant = () => {
         // }
 
 
-        axiosSecure.post('/create-restaurant', formData)
+        axiosSecure.post(`${import.meta.env.VITE_serverAddress}/create-restaurant`, data,{
+            headers:  {
+                'Content-Type': 'multipart/form-data'
+              }
+        } )
             .then(res => {
 
                 console.log(res.data);
-                navigate(`/select-package/${res?.data?.branchID}`, { replace: true })
+                // navigate(`/select-package/${res?.data?.branchID}`, { replace: true })
             }).catch(e => {
                 console.error(e)
                 Swal.fire({
@@ -165,14 +197,6 @@ const AddRestaurant = () => {
         // Append Date.now() to make it unique
         const uniqueBranchID = `${combinedInfo}-${Date.now().toString().slice(-6)}`;
         return uniqueBranchID;
-    };
-
-
-    // generate branch ID 
-    const generateBranchIDForIndex = (index) => {
-        const branch = getValues(`branches[${index}]`);
-        const uniqueBranchID = generateBranchID(branch);
-        setValue(`branches[${index}].branchID`, uniqueBranchID);
     };
 
     return (
