@@ -21,8 +21,8 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
     const fieldsStatus = getColor(restaurent?.subscriptionStart, restaurent?.subscriptionEnd)
     return (
         <tr>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                <div className='flex items-center'>
+            <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm'>
+                <div className='pl-2 flex items-center'>
                     <div className='flex-shrink-0'>
                         <div className='block relative'>
                             <img
@@ -38,10 +38,10 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
                     </div>
                 </div>
             </td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-center'>
+            <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{restaurent?.branch_name}</p>
             </td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-center'>
+            <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{
                     restaurent?.subscriptionStart && new Date(restaurent?.subscriptionStart).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
                 }</p>
@@ -49,7 +49,7 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
                     restaurent?.payment_time && new Date(restaurent?.payment_time).toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
                 }</p>
             </td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-center'>
+            <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{
                     restaurent?.subscriptionEnd && new Date(restaurent?.subscriptionEnd).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
                 }</p>
@@ -57,7 +57,7 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
                     restaurent?.payment_time && new Date(restaurent?.payment_time).toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
                 }</p>
             </td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-center'>
+            <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{
                     restaurent?.payment_time && new Date(restaurent?.payment_time).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
                 }</p>
@@ -65,7 +65,7 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
                     restaurent?.payment_time && new Date(restaurent?.payment_time).toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
                 }</p>
             </td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-center'>
+            <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
 
 
                 {restaurent?.payment_status === "Paid"
@@ -73,8 +73,16 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
                     : ""
                 }
             </td>
-            <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-center'>
+            <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{restaurent?.payment_status}</p>
+            </td>
+            <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
+              
+                <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>
+                {
+                    restaurent?.isActive ? "Activated" : "Deactivated"
+                }
+                </p>
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <div className="relative flex justify-center items-center gap-2">
@@ -85,7 +93,15 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu>
-                            <DropdownItem onClick={() => navigate(`/restaurent/edit-restaurent/${restaurent.res_id}`)}>Edit</DropdownItem>
+                            <DropdownItem >Notify Owner</DropdownItem>
+                            {
+                                restaurent?.isActive ?
+                                    <DropdownItem >Deactivate</DropdownItem>
+                                    :
+                                    <DropdownItem >Activate</DropdownItem>
+
+                            }
+
                             <DropdownItem >Delete</DropdownItem >
                         </DropdownMenu>
                     </Dropdown>
