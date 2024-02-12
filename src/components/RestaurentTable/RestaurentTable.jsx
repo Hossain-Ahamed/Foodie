@@ -128,8 +128,8 @@ const RestaurentTable = () => {
     return (
         <div className='max-w-[1600px] mx-auto'>
             <div className='py-8'>
-                <SetTitle title="All Restaurents" />
-                <SectionTitle h1="All Restaurents" />
+                <SetTitle title="Payments" />
+                <SectionTitle h1="Branch Payment & Activation List" />
                 <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto mt-4'>
                     <div className='inline-block min-w-full shadow rounded-lg overflow-h_idden'>
                         <table className='min-w-full leading-normal'>

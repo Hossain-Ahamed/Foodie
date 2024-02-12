@@ -105,7 +105,9 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: 'restaurant-list',
+
+                path: 'payment-status-list',
+
                 element: <RestaurentTable />
             },
             {
