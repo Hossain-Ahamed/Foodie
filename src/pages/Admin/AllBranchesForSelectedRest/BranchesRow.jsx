@@ -66,7 +66,7 @@ const BranchesRow = ({ branch, refetch }) => {
                 <span
                     className='text-gray-900 whitespace-no-wrap flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center'
                 >
-                    <Link title="View" to={`/admin/branch-list/edit/${branch?.uid}`} className="inline-flex ml-3 cursor-pointer text-gray-500"><AiOutlineEye size={25} /></Link>
+                    <Link title="View" to={`/admin/view-branch/${branch?._id}`} className="inline-flex ml-3 cursor-pointer text-gray-500"><AiOutlineEye size={25} /></Link>
                 </span>
             </td>
         </tr>

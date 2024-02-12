@@ -115,8 +115,12 @@ export const router = createBrowserRouter([
                 element: <AllRestaurant />
             },
             {
-                path: 'restaurant-details/:resID',
+                path: 'restaurant/branches/:resID',
                 element: <AllBranchesForSelectedRest />
+            },
+            {
+                path: '/admin/view-branch/:branchID',
+                element: <BranchBillingHistory />
             },
             {
                 path: 'employee-list',
@@ -138,10 +142,6 @@ export const router = createBrowserRouter([
             {
                 path: 'restaurant-list/edit/:res_id',
                 element: <RestaurantDetailForDev />
-            },
-            {
-                path: 'restaurant-list/billing-hsitory/branches/:branchID',
-                element: <BranchBillingHistory />
             },
         ]
     },

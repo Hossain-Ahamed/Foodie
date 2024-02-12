@@ -4,8 +4,8 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import SetTitle from '../../pages/Shared/SetTtitle/SetTitle';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import RestaurentTableRow from './RestaurentTableRow';
-import { ScaleLoader } from 'react-spinners';
 import ErrorPage from '../../pages/Shared/ErrorPage/ErrorPage';
+import LoadingPage from '../../pages/Shared/LoadingPages/LoadingPage/LoadingPage';
 
 const RestaurentTable = () => {
     const axiosSecure = useAxiosSecure();
@@ -118,7 +118,7 @@ const RestaurentTable = () => {
     };
 
     if (dataLoading) {
-        return <ScaleLoader size={100} color='#36d7b7' />
+        return <LoadingPage />
     }
 
     if (dataError) {

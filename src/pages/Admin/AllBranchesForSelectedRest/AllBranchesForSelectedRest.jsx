@@ -15,7 +15,7 @@ const AllBranchesForSelectedRest = () => {
         queryKey: ['branch-for-dev'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/restaurant-all-branches/${resID}`); // get all branches of a restaurant
-            console.log(res.data);
+            // console.log(res.data);
             return res.data;
         }
     })
@@ -31,8 +31,22 @@ const AllBranchesForSelectedRest = () => {
         <div className='max-w-[1600px] mx-auto'>
             <SetTitle title="Restaurent Branches" />
             <SectionTitle h1="Restaurent Branches" />
-            <div className='mt-5'>
-                {/* <p>Restaurant Name {data[0]?.res_id?.res_name}</p> */}
+            <div className='mt-5 flex flex-wrap justify-between items-center'>
+                <div className='mb-3 md:mb-0'>
+                    <p className='text-xl font-semibold mb-2'>Restaurant Information</p>
+                    <p>Name: {restaurantDetails?.res_name}</p>
+                    <p>Email: {restaurantDetails?.res_email}</p>
+                    <p>Phone: {restaurantDetails?.res_mobile}</p>
+                </div>
+
+                <div>
+                    <p className='text-xl font-semibold mb-2'>Owner Information</p>
+                    <p>Name: {restaurantDetails?.res_Owner_Name}</p>
+                    <p>Email: {restaurantDetails?.res_Owner_email}</p>
+                    <p>Phone: {restaurantDetails?.res_Owner_mobile}</p>
+                    <p>{restaurantDetails?.res_Owner_streetAddress}, {restaurantDetails?.res_Owner_city}</p>
+                    <p>{restaurantDetails?.res_Owner_stateProvince}, {restaurantDetails?.res_Owner_country}</p>
+                </div>
             </div>
             <section className='mt-5'>
                 <div className='py-8'>
