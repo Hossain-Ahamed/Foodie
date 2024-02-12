@@ -66,7 +66,7 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
 
                         <li>
                             <Link
-                                to='restaurent-list'
+                                to='payment-status-list'
                                 className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-300 hover:text-gray-700"
                             >
                                 <svg
@@ -84,7 +84,7 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
                                     />
                                 </svg>
 
-                                <span className="text-sm font-medium"> Restaurants </span>
+                                <span className="text-sm font-medium"> Payment Status </span>
                             </Link>
                         </li>
 
