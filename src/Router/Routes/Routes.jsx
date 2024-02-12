@@ -34,6 +34,8 @@ import PrivateRoute from './../PrivateRoute/PrivateRoute';
 import Payment from "../../pages/MainSite/Payment/Payment";
 import SuccessfullPage from "../../pages/MainSite/Payment/SuccessfullPage";
 import RestaurentTable from "../../components/RestaurentTable/RestaurentTable";
+import AllRestaurant from "../../pages/Admin/AllRestaurant/AllRestaurant";
+import AllBranchesForSelectedRest from "../../pages/Admin/AllBranchesForSelectedRest/AllBranchesForSelectedRest";
 
 
 
@@ -103,8 +105,18 @@ export const router = createBrowserRouter([
             },
 
             {
+
                 path: 'payment-status-list',
+
                 element: <RestaurentTable />
+            },
+            {
+                path: 'all-restaurant',
+                element: <AllRestaurant />
+            },
+            {
+                path: 'restaurant-details/:resID',
+                element: <AllBranchesForSelectedRest />
             },
             {
                 path: 'employee-list',
