@@ -103,7 +103,7 @@ export const router = createBrowserRouter([
             },
 
             {
-                path: 'restaurent-list',
+                path: 'payment-status-list',
                 element: <RestaurentTable />
             },
             {
