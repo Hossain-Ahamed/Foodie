@@ -88,7 +88,7 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
                 <div className="relative flex justify-center items-center gap-2">
                     <Dropdown>
                         <DropdownTrigger>
-                            <Button isIconOnly size="sm" variant="light">
+                            <Button aria-label='edit-button' isIconOnly size="sm" variant="light">
                                 <VerticalDotsIcon className="text-default-300" />
                             </Button>
                         </DropdownTrigger>
