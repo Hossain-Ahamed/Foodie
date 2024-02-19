@@ -320,7 +320,7 @@ const AddEmployee = () => {
                 {/* address  */}
                 <div className="w-full md:w-3/4 p-3 ">
                     <div className="p-6 h-full border border-gray-100 overflow-hidden bg-white rounded-md shadow-dashboard border-gray-500/50">
-                        <p className="mb-1.5 text-[18px] font-semibold text-gray-900 text-gray-800" data-config-id="auto-txt-21-3">Current Address</p>
+                        <p className="mb-1.5 text-[18px] font-semibold text-gray-900" data-config-id="auto-txt-21-3">Current Address</p>
                         <div className="flex flex-wrap -m-3 mb-3">
                             {/* Street Address */}
                             <div className="w-full  p-3">

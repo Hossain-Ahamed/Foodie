@@ -33,7 +33,7 @@ export default function AllRestaurant() {
                     data && Array.isArray(data) && data.map((item, _idx) => <Card key={_idx}
                         isFooterBlurred
                         radius="lg"
-                        className="border-none w-full max-w-md h-72 mt-5"
+                        className="border-none w-full max-w-sm h-72 mt-5"
                     >
                         <Image
                             alt="Restaurant Card"
