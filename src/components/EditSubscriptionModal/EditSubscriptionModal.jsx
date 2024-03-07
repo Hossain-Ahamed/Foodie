@@ -22,6 +22,7 @@ export default function EditSubscriptionModal({ defaultData, refetch }) {
             })
             .catch(err => {
                 SwalErrorShow(err)
+                onOpenChange()
             })
     }
 
@@ -64,7 +65,7 @@ export default function EditSubscriptionModal({ defaultData, refetch }) {
                                         <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="number"
                                             defaultValue={defaultData.finalPrice}
                                             {...register("finalPrice", {
-                                                required: "*Final Price name is Required",
+                                                required: "*Final Price is Required",
                                                 validate: {
                                                     isNumber: (value) => !isNaN(value)
                                                 },

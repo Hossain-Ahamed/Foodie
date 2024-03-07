@@ -9,7 +9,7 @@ import { FaPlus } from "react-icons/fa6";
 export default function AddSubscriptionModal({ refetch }) {
 
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { handleSubmit, register, setValue, formState: { errors } } = useForm();
+    const { handleSubmit, register, setValue, formState: { errors}, resetField } = useForm();
     const axiosSecure = useAxiosSecure();
 
     const onSubmit = (data) => {
@@ -18,6 +18,11 @@ export default function AddSubscriptionModal({ refetch }) {
         .then(data => {
             toast.success('successfully created');
             refetch();
+            resetField("packageType")
+            resetField("duration")
+            resetField("finalPrice")
+            resetField("cutPrice")
+            resetField("shortDescription")
             onOpenChange()
         })
         .catch(err => {
@@ -27,7 +32,7 @@ export default function AddSubscriptionModal({ refetch }) {
 
     return (
         <>
-            <button className="bg-green-400 rounded-lg text-white p-3 flex items-center gap-1 text-xl font-medium" onClick={onOpen}> <FaPlus className="" /> Add Subscription Packages</button>
+            <button className="bg-green-400 rounded-lg text-white p-3 flex items-center gap-1 text-xl font-medium" onClick={onOpen}> <FaPlus /> Add Subscription Packages</button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
@@ -48,7 +53,7 @@ export default function AddSubscriptionModal({ refetch }) {
                                         <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-3-3">Package Duration</p>
                                         <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="number"
                                             {...register("duration", {
-                                                required: "*Package Durarion name is Required",
+                                                required: "*Package Durarion is Required",
                                                 validate: {
                                                     isNumber: (value) => !isNaN(value)
                                                 },
@@ -61,7 +66,7 @@ export default function AddSubscriptionModal({ refetch }) {
                                         <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-3-3">Final Price</p>
                                         <input className="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input" type="number"
                                             {...register("finalPrice", {
-                                                required: "*Final Price name is Required",
+                                                required: "*Final Price is Required",
                                                 validate: {
                                                     isNumber: (value) => !isNaN(value)
                                                 },
