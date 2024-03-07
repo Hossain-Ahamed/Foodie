@@ -6,11 +6,12 @@ import Swal from 'sweetalert2';
 import { FaTrashAlt } from 'react-icons/fa';
 import useAxiosSecure from './../../../Hooks/useAxiosSecure';
 import { SwalErrorShow } from '../../../assets/scripts/Utility';
-
-const EmployeeListRow = ({ employee,refetch }) => {
+import edit from '../../../assets/images/Home/edit.svg'
+import trash from '../../../assets/images/Home/delete.svg'
+const EmployeeListRow = ({ employee, refetch }) => {
   const axiosSecure = useAxiosSecure();
-    const handleDeletecategory = uid => {
-        // console.log(uid)
+  
+    const handleDeleteEmployee = id => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -22,18 +23,16 @@ const EmployeeListRow = ({ employee,refetch }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axiosSecure.delete(`/delete-a-dev-profile/${uid}`)
-                .then(res=>{
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Employee has been deleted.",
-                        icon: "success"
-                    });
-                    refetch();
-                })
-                .catch(e=>{
-                    SwalErrorShow(e);
-                })
+                axiosSecure.delete(`/delete-dev-profile/${id}`)
+                    .then(res => {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Employee has been deleted.",
+                            icon: "success"
+                        });
+                        refetch()
+                    })
+                    .catch(err => SwalErrorShow(err))
              
             }
         });
@@ -110,8 +109,8 @@ const EmployeeListRow = ({ employee,refetch }) => {
                 <span
                     className='text-gray-900 whitespace-no-wrap flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center'
                 >
-                    <Link title="View" to={`/admin/employee-list/edit/${employee?.uid}`} className="inline-flex ml-3 cursor-pointer text-gray-500"><AiOutlineEye size={25} /></Link>
-                    <span title="Delete" onClick={() => handleDeletecategory(employee.uid)} className="inline-flex ml-3 cursor-pointer text-red-500"><FaTrashAlt size={25} /></span>
+                    <Link title="Edit" to={`/admin/employee-list/edit/${employee?.uid}`} className="inline-flex ml-3 cursor-pointer"><img src={edit} /></Link>
+                    <span title="Delete" onClick={() => handleDeleteEmployee(employee?._id)} className="inline-flex ml-3 cursor-pointer"><img src={trash} /></span>
                 </span>
             </td>
         </tr>

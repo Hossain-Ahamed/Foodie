@@ -36,6 +36,7 @@ import SuccessfullPage from "../../pages/MainSite/Payment/SuccessfullPage";
 import RestaurentTable from "../../components/RestaurentTable/RestaurentTable";
 import AllRestaurant from "../../pages/Admin/AllRestaurant/AllRestaurant";
 import AllBranchesForSelectedRest from "../../pages/Admin/AllBranchesForSelectedRest/AllBranchesForSelectedRest";
+import SubscriptionPackages from "../../pages/SubscriptionPackages/SubscriptionPackages";
 
 
 
@@ -125,6 +126,10 @@ export const router = createBrowserRouter([
             {
                 path: 'employee-list',
                 element: <EmployeeList />
+            },
+            {
+                path: 'subscription',
+                element: <SubscriptionPackages />
             },
             {
 

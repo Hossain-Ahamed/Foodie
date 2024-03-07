@@ -145,6 +145,7 @@ const EditEmployee = () => {
                 <div className="w-full md:w-3/4 p-3 mt-8">
                     <div className="p-6 h-full border border-coolGray-100 overflow-hidden bg-white rounded-md shadow-dashboard">
                         <div className="flex flex-wrap pb-3 -m-3">
+                            {/* first name */}
                             <div className="w-full md:w-1/2 p-3">
                                 <p className="mb-1.5 font-medium text-base text-coolGray-800" data-config-id="auto-txt-3-3">First name</p>
                                 <input disabled className="disabled:cursor-not-allowed w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input disabled" type="textdisabled:cursor-not-allowed " placeholder="John"
