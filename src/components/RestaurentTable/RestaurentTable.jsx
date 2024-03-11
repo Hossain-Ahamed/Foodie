@@ -9,7 +9,7 @@ import LoadingPage from '../../pages/Shared/LoadingPages/LoadingPage/LoadingPage
 
 const RestaurentTable = () => {
     const axiosSecure = useAxiosSecure();
-    const { refetch: dataRefetch, data: data = {}, isLoading: dataLoading, error: dataError } = useQuery({
+    const { refetch, data: data = {}, isLoading: dataLoading, error: dataError } = useQuery({
         queryKey: ['res_table'],
         enabled: true,
         queryFn: async () => {
@@ -192,7 +192,7 @@ const RestaurentTable = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>{data && Array.isArray(data) && data.map((item, _idx) => <RestaurentTableRow key={_idx} restaurent={item} getColor={getColor} />)}</tbody>
+                            <tbody>{data && Array.isArray(data) && data.map((item, _idx) => <RestaurentTableRow key={_idx} restaurent={item} getColor={getColor} refetch={refetch}/>)}</tbody>
                         </table>
                     </div>
                 </div>
