@@ -11,6 +11,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
     const fieldsStatus = getColor(restaurent?.subscriptionStart, restaurent?.subscriptionEnd)
     const axiosSecure = useAxiosSecure();
 
+    // for deleting branch payment history
     const handleBranchDelete = (id) => {
         console.log(id);
         Swal.fire({
@@ -38,6 +39,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
         });
     }
 
+    // for deactivating branch 
     const handleDeactiveBranch = (id, status) => {
         console.log(status);
         Swal.fire({
@@ -47,7 +49,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, deactive it!"
         }).then((result) => {
             if (result.isConfirmed) {
                 // delete branch request
@@ -64,7 +66,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
             }
         });
     }
-    //streetAddress, city, res_id, subscriptionEnd
+    // notify user for when subscription ending
     const handleNotifyBranchOwner = (restaurant) => {
         const data = {
             city: restaurant?.city, 
