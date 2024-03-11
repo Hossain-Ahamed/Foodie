@@ -10,6 +10,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
     // console.log(restaurent);
     const fieldsStatus = getColor(restaurent?.subscriptionStart, restaurent?.subscriptionEnd)
     const axiosSecure = useAxiosSecure();
+
     const handleBranchDelete = (id) => {
         console.log(id);
         Swal.fire({
@@ -37,8 +38,8 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
         });
     }
 
-    const handleDeactiveBranch = (id) => {
-        console.log(id);
+    const handleDeactiveBranch = (id, status) => {
+        console.log(status);
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -50,11 +51,43 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // delete branch request
-                axiosSecure.patch(`/deactive-branch-from-payment-lists/${id}`)
+                axiosSecure.patch(`/deactive-branch-from-payment-lists/${id}`, {status})
                     .then(data => {
                         Swal.fire({
                             title: "Deactivated!",
                             text: "Your package has been deactivated.",
+                            icon: "success"
+                        });
+                        refetch();
+                    })
+                    .catch(err => SwalErrorShow(err))
+            }
+        });
+    }
+    //streetAddress, city, res_id, subscriptionEnd
+    const handleNotifyBranchOwner = (restaurant) => {
+        const data = {
+            city: restaurant?.city, 
+            res_id: restaurant?.res_id, 
+            subscriptionEnd: restaurant?.subscriptionEnd,
+            streetAddress: restaurant?.streetAddress
+        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to notify the branch owner!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, notify!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // delete branch request
+                axiosSecure.patch(`/notify-branch-owner-from-payment-lists/${restaurant._id}`, { data })
+                    .then(data => {
+                        Swal.fire({
+                            title: "Successful!",
+                            text: "Your message has been sent to the branch owner!",
                             icon: "success"
                         });
                         refetch();
@@ -124,7 +157,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
               
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>
                 {
-                    restaurent?.isActive ? "Activated" : "Deactivated"
+                    restaurent?.isActive ? "Active" : "Deactive"
                 }
                 </p>
             </td>
@@ -137,16 +170,16 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
                             </Button>
                         </DropdownTrigger>
                         <DropdownMenu aria-label='dropdown-menu'>
-                            <DropdownItem aria-label='dropdown-item'>Notify Owner</DropdownItem>
+                            <DropdownItem aria-label='dropdown-item' onClick={() => handleNotifyBranchOwner(restaurent)}>Notify Owner</DropdownItem>
                             {
                                 restaurent?.isActive ?
-                                    <DropdownItem >Deactivate</DropdownItem>
+                                    <DropdownItem onClick={() => handleDeactiveBranch(restaurent?._id, restaurent?.isActive)}>Deactivate</DropdownItem>
                                     :
-                                    <DropdownItem >Activate</DropdownItem>
+                                    <DropdownItem onClick={() => handleDeactiveBranch(restaurent?._id, restaurent?.isActive)}>Activate</DropdownItem>
 
                             }
 
-                            <DropdownItem onClick={() => handleBranchDelete(restaurent._id)}>Delete</DropdownItem >
+                            <DropdownItem onClick={() => handleBranchDelete(restaurent?._id)}>Delete</DropdownItem >
                         </DropdownMenu>
                     </Dropdown>
                 </div>
