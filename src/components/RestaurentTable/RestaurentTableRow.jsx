@@ -1,24 +1,68 @@
 import React from 'react';
-import { SlOptionsVertical } from "react-icons/sl";
-import { IoEllipsisVerticalSharp } from "react-icons/io5";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
 import { VerticalDotsIcon } from './VerticalDotsIcon';
-const RestaurentTableRow = ({ restaurent, getColor }) => {
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { SwalErrorShow } from '../../assets/scripts/Utility';
+const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
     const navigate = useNavigate()
-    // const getColor = (from, to) => {
-    //     const currentTime = new Date().toISOString();
-    //     if (new Date(to).getMonth() + 1 === new Date().getMonth() + 1) {
-    //         return { "text": "Extend", "color": 'warning', "status": 'Expire Soon' };
-    //     } if (currentTime >= from && currentTime <= to) {
-    //         return { "text": "Extend", "color": 'success', "status": 'Continuing' };
-    //     } else if (currentTime > to) {
-    //         return { "text": "Renew", "color": 'danger', "status": "Expired" };
-    //     } else {
-    //         return { "text": "Paid", "color": 'blue-500', "status": "Paid" };
-    //     }
-    // };
+    // console.log(restaurent);
     const fieldsStatus = getColor(restaurent?.subscriptionStart, restaurent?.subscriptionEnd)
+    const axiosSecure = useAxiosSecure();
+    const handleBranchDelete = (id) => {
+        console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // delete branch request
+                axiosSecure.delete(`/delete-branch-from-payment-lists/${id}`)
+                    .then(data => {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your package has been deleted.",
+                            icon: "success"
+                        });
+                        refetch();
+                    })
+                    .catch(err => SwalErrorShow(err))
+            }
+        });
+    }
+
+    const handleDeactiveBranch = (id) => {
+        console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // delete branch request
+                axiosSecure.patch(`/deactive-branch-from-payment-lists/${id}`)
+                    .then(data => {
+                        Swal.fire({
+                            title: "Deactivated!",
+                            text: "Your package has been deactivated.",
+                            icon: "success"
+                        });
+                        refetch();
+                    })
+                    .catch(err => SwalErrorShow(err))
+            }
+        });
+    }
     return (
         <tr>
             <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -86,14 +130,14 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <div className="relative flex justify-center items-center gap-2">
-                    <Dropdown>
+                    <Dropdown aria-label='dropdown'>
                         <DropdownTrigger>
                             <Button aria-label='edit-button' isIconOnly size="sm" variant="light">
                                 <VerticalDotsIcon className="text-default-300" />
                             </Button>
                         </DropdownTrigger>
-                        <DropdownMenu>
-                            <DropdownItem >Notify Owner</DropdownItem>
+                        <DropdownMenu aria-label='dropdown-menu'>
+                            <DropdownItem aria-label='dropdown-item'>Notify Owner</DropdownItem>
                             {
                                 restaurent?.isActive ?
                                     <DropdownItem >Deactivate</DropdownItem>
@@ -102,7 +146,7 @@ const RestaurentTableRow = ({ restaurent, getColor }) => {
 
                             }
 
-                            <DropdownItem >Delete</DropdownItem >
+                            <DropdownItem onClick={() => handleBranchDelete(restaurent._id)}>Delete</DropdownItem >
                         </DropdownMenu>
                     </Dropdown>
                 </div>
