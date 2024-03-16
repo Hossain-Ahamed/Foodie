@@ -37,7 +37,7 @@ export default function AddSubscriptionModal({ refetch }) {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Edit Subscription Packages</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Subscription Packages</ModalHeader>
                             <ModalBody>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="w-full p-1">

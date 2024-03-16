@@ -10,6 +10,9 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
     // console.log(restaurent);
     const fieldsStatus = getColor(restaurent?.subscriptionStart, restaurent?.subscriptionEnd)
     const axiosSecure = useAxiosSecure();
+    if(!restaurent?.isActive){
+        fieldsStatus.color= "danger"
+    }
 
     // for deleting branch payment history
     const handleBranchDelete = (id) => {
@@ -49,15 +52,15 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, deactive it!"
+            confirmButtonText: `Yes, ${!status ? "Activate" : "Deactivate"} it!`
         }).then((result) => {
             if (result.isConfirmed) {
                 // delete branch request
                 axiosSecure.patch(`/deactive-branch-from-payment-lists/${id}`, {status})
                     .then(data => {
                         Swal.fire({
-                            title: "Deactivated!",
-                            text: "Your package has been deactivated.",
+                            title: !status ? "Activated" : "Deactivated",
+                            text: `Your package has been ${!status ? "Activated" : "Deactivated"}"`,
                             icon: "success"
                         });
                         refetch();
@@ -102,7 +105,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
         <tr>
             <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm'>
                 <div className='pl-2 flex items-center'>
-                    <div className='flex-shrink-0'>
+                    {/* <div className='flex-shrink-0'>
                         <div className='block relative'>
                             <img
                                 alt='profile'
@@ -110,15 +113,16 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
                                 className='mx-auto object-cover rounded h-10 w-15 '
                             />
                         </div>
-                    </div>
+                    </div> */}
                     <div className='ml-3'>
-                        <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{restaurent?.branch_name}</p>
-                        <p className='text-gray-400 whitespace-no-wrap'>{restaurent?.branchID}</p>
+                        <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{restaurent?.res_name}</p>
+                        <p className='text-gray-400 whitespace-no-wrap'>{restaurent?._id}</p>
                     </div>
                 </div>
             </td>
             <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{restaurent?.branch_name}</p>
+                <p className='text-gray-400 whitespace-no-wrap'>{restaurent?.branchID}</p>
             </td>
             <td className='px-1 py-5 border-b border-gray-200 bg-white text-sm text-center'>
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>{
@@ -159,7 +163,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
               
                 <p className={`whitespace-no-wrap text-${fieldsStatus.color}`}>
                 {
-                    restaurent?.isActive ? "Active" : "Deactive"
+                    restaurent?.isActive ? "Active" : "Deactivated"
                 }
                 </p>
             </td>
