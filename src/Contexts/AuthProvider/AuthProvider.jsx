@@ -41,6 +41,7 @@ const AuthProvider = ({ children }) => {
 
     // logout 
     const provideSignOut = () => {
+        console.log('sign out')
         setUser(null)
         return signOut(auth);
     }
@@ -54,6 +55,7 @@ const AuthProvider = ({ children }) => {
     const providerPasswordReset = (email) => {
         return sendPasswordResetEmail(auth, email);
     }
+    
 
 
     useEffect(() => {
@@ -64,28 +66,22 @@ const AuthProvider = ({ children }) => {
 
             if (currentUser) {
 
-                // const userData = {
-                //     name: currentUser?.displayName,
-                //     email: currentUser.email,
-                //     photoURL: currentUser?.photoURL,
-                //     mobile: currentUser?.phoneNumber,
-                //     firebase_UID: currentUser?.uid,
-                //     allData: currentUser,
+                const userData = {
+                    email: currentUser.email,
+                }
 
-
-                // }
-
-                // console.log(userData);
-                setLoading(false);
+             
+                setLoading(true);
                 // const user
-                // axios.post(`${import.meta.env.VITE_serverAddress}/jwt`, userData, { withCredentials: true })
-                //     .then(data => {
-                //         console.log("Token :  ", data.data.token);
+                axios.post(`${import.meta.env.VITE_serverAddress}/dev-admin-login`, userData, { withCredentials: true })
+                    .then(data => {
+                        // console.log("Token :  ", data.data.token);
 
-                //         Cookies.set('access-token', data.data.token, { expires: 7 });
-                //         setLoading(false);
-                //     })
-                //     .catch(e => { console.error(e); setLoading(false) })
+                      //  Cookies.set('access-token', data.data.token, { expires: 7 });
+                       
+                    })
+                    .catch(e => { provideSignOut(); })
+                    .finally(()=>setLoading(false))
 
 
             } else {
