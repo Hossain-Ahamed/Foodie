@@ -74,6 +74,7 @@ const RestaurentTableRow = ({ restaurent, getColor, refetch }) => {
         const data = {
             city: restaurant?.city, 
             res_id: restaurant?.res_id, 
+            branch_name : restaurant?.branch_name,
             subscriptionEnd: restaurant?.subscriptionEnd,
             streetAddress: restaurant?.streetAddress
         }
