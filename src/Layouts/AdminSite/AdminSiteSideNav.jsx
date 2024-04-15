@@ -8,7 +8,7 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
         <>
             <aside
                 id="default-sidebar"
-                className={`shadow select-none cursor-pointer fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${isChecked ? '' : '-translate-x-full sm:translate-x-0'
+                className={`shadow select-none cursor-pointer fixed bg-white top-0 left-0 z-40 w-64 h-screen transition-transform ${isChecked ? '' : '-translate-x-full sm:translate-x-0'
                     }`}
                 aria-label="Sidebar"
             >
@@ -21,7 +21,7 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
 
                     </button>
                     <ul className="space-y-1 pt-8">
-                        <li>
+                        {/* <li>
                             <Link to='/admin' className="flex items-center gap-2 rounded-lg  px-4 py-2 text-gray-500 hover:bg-gray-300 hover:text-gray-700">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
 
                                 <span className="text-sm font-medium"> Dashboard </span>
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to='employee-list' className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-300 hover:text-gray-700">
                                 <svg
@@ -102,6 +102,32 @@ const AdminSiteSideNav = ({ isChecked, setChecked }) => {
                                 </svg>
 
                                 <span className="text-sm font-medium"> Payment Status </span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+
+                              
+                                to='restaurant-transactions'
+
+                                className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-300 hover:text-gray-700"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 opacity-75"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                                    />
+                                </svg>
+
+                                <span className="text-sm font-medium"> Online Transactions </span>
                             </Link>
                         </li>
 

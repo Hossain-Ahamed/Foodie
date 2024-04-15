@@ -37,6 +37,7 @@ import RestaurentTable from "../../components/RestaurentTable/RestaurentTable";
 import AllRestaurant from "../../pages/Admin/AllRestaurant/AllRestaurant";
 import AllBranchesForSelectedRest from "../../pages/Admin/AllBranchesForSelectedRest/AllBranchesForSelectedRest";
 import SubscriptionPackages from "../../pages/SubscriptionPackages/SubscriptionPackages";
+import RestaurantTransactionsHistory from "../../pages/Admin/RestaurantTransactionsHistory/RestaurantTransactionsHistory";
 
 
 
@@ -147,6 +148,14 @@ export const router = createBrowserRouter([
             {
                 path: 'restaurant-list/edit/:res_id',
                 element: <RestaurantDetailForDev />
+            },
+            {
+                path: 'restaurant-transactions',
+                element: <RestaurantTransactionsHistory />
+            },
+            {
+                path: 'restaurant-transactions/:branchID',
+                element: <></>
             },
         ]
     },
