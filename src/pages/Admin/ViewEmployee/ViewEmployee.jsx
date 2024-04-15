@@ -89,7 +89,7 @@ const ViewEmployee = ({ title, data, editable }) => {
                                 </div>
                             </div>
                             <div>
-                                <ChangePasswordModal userEmail={data?.email}/>
+                                {/* <ChangePasswordModal userEmail={data?.email}/> */}
                             </div>
                         </div>
                     </div>
