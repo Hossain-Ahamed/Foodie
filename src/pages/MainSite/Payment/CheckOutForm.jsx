@@ -143,7 +143,7 @@ const CheckOutForm = ({ price, priceDetails }) => {
                             timer: 1500
                         })
 
-                        window.open('https://facebook.com', '_blank')
+                        window.open('http://localhost:5174/', '_blank')
                     })
                     .catch(e => {
                         console.error(e);
