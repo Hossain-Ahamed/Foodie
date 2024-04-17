@@ -109,7 +109,7 @@ const EmployeeListRow = ({ employee, refetch }) => {
                 <span
                     className='text-gray-900 whitespace-no-wrap flex flex-col md:flex-row gap-4 md:gap-0 items-center justify-center'
                 >
-                    <Link title="Edit" to={`/admin/employee-list/edit/${employee?.uid}`} className="inline-flex ml-3 cursor-pointer"><img src={edit} /></Link>
+                    <Link title="Edit" to={`/admin/employee-list/edit/${employee?.uid}`} className="inline-flex ml-3 cursor-pointer"><AiOutlineEye size={24} /></Link>
                     <span title="Delete" onClick={() => handleDeleteEmployee(employee?._id)} className="inline-flex ml-3 cursor-pointer"><img src={trash} /></span>
                 </span>
             </td>
