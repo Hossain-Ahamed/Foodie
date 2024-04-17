@@ -32,7 +32,7 @@ export default function AddSubscriptionModal({ refetch }) {
 
     return (
         <>
-            <button className="bg-green-400 rounded-lg text-white p-3 flex items-center gap-1 text-xl font-medium" onClick={onOpen}> <FaPlus /> Add Subscription Packages</button>
+            <button className="bg-green-400 rounded-lg text-white p-3 flex items-center gap-1 text-xl font-medium" onClick={onOpen}> <FaPlus /> Subscription Packages</button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
